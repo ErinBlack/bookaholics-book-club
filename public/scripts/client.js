@@ -1,7 +1,16 @@
 console.log('js');
 
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['ngRoute']);
 
+//router to navigate throughout the app
+myApp.config(function($routeProvider){
+  $routeProvider.when('/', {
+    templateUrl: 'views/partials/login.html',
+    controller:'MyProfile as mp'
+  }).when('/admin', {
+    templateUrl: 'views/partials/admin.html',
+  }); //end submit
+}); //end config
 
 myApp.controller('LibraryController', function(LibraryService){
   console.log('LC');

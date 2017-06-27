@@ -1,0 +1,24 @@
+<div class="container" ng-controller="LibraryController as lc">
+  <div class="searchBook" >
+    <form ng-submit="lc.searchForBook(lc.search)">
+      <p>Search for the Book You Want</p>
+      <input type="text" ng-model="lc.search" ng-change="lc.searchForBook(lc.search)">
+    </form>
+
+
+    <div ng-repeat="book in lc.books | filter:lc.search:strict">
+      <div class="row">
+        <div class="col-sm-1">
+          <img src="http://covers.openlibrary.org/b/isbn/{{book.isbn[0]}}-S.jpg" />
+        </div>
+        <div class="col-sm-2">
+          <p>{{book.title}}</p>
+          <p>By {{book.author_name[0]}}</p>
+          <p>ISBN# {{book.isbn[0]}} </p>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
