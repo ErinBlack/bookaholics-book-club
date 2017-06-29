@@ -1,1 +1,1 @@
-.loginBackground{background-image:url("public/images/login-background.jpg");min-height:100%}html,body{height:100%;margin:0}h1{font:100% "Open Sans",sans-serif;font-size:2.4em;color:#696a6c}.loginBackground{background-image:url("../../images/login-background.jpg")}
+body,html{margin:auto;height:100%}h1{font:100% "Open Sans",sans-serif;font-size:2.4em;color:#696a6c}.loginBackground{min-height:100%;background-image:url("../images/login-background.jpg");-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover}
