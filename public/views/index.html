@@ -3,19 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>API Test</title>
+    <link rel="stylesheet" href="vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:500,700" rel="stylesheet">
     <script src="vendors/angular.min.js" charset="utf-8"></script>
     <script src="vendors/angular-route.min.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
     <script src="scripts/services/libraryService.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="vendors/bootstrap.min.css">
+    <script src="scripts/services/LoginService.js" charset="utf-8"></script>
+
 
   </head>
   <body ng-app="myApp">
-    <div ng-controller="LibraryController as lb">
       <ng-view>
 
       </ng-view>
-    </div>
-
   </body>
 </html>

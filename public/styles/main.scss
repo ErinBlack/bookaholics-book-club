@@ -1,0 +1,32 @@
+@import 'login';
+html, body {
+          height: 100%;
+          margin: 0;
+      }
+
+
+//fonts
+$font-primary: 'Open Sans', sans-serif;
+$font-secondary: 'Raleway', sans-serif;
+
+// Colors
+$teal: #a4c8c9;
+$blue: #2c6c99;
+$textGray: #696a6c;
+$salmon: #cb7777;
+$white: #ffffff;
+$commentBkg: #747678;
+$inputHeader: #747678;
+
+
+
+h1{
+  font: 100% $font-primary;
+  font-size: 2.4em;
+  color: $textGray;
+}
+
+
+.loginBackground {
+  background-image: url('../../images/login-background.jpg');
+}

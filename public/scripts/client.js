@@ -6,7 +6,7 @@ var myApp = angular.module('myApp', ['ngRoute']);
 myApp.config(function($routeProvider){
   $routeProvider.when('/', {
     templateUrl: 'views/partials/login.html',
-    controller:'MyProfile as mp'
+    controller:'LoginController as lc'
   }).when('/register', {
     templateUrl: 'views/partials/register.html',
   }).when('/admin', {
@@ -21,7 +21,7 @@ myApp.config(function($routeProvider){
 }); //end config
 
 myApp.controller('LibraryController', function(LibraryService){
-  console.log('LC');
+  console.log('Inside Library Controller');
   var vm = this;
 
 
@@ -37,3 +37,9 @@ myApp.controller('LibraryController', function(LibraryService){
 
   }; //end searchGif
 }); //end LibraryController
+
+
+myApp.controller('LoginController', function(LoginService){
+  console.log('In Login Controller');
+  var vm = this;
+});
