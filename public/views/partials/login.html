@@ -6,7 +6,7 @@
   <a href="/#!/book">book</a>
   <a href="/#!/main">main</a>
 </header>
-<div ng-controller="LoginController as LC" class="loginBackground">
+<div ng-controller="LoginController as lc" class="loginBackground">
   <div class="row">
     <div class="col-md-offset-4 col-md-4 col-xs-offset-1 col-xs-10 loginWindow">
 
@@ -22,11 +22,11 @@
       <!-- Start Login Form -->
       <form>
         <h2>Login</h2>
-        <p>Username</p>
-        <input type="text" name="" value="">
+        <p>Email Address</p>
+        <input type="text" placeholder="name@gmail.com" type="text" ng-model="lc.emailInput">
         <p>Password</p>
-        <input type="text" name="" value="">
-        <button type="button" name="button">Sign In</button>
+        <input ng-model='lc.passwordInput' type="password" name="" value="" placeholder="Password">
+        <button type="button" name="button" ng-click="lc.login()">Sign In</button>
       </form>
       <!-- End Login Form -->
 
