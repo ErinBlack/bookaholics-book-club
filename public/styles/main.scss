@@ -1,4 +1,4 @@
-@import 'login';
+
 body, html {
   margin: auto;
   height: 100%;
@@ -21,12 +21,38 @@ $inputHeader: #747678;
 
 
 h1{
-  font: 100% $font-primary;
+  font-weight: 300;
   font-size: 2.4em;
   color: $textGray;
+  margin-bottom: 0px
 }
 
+h2 {
 
+  font-weight: 100;
+  font-size: 2em;
+  color: $textGray;
+  margin-top: 0px;
+}
+
+button {
+  background-color: $salmon;
+  color: $white;
+  border: none;
+  padding: 5px 20px;
+  font-size: 1.2em;
+  font-weight: 300;
+  border-radius: 6px;
+
+}
+
+.blueLine{
+  width: 100%;
+  height: 2px;
+  background-color: $blue;
+}
+
+//login info
 .loginBackground {
   min-height: 100%;
   background-image: url('../images/login-background.jpg');
@@ -34,4 +60,37 @@ h1{
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+}
+
+.loginWindow {
+  border-radius: 4px;
+  margin-top: 50px;
+  background-color: $white;
+  color: $textGray;
+  padding: 3% 5% ;
+  box-shadow: -6px 7px 5px #888888;
+
+
+  .loginHeader{
+    text-align: center;
+  }
+  p {
+    font-size: 1.2em;
+  }
+
+  form{
+    margin: 30px 0;
+
+    input{
+      width: 90%;
+      margin: 0 0 20px 0;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: 400;
+    }
+  }
+
 }
