@@ -14,6 +14,8 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', index);
 app.use('/login', login);
+app.use('/register', register);
+
 
 //port for server
 var port = process.env.PORT || 3000;

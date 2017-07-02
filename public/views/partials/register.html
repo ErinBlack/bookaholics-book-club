@@ -20,7 +20,7 @@
       <!-- End Login Header  -->
 
       <!-- Start Login Form -->
-      <form name="registerForm" ng-submit="rc.register()" ng-disabled="registerForm.$invalid">
+      <form name="registerForm" ng-submit="rc.registerNewUser()" ng-disabled="registerForm.$invalid">
         <h2>Register</h2>
         <!-- row for first name and last name  -->
         <div class="row">
@@ -55,7 +55,7 @@
           </div>
         </div>
         <!-- end password row -->
-        <button type="button" name="button" ng-click="rc.register()" ng-disabled="registerForm.$invalid">Register</button>
+        <button type="button" name="button" ng-click="rc.registerNewUser()" ng-disabled="registerForm.$invalid">Register</button>
       </form>
       <div >
       <!-- End Login Form -->
