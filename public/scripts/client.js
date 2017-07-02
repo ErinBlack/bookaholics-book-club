@@ -1,6 +1,6 @@
 
 
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngFileUpload']);
 
 //router to navigate throughout the app
 myApp.config(function($routeProvider){

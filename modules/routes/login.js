@@ -27,6 +27,7 @@ console.log('base url post hit:', req.body);
 
 //creating object out of email from req.body
 var email = req.body.email;
+var password = req.body.password
 
 pool.connect( function(err, connection, done){
   if( err ){
@@ -37,7 +38,7 @@ pool.connect( function(err, connection, done){
 else {
   console.log('connected to db');
   //connecting to database to see if the email exists
-  var checkUsername = connection.query("SELECT user_id FROM users WHERE email='erinblackdesign@gmail.com'");
+  var checkUsername = connection.query("SELECT user_id FROM users WHERE email='" + email+ "' AND password='" + password + "'");
   console.log('checkusername', checkUsername);
   done();
   res.send(200);

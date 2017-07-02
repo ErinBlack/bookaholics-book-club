@@ -10,7 +10,7 @@ sv.sendLogIn = function(data){
     data: data
   }).then(function(response) {
     console.log('back from login attempt:', response);
-    if (response.data == 'hooray') {
+    if (response.status == 200) {
       console.log('logged in');
       sv.loggedIn = true;
       sv.registeredUser = !sv.registeredUser;

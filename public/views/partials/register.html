@@ -32,14 +32,38 @@
           </div>
           <div class="col-sm-6">
             <p>Last Name *</p>
-            <span class="invalid" ng-show="registerForm.lastName.$touched && registerForm.lastName.$invalid">Last Name is required.</span>
-            <input type="text" name="lastName" placeholder="Last Name" type="text" ng-model="rc.lastNameInput" required >
+            <span class="invalid" ng-show="registerForm.lastName.$touched &&
+            registerForm.lastName.$invalid">Last Name is required.</span>
+            <input type="text" name="lastName" placeholder="Last Name"
+            type="text" ng-model="rc.lastNameInput" required >
           </div>
         </div>
         <!-- end name row -->
-        <p>Email Address *</p>
-        <span class="invalid" ng-show="registerForm.email.$touched && registerForm.email.$invalid">Email Address is Required</span>
-        <input type="text" name ="email" placeholder="name@gmail.com" type="text" ng-model="rc.emailInput" required >
+        <div class="row">
+          <div class="col-sm-6">
+            <!-- <p>Upload Profile Image</p>
+            <input type="file" ngf-select ng-model="picFile" name="file"
+            accept="image/*" ngf-max-size="2MB"
+            required ngf-model-invalid="errorFile">
+             <i ng-show="myForm.file.$error.required">*required</i><br>
+             <i ng-show="myForm.file.$error.maxSize">File too large
+          {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+          <img ng-show="myForm.file" ngf-thumbnail="picFile" class="thumb">
+          <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+          <br>
+           <span class="progress" ng-show="picFile.progress >= 0"> -->
+          </div>
+        <div class="col-sm-6">
+          <p>Email Address *</p>
+          <span class="invalid" ng-show="registerForm.email.$touched &&
+          registerForm.email.$invalid">Email Address is Required</span>
+          <input type="text" name ="email" placeholder="name@gmail.com"
+          type="text" ng-model="rc.emailInput" required >
+        </div>
+
+        </div>
+
+
         <!-- row for passwords  -->
         <div class="row">
           <div class="col-sm-6">
@@ -55,7 +79,7 @@
           </div>
         </div>
         <!-- end password row -->
-        <button type="button" name="button" ng-click="rc.registerNewUser()" ng-disabled="registerForm.$invalid">Register</button>
+        <button type="button" name="button" ng-click="rc.registerNewUser()"  ng-click="uploadPic(picFile)" ng-disabled="registerForm.$invalid">Register</button>
       </form>
       <div >
       <!-- End Login Form -->
