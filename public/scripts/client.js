@@ -1,4 +1,4 @@
- 
+
 
 var myApp = angular.module('myApp', ['ngRoute']);
 
@@ -9,6 +9,7 @@ myApp.config(function($routeProvider){
     controller:'LoginController as lc'
   }).when('/register', {
     templateUrl: 'views/partials/register.html',
+    controller:'RegisterController as rc'
   }).when('/admin', {
     templateUrl: 'views/partials/admin.html',
   }).when('/book', {

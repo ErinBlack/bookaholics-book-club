@@ -9,7 +9,7 @@ sv.sendLogIn = function(data){
     url: '/login',
     data: data
   }).then(function(response) {
-    console.log('back from register attempt:', response);
+    console.log('back from login attempt:', response);
     if (response.data == 'hooray') {
       console.log('logged in');
       sv.loggedIn = true;
@@ -18,9 +18,13 @@ sv.sendLogIn = function(data){
       return sv.registeredUser;
     } //end logged in
     else {
+      console.log('in loginService else statement');
       sv.loggedIn = false;
       return sv.error;
     }
   }); // end http
 };
+
+
+
 }); //end LoginService

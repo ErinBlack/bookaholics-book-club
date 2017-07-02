@@ -6,4 +6,64 @@
   <a href="/#!/book">book</a>
   <a href="/#!/main">main</a>
 </header>
-<h1>Register Me</h1>
+<div ng-controller="RegisterController as rc" class="loginBackground">
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6 col-xs-offset-1 col-xs-10 loginWindow">
+
+      <!-- Start Login Header -->
+      <div class="loginHeader">
+        <img src="../images/logo-white-bkg.png" style="width:70px" alt="">
+        <h1>Bookaholics</h1>
+        <h2>Book Club</h2>
+        <div class="blueLine"></div>
+      </div>
+      <!-- End Login Header  -->
+
+      <!-- Start Login Form -->
+      <form name="registerForm" ng-submit="rc.register()" ng-disabled="registerForm.$invalid">
+        <h2>Register</h2>
+        <!-- row for first name and last name  -->
+        <div class="row">
+          <div class="col-sm-6">
+            <p>First Name *</p>
+            <span class="invalid" ng-show="registerForm.firstName.$touched && registerForm.firstName.$invalid">First Name is required.</span>
+
+            <input type="text" name="firstName" placeholder="First Name" type="text" ng-model="rc.firstNameInput" required/>
+          </div>
+          <div class="col-sm-6">
+            <p>Last Name *</p>
+            <span class="invalid" ng-show="registerForm.lastName.$touched && registerForm.lastName.$invalid">Last Name is required.</span>
+            <input type="text" name="lastName" placeholder="Last Name" type="text" ng-model="rc.lastNameInput" required >
+          </div>
+        </div>
+        <!-- end name row -->
+        <p>Email Address *</p>
+        <span class="invalid" ng-show="registerForm.email.$touched && registerForm.email.$invalid">Email Address is Required</span>
+        <input type="text" name ="email" placeholder="name@gmail.com" type="text" ng-model="rc.emailInput" required >
+        <!-- row for passwords  -->
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Create Password *</p>
+            <span  class="invalid" ng-show="registerForm.password.$touched && registerForm.password.$invalid">Password is Required</span>
+            <input  type="password" name="password" placeholder="Password" ng-model='rc.passwordInput' required>
+
+          </div>
+          <div class="col-sm-6">
+            <p>Confirm Password *</p>
+            <span class="invalid" ng-show="registerForm.confirmPassword.$touched && registerForm.confirmPassword.$invalid ">Please Confirm Password</span>
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" ng-model='rc.passwordConfirm' required >
+          </div>
+        </div>
+        <!-- end password row -->
+        <button type="button" name="button" ng-click="rc.register()" ng-disabled="registerForm.$invalid">Register</button>
+      </form>
+      <div >
+      <!-- End Login Form -->
+
+      <p>Already Registered?</p>
+      <a href="/#!/">Login Here</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- end controller -->
