@@ -30,9 +30,14 @@ router.post ('/', function(req,res) {
       res.send(400);
     }// end if
     else {
+      //creating variables to be used in databse to insert information
+      var firstName = req.body.firstName;
+      var lastName = req.body.lastName;
+      var email = req.body.email;
+      var password = req.body.password;
       console.log('connected to db');
-      //connecting to database to see if the email exists
-      // var checkUsername = connection.query("SELECT user_id FROM users WHERE email='erinblackdesign@gmail.com'");
+      //sending information to the database
+       var addUser = connection.query("INSERT INTO users (first_name, last_name, email, password, role) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '"+ password+ "', '3');");
       // console.log('checkusername', checkUsername);
       done();
       res.send(200);
