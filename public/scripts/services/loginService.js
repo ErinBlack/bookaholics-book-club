@@ -10,18 +10,23 @@ sv.sendLogIn = function(data){
     data: data
   }).then(function(response) {
     console.log('back from login attempt:', response);
-    if (response.status == 200) {
-      if(response.data[0].status === true){
-        var userData = response.data;
+    if (response.data.length > 0) {
+      if(response.data[0].status === false ){
+        console.log('User not confirmed yet');
+        sv.loggedIn = false;
+        return sv.error;
+      }
+      else{
+        var userData = response.data[0];
         console.log('logged in');
         sv.loggedIn = true;
         sv.registeredUser = !sv.registeredUser;
+        // var user = {
+        //   sv.name: userData.first_name + ' ' + userData.last_name;
+        // };
+        //
         return sv.registeredUser;
-      }
-      else{
-          console.log('User not confirmed yet');
-          sv.loggedIn = false;
-          return sv.error;
+
       }
 
     } //end logged in

@@ -22,6 +22,7 @@ myApp.controller('LoginController', function(LoginService){
     //sending login information to the LoginService
     else{
       LoginService.sendLogIn(userInfo).then(function() {
+
         vm.name = vm.emailInput;
         console.log(vm.emailInput);
         vm.emailInput = '';
