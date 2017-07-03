@@ -21,13 +21,15 @@ myApp.controller('LoginController', function(LoginService){
     } //end if
     //sending login information to the LoginService
     else{
-      LoginService.sendLogIn(userInfo).then(function() {
-
-        vm.name = vm.emailInput;
-        console.log(vm.emailInput);
+      LoginService.sendLogIn(userInfo).then(function(user) {
+        console.log('user info in controller', user);
         vm.emailInput = '';
         vm.passwordInput = '';
-        console.log(vm.name, vm.passwordInput);
+        if(user === undefined){
+        }
+        else {
+          window.location = "/#!/main";
+        }
       }); // end LoginService call
     } //end else
   }; //end login

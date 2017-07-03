@@ -36,7 +36,7 @@ router.post ('/', function(req,res) {
   else {
     console.log('connected to db');
     //connecting to database to see if the email exists
-    var checkUsername = connection.query("SELECT user_id, status, role, first_name, last_name  FROM users WHERE email='"+ email +"' AND password ='"+password+"';",
+    var checkUsername = connection.query("SELECT user_id, status, role, first_name, last_name, email  FROM users WHERE email='"+ email +"' AND password ='"+password+"';",
     function(err, result, fields){
       if(err) throw err;
       console.log(result.rows);
