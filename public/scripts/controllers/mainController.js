@@ -1,7 +1,5 @@
 myApp.controller('MainController', function(LoginService){
   var vm = this;
-  console.log('vm', vm);
-  console.log('loginService', LoginService.user);
-  console.log('in MainController');
-
+  //getting logged in user info from LoginService
+  vm.user = LoginService.getUser();
 }); //end MainController

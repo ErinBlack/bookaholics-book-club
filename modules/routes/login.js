@@ -5,7 +5,6 @@ var bcrypt = require( 'bcrypt' );
 var bodyParser = require('body-parser');
 var pg = require('pg');
 
-
 //config to database
 var config = {
   database: 'bookaholics',
@@ -18,8 +17,6 @@ var pool = new pg.Pool(config);
 
 router.use( bodyParser.urlencoded( { extended: true } ) );
 router.use( bodyParser.json() );
-
-
 
 // Post route to log in user
 router.post ('/', function(req,res) {
@@ -50,7 +47,6 @@ router.post ('/', function(req,res) {
           //using bcrypt to see if password given matches pasword in db
             bcrypt.compare( req.body.password, dbPassword, function(err, isMatch){
             if(err){
-              // error with bcrypt
               res.send( 'error' );
             } //end if
             else {
