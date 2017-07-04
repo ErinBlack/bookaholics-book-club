@@ -30,19 +30,38 @@ router.post ('/', function(req,res) {
       res.send(400);
     }// end if
     else {
-      //creating variables to be used in databse to insert information
-      var firstName = req.body.firstName;
-      var lastName = req.body.lastName;
-      var email = req.body.email;
-      var password = req.body.password;
-      console.log('connected to db');
-      //sending information to the database
-       var addUser = connection.query("INSERT INTO users (first_name, last_name, email, password, role) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '"+ password+ "', '3');");
-      // console.log('checkusername', checkUsername);
-      done();
-      res.send(200);
-    }// end else
-
+      // use bcrypt to generate a salt
+      bcrypt.genSalt(12, function(err, salt){
+        if(err){
+          console.log('salt error', err);
+          res.sendStatus(400);
+        } //end if error
+        //creating hash
+        else{
+          console.log('salt:', salt);
+          bcrypt.hash(req.body.password, salt, function(err, hash){
+            if(err){
+              console.log('has err', err);
+              res.sendStatus(400);
+            } //end if err
+            else{
+              console.log('hash:', hash);
+              //creating variables to be used in databse to insert information
+              var firstName = req.body.firstName;
+              var lastName = req.body.lastName;
+              var email = req.body.email;
+              var password = hash;
+              console.log('connected to db');
+              //sending information to the database
+               var addUser = connection.query("INSERT INTO users (first_name, last_name, email, password, role) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '"+ password+ "', '3');");
+              // console.log('checkusername', checkUsername);
+              done();
+              res.send(200);
+            } //end hash else
+          }); //end bcrypt.hash
+        } //end else
+      }); //end bcrypt salt
+    } // end else
   }); //end pool connect
 
 });// end login post
