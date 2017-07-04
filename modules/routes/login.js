@@ -33,7 +33,7 @@ router.post ('/', function(req,res) {
       done();
       res.send(400);
     }// end if
-  else {
+    else {
     console.log('connected to db');
     //connecting to database to see if the email exists
     var checkUsername = connection.query("SELECT user_id, status, role, first_name, last_name, email  FROM users WHERE email='"+ email +"' AND password ='"+password+"';",
@@ -47,41 +47,5 @@ router.post ('/', function(req,res) {
   }// end else
   }); //end pool connect
 });// end login get
-
-// user.findOne ({username: req.body.username}, function (err, user) {
-// if (err) {
-//   console.log('find user error:', err);
-//   res.sendStatus(400);
-// } //end if err
-// else {
-//   if (user != undefined) {
-//     console.log('comparing:', req.body.password, user.password);
-//     bcrypt.compare(req.body.password, user.password, function(err, isMatch) {
-//       if (err) {
-//         console.log('compare error:', err);
-//         res.sendStatus(400);
-//       } //end if
-//       else {
-//         console.log('found u!');
-//         if (isMatch) {
-//         res.send ('hooray');
-//         }
-//         else {
-//           res.send ('bummer');
-//         }
-//       }
-//     }); //end bcrypt
-//   } //end if user defined
-//
-//   else {
-//     console.log('no user found');
-//     res.sendStatus(400);
-//   }
-// } // end of else
-// }); //end findOne
-
-
-
-
 
 module.exports = router;
