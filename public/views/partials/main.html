@@ -1,13 +1,6 @@
-<!-- <header>
-  <a href="/">login</a>
-  <a href="/#!/register">register</a>
-  <a href="/#!/admin">admin</a>
-  <a href="/#!/edit-profile">edit profile</a>
-  <a href="/#!/book">book</a>
-  <a href="/#!/main">main</a>
-</header> -->
-<div ng-controller="MainController as mc" >
 
+<div ng-controller="MainController as mc" class="page" >
+  <!--  Header -->
     <header>
       <div class="container">
         <div class="col-sm-9">
@@ -26,7 +19,7 @@
     <section class="container-fluid welcome">
       <div class="row">
         <!-- User Info and Current Book Section-->
-        <section class="col-sm-offset-1 col-sm-3 sideBar boundingBox ">
+        <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
           <div class="row ">
             <div class="col-sm-4">
             </div>
@@ -35,14 +28,14 @@
               <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
             </div>
           </div>
-          <h3>Current Book</h3>
+          <h3>Current Books</h3>
         </section>
-        <section class=" col-sm-6 col-sm-offset-1  boundingBox ">
+        <section class=" col-sm-7 col-sm-offset-1  boundingBox ">
           <h2>Previous Reads</h2>
           <div class="blueLine"></div>
         </section>
       </div>
     </section>
 
-
-</div>
+<footer></footer>
+</div><!-- end Controller -->

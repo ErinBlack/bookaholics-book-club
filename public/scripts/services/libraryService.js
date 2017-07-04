@@ -20,9 +20,9 @@ ls.parseBooks = function(bookArray){
 
   console.log('inside parseBooks');
   var bookData = bookArray.data.docs;
-  console.log('bookData.length', bookData.length);
+  
   //for loop to loop through the data and parse it out
-  for (var i = 0; i < bookData.length; i++) {
+  for (var i = 0; i <= 10; i++) {
     console.log('entered forloop');
     if(bookData[i].author_name === undefined || bookData[i].isbn === undefined ){
       console.log('no author name');

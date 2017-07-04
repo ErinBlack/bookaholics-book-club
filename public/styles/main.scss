@@ -15,12 +15,14 @@ $blue: #2c6c99;
 $textGray: #696a6c;
 $salmon: #cb7777;
 $white: #ffffff;
-$commentBkg: #747678;
+$headerGray: #9fa1a4;
+$commentBkg: #e4e5e6;
 $inputHeader: #747678;
 
 
 
 h1{
+  font-family: $font-primary;
   font-weight: 300;
   font-size: 2.4em;
   color: $textGray;
@@ -28,11 +30,26 @@ h1{
 }
 
 h2 {
-
-  font-weight: 100;
+font-family: $font-primary;
+  font-weight: 300;
   font-size: 2em;
   color: $textGray;
   margin-top: 0px;
+}
+h3 {
+font-family: $font-primary;
+  font-weight: 300;
+  font-size: 1.5em;
+  color: $textGray;
+  margin-top: 0px;
+}
+p{
+  font-family: $font-primary;
+  font-weight: 300;
+}
+a{
+  font-family: $font-primary;
+  font-weight: 300;
 }
 
 button {
@@ -54,19 +71,21 @@ button {
 
 .boundingBox {
   margin-top: 20px;
-  border: 2px $commentBkg solid;
+  border: 2px $headerGray solid;
   border-radius: 3px;
 }
+
+
 
 .welcome {
   padding: 10px 0 0 0;
   h2{
-      font-family: $font-primary;
-      font-weight: 600;
-      font-size: 2.3em;
-      color: $textGray;
-      text-align: center;
-      margin-top: 20px;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 2.3em;
+    color: $textGray;
+    text-align: center;
+    margin-top: 20px;
   }
   h3 {
     background-color: $blue;
@@ -102,6 +121,12 @@ header {
   }
 }
 
+// ****** Footer Styles *******
+footer{
+  height: 60px;
+  background-color: $commentBkg;
+  margin-top: 150px;
+}
 // ****** Login Styles *******
 
 .loginBackground {
@@ -147,12 +172,31 @@ header {
       color: red;
     }
     .thumb {
-    width: 24px;
-    height: 24px;
-    float: none;
-    position: relative;
-    top: 7px;
-}
+      width: 24px;
+      height: 24px;
+      float: none;
+      position: relative;
+      top: 7px;
+    }
   }
 
+}
+
+// ****** Admin Styles *******
+.subBoundingBox {
+  min-height: 400px;
+  margin: 40px 0;
+  background-color: $commentBkg;
+  border-radius: 3px;
+  h3 {
+    color: $white;
+    text-align: center;
+    background-color: $headerGray;
+    font-family: $font-primary;
+    font-weight:300;
+    font-size: 1.3em;
+    margin-top: -2px;
+    padding: 15px 0;
+    border-radius: 3px;
+  }
 }
