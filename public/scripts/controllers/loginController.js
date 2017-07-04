@@ -21,11 +21,13 @@ myApp.controller('LoginController', function(LoginService){
     } //end if
     //sending login information to the LoginService
     else{
-      LoginService.sendLogIn(userInfo).then(function(user) {
-        console.log('user info in controller', user);
+      LoginService.sendLogIn(userInfo).then(function(registered) {
+        console.log('user info in controller', registered);
         vm.emailInput = '';
         vm.passwordInput = '';
-        if(user === undefined){
+
+        if(registered === false){
+          console.log('user not logged in');
         }
         else {
           window.location = "/#!/main";

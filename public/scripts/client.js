@@ -18,5 +18,6 @@ myApp.config(function($routeProvider){
     templateUrl: 'views/partials/editProfile.html',
   }).when('/main', {
     templateUrl: 'views/partials/main.html',
-  }); //end submit
+    controller:'LoginController as lc'
+  }).otherwise({ redirectTo: '/'});
 }); //end config
