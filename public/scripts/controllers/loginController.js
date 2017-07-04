@@ -1,6 +1,5 @@
 
 myApp.controller('LoginController', function(LoginService){
-  console.log('In Login Controller');
   var vm = this;
 
   vm.loggingIn= false;
@@ -8,7 +7,6 @@ myApp.controller('LoginController', function(LoginService){
 
   //function to login users
   vm.login = function(){
-    console.log('in login');
       // create userInfo object
     var userInfo = {
       email: vm.emailInput,
@@ -22,12 +20,9 @@ myApp.controller('LoginController', function(LoginService){
     //sending login information to the LoginService
     else{
       LoginService.sendLogIn(userInfo).then(function(registered) {
-        console.log('user info in controller', registered);
         vm.emailInput = '';
         vm.passwordInput = '';
-
         if(registered === undefined){
-          console.log('user not logged in');
         }
         else {
           window.location = "/#!/main";

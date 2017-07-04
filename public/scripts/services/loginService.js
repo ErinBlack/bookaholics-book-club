@@ -5,7 +5,6 @@ myApp.service('LoginService', function($http){
 
 //send user info to controller
   sv.getUser=function(){
-    console.log('user', user);
     sv.user = user;
     return sv.user;
   }; //end getUser
@@ -17,7 +16,6 @@ myApp.service('LoginService', function($http){
       url: '/login',
       data: data
     }).then(function(response) {
-      console.log('response', response);
       if(response.data === 'error'){
         sv.loggedIn = false;
          sv.error = alert('an error has occured');
@@ -41,7 +39,6 @@ myApp.service('LoginService', function($http){
           // user is in system and confirmed
           else{
             var userData = response.data[0];
-            console.log('logged in');
             sv.loggedIn = true;
             sv.registeredUser = !sv.registeredUser;
             //all user information
@@ -55,7 +52,6 @@ myApp.service('LoginService', function($http){
               image: userData.profile_img,
               role: userData.role
             };
-            console.log('user info in loginService',user);
             return user;
           } //end else statement
       }
