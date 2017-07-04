@@ -1,4 +1,4 @@
-
+// ****** Main Styles *******
 body, html {
   margin: auto;
   height: 100%;
@@ -52,7 +52,58 @@ button {
   background-color: $blue;
 }
 
-//login info
+.boundingBox {
+  margin-top: 20px;
+  border: 2px $commentBkg solid;
+  border-radius: 3px;
+}
+
+.welcome {
+  padding: 10px 0 0 0;
+  h2{
+      font-family: $font-primary;
+      font-weight: 600;
+      font-size: 2.3em;
+      color: $textGray;
+      text-align: center;
+      margin-top: 20px;
+  }
+  h3 {
+    background-color: $blue;
+    color: white;
+    font-size: 1.6em;
+    padding: 20px 0;
+    text-align: center;
+  }
+  h4 {
+    color: $blue;
+    text-decoration: underline;
+  }
+  p{
+    color: $blue;
+    font-size: 1em;
+    font-weight: 600;
+  }
+
+}
+// ****** Header Styles *******
+header {
+  background-color: $teal;
+  height: 60px;
+  color: $white;
+
+  a {
+    color: $white;
+    text-decoration: underline;
+    font-size: 1.2em;
+  }
+  .signOut{
+    padding: 20px 0;
+  }
+}
+
+// ****** Login Styles *******
+
 .loginBackground {
   min-height: 100%;
   background-image: url('../images/login-background.jpg');

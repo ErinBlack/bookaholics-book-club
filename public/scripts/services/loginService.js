@@ -1,6 +1,8 @@
 myApp.service('LoginService', function($http){
   //logged in information
   var sv = this;
+  sv.loggedIn = false;
+  sv.admin = false;
   var user = {};
 
 //send user info to controller
@@ -17,22 +19,18 @@ myApp.service('LoginService', function($http){
       data: data
     }).then(function(response) {
       if(response.data === 'error'){
-        sv.loggedIn = false;
          sv.error = alert('an error has occured');
       }
       else if(response.data === 'not in system') {
-        sv.loggedIn = false;
           sv.error = alert('Email and / or password not registered');
           return sv.error;
       }
       else if(response.data == 'password not a match'){
-            sv.loggedIn = false;
             sv.error = alert('Incorrect Username or Passwords');
             return sv.error;
       }
       else {
           if(response.data[0].status === false ){
-            sv.loggedIn = false;
             sv.error = alert('You haven\'t yet been confirmed by the administrator');
             return sv.error;
           } //end if statment
@@ -41,6 +39,9 @@ myApp.service('LoginService', function($http){
             var userData = response.data[0];
             sv.loggedIn = true;
             sv.registeredUser = !sv.registeredUser;
+            if(userData.role < 3){
+              sv.admin = true;
+            }
             //all user information
             user = {
               loggedIn: sv.loggedIn,
@@ -50,7 +51,8 @@ myApp.service('LoginService', function($http){
               lastName: userData.last_name,
               email: userData.email,
               image: userData.profile_img,
-              role: userData.role
+              role: userData.role,
+              admin: sv.admin
             };
             return user;
           } //end else statement

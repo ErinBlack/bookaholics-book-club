@@ -1,12 +1,48 @@
-<header>
+<!-- <header>
   <a href="/">login</a>
   <a href="/#!/register">register</a>
   <a href="/#!/admin">admin</a>
   <a href="/#!/edit-profile">edit profile</a>
   <a href="/#!/book">book</a>
   <a href="/#!/main">main</a>
-</header>
+</header> -->
 <div ng-controller="MainController as mc" >
-<h1>Main page</h1>
-{{mc.user.firstName}}
+
+    <header>
+      <div class="container">
+        <div class="col-sm-9">
+          <a href="/#!/main"><img src="images/header-logo.png" alt=""></a>
+        </div>
+        <div ng-show="mc.user.admin" class="col-sm-2 signOut">
+          <a href="/#!/admin">Admin Page</a>
+        </div>
+        <div class="col-sm-1 signOut">
+          <a href="/" ng-click="logOut()">Sign Out</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Page Content-->
+    <section class="container-fluid welcome">
+      <div class="row">
+        <!-- User Info and Current Book Section-->
+        <section class="col-sm-offset-1 col-sm-3 sideBar boundingBox ">
+          <div class="row ">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-6 col-sm-offset-1">
+              <h4 class="welcome">Welcome </h4>
+              <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
+            </div>
+          </div>
+          <h3>Current Book</h3>
+        </section>
+        <section class=" col-sm-6 col-sm-offset-1  boundingBox ">
+          <h2>Previous Reads</h2>
+          <div class="blueLine"></div>
+        </section>
+      </div>
+    </section>
+
+
 </div>
