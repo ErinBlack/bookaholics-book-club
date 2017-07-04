@@ -26,7 +26,7 @@ myApp.controller('LoginController', function(LoginService){
         vm.emailInput = '';
         vm.passwordInput = '';
 
-        if(registered === false){
+        if(registered === undefined){
           console.log('user not logged in');
         }
         else {

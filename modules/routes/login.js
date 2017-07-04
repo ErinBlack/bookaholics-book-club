@@ -8,10 +8,10 @@ var pg = require('pg');
 
 //config to database
 var config = {
-database: 'bookaholics',
-host: 'localhost',
-port: 5432,
-max: 50
+  database: 'bookaholics',
+  host: 'localhost',
+  port: 5432,
+  max: 50
 };
 
 var pool = new pg.Pool(config);
@@ -31,21 +31,42 @@ router.post ('/', function(req,res) {
     if( err ){
       console.log(err);
       done();
-      res.send(400);
+      res.send('error');
     }// end if
     else {
-    console.log('connected to db');
-    //connecting to database to see if the email exists
-    var checkUsername = connection.query("SELECT user_id, status, role, first_name, last_name, email  FROM users WHERE email='"+ email +"' AND password ='"+password+"';",
-    function(err, result, fields){
-      if(err) throw err;
-      console.log(result.rows);
-      done();
-      res.send(result.rows);
-    });
-
-  }// end else
-  }); //end pool connect
-});// end login get
-
+      console.log('connected to db');
+      //connecting to database to see if the email exists
+      var checkUsername = connection.query("SELECT user_id, status, role, first_name, last_name, email, password  FROM users WHERE email='"+ email +"';",
+      function(err, result){
+        if(err) throw err;
+        console.log('result.rows', result.rows[0]);
+        //check if user email exists
+        if(result.rows[0] === undefined){
+          res.send( 'not in system' );
+        }
+        else {
+          //password returned from db
+          var dbPassword = result.rows[0].password;
+          //using bcrypt to see if password given matches pasword in db
+            bcrypt.compare( req.body.password, dbPassword, function(err, isMatch){
+            if(err){
+              // error with bcrypt
+              res.send( 'error' );
+            } //end if
+            else {
+              if( isMatch ){
+                done();
+                res.send(result.rows);
+              } //end if
+              else {
+                done();
+                res.send('password not a match');
+              }
+            } //end else
+          }); //end bcrypt.compare
+        }
+      }); //end SELETE statement
+    } //end else
+  });// end pool connect
+}); //end router.post
 module.exports = router;
