@@ -61,7 +61,7 @@ router.post ('/', function(req,res) {
             } //end else
           }); //end bcrypt.compare
         }
-      }); //end SELETE statement
+      }); //end SELECT statement
     } //end else
   });// end pool connect
 }); //end router.post

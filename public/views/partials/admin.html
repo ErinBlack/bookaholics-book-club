@@ -25,7 +25,7 @@
           </div>
           <div class="col-sm-6 col-sm-offset-1">
             <h4 class="welcome">Welcome </h4>
-            <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
+            <p>{{ac.user.firstName}} {{ac.user.lastName}}</p>
           </div>
         </div>
         <h3>Current Books</h3>
@@ -61,10 +61,12 @@
 
           </div>
           <!-- Membership Requests-->
-            <div class="col-sm-4 ">
+            <div class="col-sm-4" ng-init="ac.getRequests()">
               <div class="subBoundingBox">
                   <h3>Membership Requests</h3>
-                  
+                  <div>
+                    <h4></h4>
+                  </div>
               </div>
             </div>
             <!-- All Users-->

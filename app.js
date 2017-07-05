@@ -8,6 +8,7 @@ var index = require('./modules/routes/index');
 var login = require('./modules/routes/login');
 var register = require('./modules/routes/register');
 var main = require('./modules/routes/main');
+var admin = require('./modules/routes/admin');
 var bcrypt = require( 'bcrypt' );
 var pg = require('pg');
 //uses
@@ -17,6 +18,7 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/register', register);
 app.use('/main', main);
+app.use('/admin', admin);
 
 
 //port for server

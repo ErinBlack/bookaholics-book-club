@@ -12,8 +12,10 @@ myApp.config(function($routeProvider){
     controller:'RegisterController as rc'
   }).when('/admin', {
     templateUrl: 'views/partials/admin.html',
+    controller:'AdminController as ac'
   }).when('/book', {
     templateUrl: 'views/partials/book.html',
+    controller:'BookController as bc'
   }).when('/edit-profile', {
     templateUrl: 'views/partials/editProfile.html',
   }).when('/main', {
