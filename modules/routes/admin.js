@@ -19,25 +19,21 @@ var pool = new pg.Pool(config);
 router.use( bodyParser.urlencoded( { extended: true } ) );
 router.use( bodyParser.json() );
 
-//get all user information from pending requests
+// *****  Get all user information from pending requests   *****//
 router.get('/requests', function(req, res){
-  console.log('base url post hit:', req.body);
-  //creating object out of email from req.body
+  //creating variables from req.body
   var email = req.body.email;
   var password = req.body.password;
   pool.connect( function(err, connection, done){
     if( err ){
-      console.log(err);
       done();
       res.send('error');
     }// end if
     else {
-      console.log('connected to db');
       //connecting to database to retrieve all users pending approval
       var allPending = connection.query("SELECT user_id, first_name, last_name, profile_img, email  FROM users WHERE status='false';",
       function(err, result){
         if(err) throw err;
-        console.log('result.rows', result.rows);
         done();
         res.send(result.rows);
       }); //end SELECT statement
@@ -45,23 +41,20 @@ router.get('/requests', function(req, res){
   });// end pool connect
   }); // end router.get
 
-  //approve pending user requests
+
+// *****  Approve pending user requests   *****//
+
   router.put('/approve', function(req,res){
-    console.log('base url put hit', req.body);
     userID = req.body.data;
     pool.connect( function(err, connection, done){
       if( err ){
-        console.log(err);
         done();
         res.send('error');
       }// end if
       else {
-          console.log('connected to db');
-          console.log('userId', userID);
           //connecting to database to approve user
           var approveUser = connection.query("UPDATE users SET status = 'true' WHERE user_id = '"+ userID +"';");
             if(err){
-              console.log('has err', err);
               res.sendStatus(400);
             } //end if err
             else{
@@ -72,23 +65,19 @@ router.get('/requests', function(req, res){
       }); // end pool connection
   }); //end put request
 
-  //decline pending user requests
+
+  // *****  Decline pending user requests   *****//
   router.put('/decline', function(req,res){
-    console.log('base url put hit', req.body);
     userID = req.body.data;
     pool.connect( function(err, connection, done){
       if( err ){
-        console.log(err);
         done();
         res.send('error');
       }// end if
       else {
-          console.log('connected to db');
-          console.log('userId', userID);
           //connecting to database to approve user
           var declineUser = connection.query("UPDATE users SET status = 'declined' WHERE user_id = '"+ userID +"';");
             if(err){
-              console.log('has err', err);
               res.sendStatus(400);
             } //end if err
             else{
@@ -99,4 +88,25 @@ router.get('/requests', function(req, res){
       }); // end pool connection
   }); //end put request
 
+  // *****  Get all Users for Role Change   *****//
+  router.get('/getMembers', function(req, res){
+  console.log('base url get hit');
+    pool.connect( function(err, connection, done){
+      if( err ){
+        done();
+        res.send('error');
+      }// end if
+      else {
+        console.log('in get else');
+        //connecting to database to retrieve all users pending approval
+        var allUsers = connection.query("SELECT user_id, first_name, last_name, profile_img, email  FROM users WHERE status='true';",
+        function(err, result){
+          if(err) throw err;
+          console.log('result.rows', result.rows);
+          done();
+          res.send(result.rows);
+        }); //end SELECT statement
+      } //end else
+    });// end pool connect
+    }); // end router.get
 module.exports = router;

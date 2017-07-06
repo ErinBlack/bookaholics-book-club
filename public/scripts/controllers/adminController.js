@@ -47,10 +47,10 @@ vm.user = LoginService.getUser();
   }; //end approveUser
 
   // *****  Get All Members for Role Change  *****//
-  vm.getUsers = () => {
+  vm.getMembers = () => {
     console.log('in getUsers');
-    $http.get('/admin/users').then(function(data){
-      console.log('back from the /users with', data);
+    $http.get('/admin/getMembers').then(function(data){
+      console.log('back from the /getMembers with', data);
       vm.userData = data.data;
       console.log('pendingUserData',  vm.userData);
       for (const value of vm.userData) {

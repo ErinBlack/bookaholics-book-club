@@ -87,9 +87,28 @@
               </div>
             </div>
             <!-- All Users-->
-              <div class="col-md-4 ">
+              <div class="col-md-4 " ng-init="ac.getMembers()">
                 <div class="subBoundingBox">
                     <h3>All Members</h3>
+                    <div>
+                      <div class="allUsers" ng-repeat = 'user in ac.allUsers'>
+                        <div class="row">
+                          <div class="col-md-4">
+                            {{user.profile_img}}
+                          </div>
+                          <div class="col-md-8">
+                            {{user.first_name}} {{user.last_name}} <br>
+                            {{user.email}}
+                          </div>
+                        </div>
+
+                        <div >
+                          <button type="button" name="button" class="btn" ng-click="ac.approveUser(user.user_id)">Approve</button>
+                          <button type="button" name="button" class="btn" ng-click="ac.declineUser(user.user_id)">Decline</button>
+                        </div>
+
+                      </div>
+                    </div>
                 </div>
               </div>
         </div>
