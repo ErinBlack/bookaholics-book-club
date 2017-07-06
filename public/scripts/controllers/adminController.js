@@ -7,7 +7,7 @@ vm.allUsers = [];
 vm.user = LoginService.getUser();
 
   // *****   Get Search Title   *****//
-  vm.searchForBook = function(search){
+  vm.searchForBook = (search) => {
     LibraryService.searchBook(search).then(function(bookSearched){
       vm.books = bookSearched;
       vm.searchBook = LibraryService;
@@ -19,14 +19,14 @@ vm.user = LoginService.getUser();
   vm.getRequests = function(){
     $http.get('/admin/requests').then(function(data){
       vm.pendingUserData = data.data;
-      for (var i = 0; i < vm.pendingUserData.length; i++) {
-        vm.pendingUsers.push(vm.pendingUserData[i]);
-      } // end for loop
+      for (const value of vm.pendingUserData) {
+        vm.pendingUsers.push(value);
+      }
     });
   }; //end getRequests
 
   // *****  Approve Member Request   *****//
-  vm.approveUser = function(user_id){
+  vm.approveUser = (user_id) => {
     $http.put('/admin/approve',{
       data: user_id
     }).then(function(){
@@ -37,7 +37,7 @@ vm.user = LoginService.getUser();
 
 
   // *****  Decline Member Request   *****//
-  vm.declineUser = function(user_id){
+  vm.declineUser = (user_id) => {
     $http.put('/admin/decline',{
       data: user_id
     }).then(function(){
@@ -53,9 +53,10 @@ vm.user = LoginService.getUser();
       console.log('back from the /users with', data);
       vm.userData = data.data;
       console.log('pendingUserData',  vm.userData);
-      for (var i = 0; i < vm.userData.length; i++) {
-        vm.allUsers.push(vm.userData[i]);
-      } // end for loop
+      for (const value of vm.userData) {
+        console.log(value);
+      vm.allUsers.push(value);
+    }
       console.log('pendingUsers', vm.allUsers);
     });
   }; //end getRequests
