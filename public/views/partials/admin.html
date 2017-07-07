@@ -38,27 +38,38 @@
         <!-- Search for Book -->
           <div class="col-md-4 ">
             <div class="subBoundingBox">
-              <div class="searchBook" >
+              <div class="containerBook" >
                 <form ng-submit="ac.searchForBook(ac.search)">
                   <h3>Add New Book</h3>
-                  <input type="text" ng-model="ac.search" ng-change="ac.searchForBook(ac.search)">
+                  <div class="containerBox">
+                    <h4>Search Books</h4>
+                    <input type="text" ng-model="ac.search" placeholder="title/ author / isbn" ng-submit="ac.searchForBook(ac.search)">
+                    <button type="button" ng-submit="ac.searchForBook(ac.search)" name="button">Search</button>
+
                 </form>
                 <!-- Display Book Results -->
-                <div ng-repeat="book in ac.books | filter:ac.search:strict">
-                  <div class="row">
+                <div class="bookContainer">
+                <div ng-repeat="book in ac.books | limitTo:15 " class="bookListing" >
+                  <div class="row" ng-click="ac.chooseBook(book)">
                     <div class="col-sm-2 ">
                       <img src="http://covers.openlibrary.org/b/isbn/{{book.isbn[0]}}-S.jpg" />
                     </div>
                     <div class="col-sm-9">
-                      <span>{{book.title}}</span>
-                      <span>By {{book.author_name[0]}}</span>
-                      <span>ISBN# {{book.isbn[0]}} </span>
+                      <div class="listingInfo" id="title">{{book.title}}</div>
+                      <div class="listingInfo" id="author">By {{book.author_name[0]}}</div>
+                      <div class="listingInfo" id="isbn">ISBN# {{book.isbn[0]}} </div>
                     </div>
                   </div>
                 </div>
               </div>
+              </div>
             </div>
-
+            <!-- Submit Book-->
+            <div class="">
+              <input type="date" placeholder="Date / Month / Year" ng-model="ac.dueDate">
+              <button type="button" name="button" ng-click="ac.submitBook()">Submit Book</button>
+            </div>
+          </div>
           </div>
           <!-- Membership Requests-->
             <div class="col-md-4" ng-init="ac.getRequests()">
@@ -78,8 +89,8 @@
                       </div>
 
                       <div >
-                        <button type="button" name="button" class="btn" ng-click="ac.approveUser(user.user_id)">Approve</button>
-                        <button type="button" name="button" class="btn" ng-click="ac.declineUser(user.user_id)">Decline</button>
+                        <button type="button" name="button" class="btn" ng-click="ac.changeStatus(user.user_id, 'active')">Approve</button>
+                        <button type="button" name="button" class="btn" ng-click="ac.changeStatus(user.user_id, 'declined')">Decline</button>
                       </div>
 
                     </div>
@@ -117,7 +128,7 @@
                                   <button ng-show="ac.user.role == '1'" type="button" name="button" ng-click="ac.changeRole(user.user_id, 3)">Remove Owner</button>
                               </div>
                               <div class=" col-md-3 signOut">
-                                  <button type="button" name="button" ng-click="ac.changeStatus(user.user_id, 'disable')">Disable</button>
+                                  <button type="button" name="button" ng-click="ac.changeStatus(user.user_id, 'disabled')">Disable</button>
                               </div>
                           </div>
                           </div>

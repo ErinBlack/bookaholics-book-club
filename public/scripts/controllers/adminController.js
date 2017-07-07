@@ -5,9 +5,13 @@ var vm = this;
 vm.pendingUsers = [];
 vm.allUsers = [];
 vm.user = LoginService.getUser();
+vm.bookImg = 0;
+let bookSelected = {};
 
   // *****   Get Search Title   *****//
   vm.searchForBook = (search) => {
+    console.log('in searchforBook');
+    console.log('search', search);
     LibraryService.searchBook(search).then(function(bookSearched){
       vm.books = bookSearched;
       vm.searchBook = LibraryService;
@@ -15,8 +19,40 @@ vm.user = LoginService.getUser();
   }; //end searchForBook
 
 
+
+  // *****   Choose a Book *****//
+  vm.chooseBook = (book) => {
+    console.log('in choose book');
+    vm.selectedBook = LibraryService.selectedBook();
+    // .then(function(bookSelected){
+    //   vm.bookSelected = bookSelected;
+    // }); //end then
+    // console.log('bookSelected', vm.bookSelected);
+  };
+
+    // *****  Submit a Book *****//
+  vm.submitBook = () => {
+      console.log('in submitBook');
+      console.log('vm.dueDate', vm.dueDate);
+      getSeletedBook = function(){
+
+      }
+      vm.bookToSend = {
+        userId: vm.user.userId,
+        title: selectedBook.title,
+        author: selectedBook.author_name[0],
+        publishedDate: selectedBook.publish_date[0],
+        isbn: selectedBook.isbn[0],
+        coverImage: "http://covers.openlibrary.org/b/isbn/"+selectedBook.isbn[0]+"-S.jpg",
+        dueDate: vm.dueDate
+      }
+
+      console.log('bookToSend', bookToSend);
+  } //end submitBook
+
+
   // *****   Get Member Request   *****//
-  vm.getRequests = function(){
+  vm.getRequests = () => {
     $http.get('/admin/requests').then(function(data){
       vm.pendingUserData = data.data;
       for (const value of vm.pendingUserData) {

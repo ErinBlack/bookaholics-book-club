@@ -41,53 +41,6 @@ router.get('/requests', function(req, res){
   });// end pool connect
   }); // end router.get
 
-
-// *****  Approve pending user requests   *****//
-
-  router.put('/approve', function(req,res){
-    userID = req.body.data;
-    pool.connect( function(err, connection, done){
-      if( err ){
-        done();
-        res.send('error');
-      }// end if
-      else {
-          //connecting to database to approve user
-          var approveUser = connection.query("UPDATE users SET status = 'active' WHERE user_id = '"+ userID +"';");
-            if(err){
-              res.sendStatus(400);
-            } //end if err
-            else{
-              done();
-              res.sendStatus(200);
-            } // end else
-        } // end else
-      }); // end pool connection
-  }); //end put request
-
-
-  // *****  Decline pending user requests   *****//
-  router.put('/decline', function(req,res){
-    userID = req.body.data;
-    pool.connect( function(err, connection, done){
-      if( err ){
-        done();
-        res.send('error');
-      }// end if
-      else {
-          //connecting to database to approve user
-          var declineUser = connection.query("UPDATE users SET status = 'declined' WHERE user_id = '"+ userID +"';");
-            if(err){
-              res.sendStatus(400);
-            } //end if err
-            else{
-              done();
-              res.sendStatus(200);
-            } // end else
-        } // end else
-      }); // end pool connection
-  }); //end put request
-
   // *****  Get all Users for Role Change   *****//
   router.get('/getMembers', function(req, res){
     pool.connect( function(err, connection, done){
@@ -109,7 +62,7 @@ router.get('/requests', function(req, res){
     }); // end router.get
 
 
-  // *****  Change Roll   *****//
+  // *****  Change Member's Roll   *****//
   router.put('/changeRoll', function(req,res){
     userId = req.body.data.id;
     role = req.body.data.role
@@ -132,7 +85,7 @@ router.get('/requests', function(req, res){
       }); // end pool connection
   }); //end put request
 
-  // ***** Disable Account   *****//
+  // ***** Change Member's Status   *****//
   router.put('/changeStatus', function(req,res){
     console.log('base url get hit on /disableAccount');
     userId = req.body.data.id;
@@ -147,7 +100,7 @@ router.get('/requests', function(req, res){
       else {
         console.log('in get else');
           // connecting to database to approve user
-          var makeAdmin = connection.query("UPDATE users SET status = '"+ status+"' WHERE user_id = '"+ userId +"';");
+          var makeAdmin = connection.query("UPDATE users SET status = '"+ status +"' WHERE user_id = '"+ userId +"';");
             if(err){
               res.sendStatus(400);
             } //end if err

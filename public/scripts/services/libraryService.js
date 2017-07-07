@@ -1,37 +1,51 @@
 myApp.service('LibraryService', function($http){
-var ls = this;
-var books = [];
-//get list of books from API
-ls.searchBook = function(search){
+let ls = this;
+let books = [];
+let selectedBook = {};
+
+
+// *****  Get list of books from API *****//
+ls.searchBook = (search) => {
   //returning books array to empty
   books = [];
     //call to openlibrary API
-    var searchURL = 'http://openlibrary.org/search.json?q=' + search;
+    let searchURL = 'http://openlibrary.org/search.json?q=' + search;
+
     return $http.get(searchURL).then(function(response){
-      console.log('inside searchBook .then function');
       //running parseBooks to remove books without authors
       ls.parseBooks(response);
       return books;
     }); //end searchBook
 }; //end searchBook
 
-//parse through the books array to remove items without authors
-ls.parseBooks = function(bookArray){
 
-  console.log('inside parseBooks');
-  var bookData = bookArray.data.docs;
-  
-  //for loop to loop through the data and parse it out
-  for (var i = 0; i <= 10; i++) {
-    console.log('entered forloop');
-    if(bookData[i].author_name === undefined || bookData[i].isbn === undefined ){
-      console.log('no author name');
-    } //end if
-    else{
-    books.push(bookData[i]);
-    } //end else
-  } //end for loop
-  console.log('books', books);
+// *****  Parse through the books array to remove items without authors *****//
+ls.parseBooks = (bookArray) => {
+  let bookData = bookArray.data.docs;
+  //checking to see if the book array returned is < 25 items
+    for (const value of bookData) {
+      if(value.author_name === undefined || value.isbn === undefined ){
+      }
+      else{
+      books.push(value);
+      } //end else
+    } //end for loop
+    console.log('books', books);
 }; //end parseBooks
 
+// *****  Storing Selected Book *****//
+ls.selectedBook = (book) => {
+  selectedBook = {};
+
+  // vm.title = book.title;
+  selectedBook = {
+    title: book.title,
+    author: book.author_name[0],
+    publishedDate: book.publish_date[0],
+    isbn: book.isbn[0],
+    coverImage: "http://covers.openlibrary.org/b/isbn/"+book.isbn[0]+"-S.jpg",
+  }; // end selectedBook
+  console.log('selected book in service', selectedBook);
+  return selectedBook;
+}; // end ls.selectedBook
 });// end GifService

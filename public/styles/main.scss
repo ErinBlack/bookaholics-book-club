@@ -184,7 +184,7 @@ footer{
 
 // ****** Admin Styles *******
 .subBoundingBox {
-  min-height: 400px;
+  min-height: 500px;
   margin: 40px 0;
   background-color: $commentBkg;
   border-radius: 3px;
@@ -202,6 +202,12 @@ footer{
     margin-top: -2px;
     padding: 15px 0;
     border-radius: 3px;
+  }
+  h4 {
+    color: $textGray;
+    padding:0 0 0  10px;
+    text-decoration: none;
+    font-weight: 300
   }
   .adminRights{
     button{
@@ -222,4 +228,30 @@ footer{
   .allUsers{
     padding: 5px;
   }
+  .bookListing{
+    padding: 5px;
+  }
+  .bookContainer{
+    overflow-y: scroll;
+    height: 200px;
+    background-color: $white;
+    margin: 10px 0 0 0;
+  }
+
+  #title {
+    font-size: .9em;
+  }
+  #author {
+    font-size: .8em;
+  }
+  #isbn {
+    font-size: .7em;
+  }
+}
+.containerBox{
+  padding: 10px;
+  input{
+    width: 90%;
+  }
+
 }
