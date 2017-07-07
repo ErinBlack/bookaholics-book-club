@@ -188,6 +188,10 @@ footer{
   margin: 40px 0;
   background-color: $commentBkg;
   border-radius: 3px;
+
+  .row{
+    margin: 0;
+  }
   h3 {
     color: $white;
     text-align: center;
@@ -198,5 +202,24 @@ footer{
     margin-top: -2px;
     padding: 15px 0;
     border-radius: 3px;
+  }
+  .adminRights{
+    button{
+      color: $blue;
+      background-color: transparent;
+      font-size: .7em;
+      float: left;
+      font-family: $font-secondary;
+      font-weight: 400;
+      border: none;
+      text-decoration: underline;
+      padding: 2px;
+    } // end Button
+  } //end adminRights
+  .userEmail {
+    font-size: .7em;
+  }
+  .allUsers{
+    padding: 5px;
   }
 }

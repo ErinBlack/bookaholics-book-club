@@ -93,20 +93,37 @@
                     <div>
                       <div class="allUsers" ng-repeat = 'user in ac.allUsers'>
                         <div class="row">
+                          <md-content flex layout="row" layout-align="center">
+                          <md-content flex="10">
                           <div class="col-md-4">
                             {{user.profile_img}}
                           </div>
                           <div class="col-md-8">
-                            {{user.first_name}} {{user.last_name}} <br>
-                            {{user.email}}
+                            {{user.first_name}} {{user.last_name}}
+                            <div class="userEmail">
+                              {{user.email}}
+                            </div>
+                            <!-- Change Member Priviliges-->
+                            <div class="adminRights">
+                              <div ng-show="user.role  == '3'" >
+                                <button type="button" name="button" ng-click="ac.changeRole(user.user_id, 2)">Make Admin</button>
+                              </div>
+                              <div ng-show="user.role  == '2'" >
+                                  <button type="button" name="button" ng-click="ac.changeRole(user.user_id, 3)">Remove Admin</button>
+                                  <button ng-show="ac.user.role == '1'" type="button" name="button" ng-click="ac.changeRole(user.user_id, 1)">Make Owner</button>
+
+                              </div>
+                              <div ng-show="user.role  == '1'">
+                                  <button ng-show="ac.user.role == '1'" type="button" name="button" ng-click="ac.changeRole(user.user_id, 3)">Remove Owner</button>
+                              </div>
+                              <div class=" col-md-3 signOut">
+                                  <button type="button" name="button" ng-click="ac.disableAccount(user.user_id, 'disable')">Disable</button>
+                              </div>
                           </div>
+                          </div>
+                        </md-content>
+                      </md-content>
                         </div>
-
-                        <div >
-                          <button type="button" name="button" class="btn" ng-click="ac.approveUser(user.user_id)">Approve</button>
-                          <button type="button" name="button" class="btn" ng-click="ac.declineUser(user.user_id)">Decline</button>
-                        </div>
-
                       </div>
                     </div>
                 </div>

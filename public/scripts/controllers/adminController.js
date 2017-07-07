@@ -48,17 +48,51 @@ vm.user = LoginService.getUser();
 
   // *****  Get All Members for Role Change  *****//
   vm.getMembers = () => {
-    console.log('in getUsers');
+    console.log('in getMembers');
     $http.get('/admin/getMembers').then(function(data){
-      console.log('back from the /getMembers with', data);
       vm.userData = data.data;
-      console.log('pendingUserData',  vm.userData);
       for (const value of vm.userData) {
-        console.log(value);
-      vm.allUsers.push(value);
+        if(value.role <= 2 ){
+          vm.admin = true;
+        }
+        else if(value.role === 1){
+            vm.admin = 'owner';
+        }
+        else{
+          vm.admin = false;
+        }
+        user = {
+          email: value.email,
+          first_name: value.first_name,
+          last_name: value.last_name,
+          profile_img: value.profile_img,
+          role: value.role,
+          user_id: value.user_id,
+          admin: vm.admin
+        }
+      vm.allUsers.push(user);
     }
-      console.log('pendingUsers', vm.allUsers);
+      console.log('allUsers', vm.allUsers);
     });
   }; //end getRequests
+
+
+
+  // ***** Change Role *****//
+  vm.changeRole = (user_id, role) => {
+    let userInfo = {
+      id: user_id,
+      role: role
+    }
+    console.log('in changeRoll');
+    $http.put('/admin/changeRoll',{
+      data: userInfo
+    }).then(function(){
+      vm.allUsers = [];
+      vm.getMembers();
+      console.log('allUsers', vm.allUsers);
+    }); //end .then function
+  }; //end makeAdmin
+
 
 }); //end AdminController
