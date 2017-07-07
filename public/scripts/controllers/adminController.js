@@ -23,31 +23,26 @@ let bookSelected = {};
   // *****   Choose a Book *****//
   vm.chooseBook = (book) => {
     console.log('in choose book');
-    vm.selectedBook = LibraryService.selectedBook();
-    // .then(function(bookSelected){
-    //   vm.bookSelected = bookSelected;
-    // }); //end then
-    // console.log('bookSelected', vm.bookSelected);
+    LibraryService.selectedBook(book);
   };
 
     // *****  Submit a Book *****//
   vm.submitBook = () => {
       console.log('in submitBook');
-      console.log('vm.dueDate', vm.dueDate);
-      getSeletedBook = function(){
-
-      }
+      vm.selectedBook = LibraryService.currentSelectedBook();
+      console.log('selectedBook', vm.selectedBook);
+      //creating book to send to the books database
       vm.bookToSend = {
         userId: vm.user.userId,
-        title: selectedBook.title,
-        author: selectedBook.author_name[0],
-        publishedDate: selectedBook.publish_date[0],
-        isbn: selectedBook.isbn[0],
-        coverImage: "http://covers.openlibrary.org/b/isbn/"+selectedBook.isbn[0]+"-S.jpg",
+        title: vm.selectedBook.title,
+        author: vm.selectedBook.author,
+        publishedDate: vm.selectedBook.publishedDate,
+        isbn: vm.selectedBook.isbn,
+        coverImage: "http://covers.openlibrary.org/b/isbn/"+vm.selectedBook.isbn+"-S.jpg",
         dueDate: vm.dueDate
       }
 
-      console.log('bookToSend', bookToSend);
+      console.log('bookToSend', vm.bookToSend);
   } //end submitBook
 
 
