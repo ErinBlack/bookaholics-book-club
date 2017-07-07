@@ -109,31 +109,6 @@ router.get('/requests', function(req, res){
     }); // end router.get
 
 
-  router.put('/makeAdmin', function(req,res){
-    console.log('base url get hit');
-    userID = req.body.data;
-    pool.connect( function(err, connection, done){
-      if( err ){
-        done();
-        res.send('error');
-      }// end if
-      else {
-        console.log('in get else');
-          //connecting to database to approve user
-          var makeAdmin = connection.query("UPDATE users SET role = '2' WHERE user_id = '"+ userID +"';");
-            if(err){
-              res.sendStatus(400);
-            } //end if err
-            else{
-              done();
-              res.sendStatus(200);
-            } // end else
-        } // end else
-      }); // end pool connection
-  }); //end put request
-
-
-
   // *****  Change Roll   *****//
   router.put('/changeRoll', function(req,res){
     console.log('base url get hit on /changeRoll');
