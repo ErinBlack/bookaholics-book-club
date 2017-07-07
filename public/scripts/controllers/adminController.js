@@ -70,6 +70,7 @@ vm.user = LoginService.getUser();
           user_id: value.user_id,
           admin: vm.admin
         }
+
       vm.allUsers.push(user);
     }
       console.log('allUsers', vm.allUsers);
