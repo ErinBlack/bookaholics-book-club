@@ -53,7 +53,7 @@ router.post ('/', function(req,res) {
               var password = hash;
               console.log('connected to db');
               //sending information to the database
-               var addUser = connection.query("INSERT INTO users (first_name, last_name, email, password, role) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '"+ password+ "', '3');");
+               var addUser = connection.query("INSERT INTO users (first_name, last_name, status, email, password, role) VALUES ('" + firstName + "', '" + lastName + "', 'pending', '" + email + "', '"+ password+ "', '3');");
               // console.log('checkusername', checkUsername);
               done();
               res.send(200);

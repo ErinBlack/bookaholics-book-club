@@ -31,7 +31,7 @@ router.get('/requests', function(req, res){
     }// end if
     else {
       //connecting to database to retrieve all users pending approval
-      var allPending = connection.query("SELECT user_id, first_name, last_name, profile_img, email  FROM users WHERE status='false';",
+      var allPending = connection.query("SELECT user_id, first_name, last_name, profile_img, email  FROM users WHERE status='pending';",
       function(err, result){
         if(err) throw err;
         done();
@@ -53,7 +53,7 @@ router.get('/requests', function(req, res){
       }// end if
       else {
           //connecting to database to approve user
-          var approveUser = connection.query("UPDATE users SET status = 'true' WHERE user_id = '"+ userID +"';");
+          var approveUser = connection.query("UPDATE users SET status = 'active' WHERE user_id = '"+ userID +"';");
             if(err){
               res.sendStatus(400);
             } //end if err
@@ -97,7 +97,7 @@ router.get('/requests', function(req, res){
       }// end if
       else {
         //connecting to database to retrieve all users pending approval
-        var allUsers = connection.query("SELECT user_id, first_name, last_name, profile_img, email, role  FROM users WHERE status='true';",
+        var allUsers = connection.query("SELECT user_id, first_name, last_name, profile_img, email, role  FROM users WHERE status='active';",
         function(err, result){
           if(err) throw err;
           console.log('result.rows', result.rows);
@@ -111,18 +111,14 @@ router.get('/requests', function(req, res){
 
   // *****  Change Roll   *****//
   router.put('/changeRoll', function(req,res){
-    console.log('base url get hit on /changeRoll');
     userId = req.body.data.id;
     role = req.body.data.role
-    console.log('id', userId);
-    console.log('role', role);
     pool.connect( function(err, connection, done){
       if( err ){
         done();
         res.send('error');
       }// end if
       else {
-        console.log('in get else');
           // connecting to database to approve user
           var makeAdmin = connection.query("UPDATE users SET role = '"+role+"' WHERE user_id = '"+ userId +"';");
             if(err){
@@ -136,5 +132,32 @@ router.get('/requests', function(req, res){
       }); // end pool connection
   }); //end put request
 
-  
+  // ***** Disable Account   *****//
+  router.put('/changeStatus', function(req,res){
+    console.log('base url get hit on /disableAccount');
+    userId = req.body.data.id;
+    status = req.body.data.status
+    console.log('id', userId);
+    console.log('role', status);
+    pool.connect( function(err, connection, done){
+      if( err ){
+        done();
+        res.send('error');
+      }// end if
+      else {
+        console.log('in get else');
+          // connecting to database to approve user
+          var makeAdmin = connection.query("UPDATE users SET status = '"+ status+"' WHERE user_id = '"+ userId +"';");
+            if(err){
+              res.sendStatus(400);
+            } //end if err
+            else{
+              done();
+              res.sendStatus(200);
+            } // end else
+        } // end else
+      }); // end pool connection
+  }); //end put request
+
+
 module.exports = router;

@@ -85,7 +85,6 @@ vm.user = LoginService.getUser();
       id: user_id,
       role: role
     }
-    console.log('in changeRoll');
     $http.put('/admin/changeRoll',{
       data: userInfo
     }).then(function(){
@@ -94,6 +93,25 @@ vm.user = LoginService.getUser();
       console.log('allUsers', vm.allUsers);
     }); //end .then function
   }; //end makeAdmin
+
+
+    // ***** Change User Status *****//
+    vm.changeStatus = (user_id, status) => {
+      let userInfo = {
+        id: user_id,
+        status: status
+      }
+      console.log('in changeStatus');
+      $http.put('/admin/changeStatus',{
+        data: userInfo
+      }).then(function(){
+        vm.allUsers = [];
+        vm.pendingUsers = [];
+        vm.getMembers();
+        vm.getRequests();
+      }); //end .then function
+    }; //end makeAdmin
+
 
 
 }); //end AdminController
