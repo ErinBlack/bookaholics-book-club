@@ -40,12 +40,15 @@ let bookSelected = {};
         isbn: vm.selectedBook.isbn,
         coverImage: "http://covers.openlibrary.org/b/isbn/"+vm.selectedBook.isbn+"-S.jpg",
         dueDate: vm.dueDate
-      }
+      }; //end bookToSend
 
       console.log('bookToSend', vm.bookToSend);
-  } //end submitBook
-
-
+      //sending bookToSend to Library Service
+      LibraryService.sendBook(vm.bookToSend).then(function() {
+      }); //end LibraryService
+  }; //end submitBook
+//
+//
   // *****   Get Member Request   *****//
   vm.getRequests = () => {
     $http.get('/admin/requests').then(function(data){
@@ -55,7 +58,7 @@ let bookSelected = {};
       }
     });
   }; //end getRequests
-
+//
   // *****  Approve Member Request   *****//
   vm.approveUser = (user_id) => {
     $http.put('/admin/approve',{
@@ -107,9 +110,9 @@ let bookSelected = {};
       console.log('allUsers', vm.allUsers);
     });
   }; //end getRequests
-
-
-
+//
+//
+//
   // ***** Change Role *****//
   vm.changeRole = (user_id, role) => {
     let userInfo = {
@@ -124,7 +127,7 @@ let bookSelected = {};
       console.log('allUsers', vm.allUsers);
     }); //end .then function
   }; //end makeAdmin
-
+//
 
     // ***** Change User Status *****//
     vm.changeStatus = (user_id, status) => {

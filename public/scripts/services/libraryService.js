@@ -57,4 +57,17 @@ sv.selectedBook = (book) => {
     return sv.selectedBook;
   }; //end getUser
 
+// ***** Send selected Book info to controller *****//
+  sv.sendBook = (sentBook) => {
+    console.log('in sendBook');
+    return $http({
+      method: 'POST',
+      url: 'admin/postBook',
+      data: sentBook
+    }).then(function(data){
+      console.log('data from sentBook', data);
+    } //end then
+    );
+  };
+
 });// end LibraryService

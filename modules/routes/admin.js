@@ -112,5 +112,30 @@ router.get('/requests', function(req, res){
       }); // end pool connection
   }); //end put request
 
+  // ***** Submit a new book   *****//
+  router.post('/postBook', function(req,res){
+    console.log('base url get hit on /postBook');
+    console.log('id', req.body);
+    pool.connect( function(err, connection, done){
+      console.log('in pool.connect');
+      // if( err ){
+      //   done();
+      //   res.send('error');
+      // }// end if
+      // else {
+      //   console.log('in get else');
+      //     // connecting to database to approve user
+      //     var sendBook = connection.query("INSERT INTO books (book_id, user_id, title, author, published_date, isbn, cover_img, due_date, status) VALUES ('" + firstName + "', '" + lastName + "', 'pending', '" + email + "', '"+ password+ "', '3');");
+      //       if(err){
+      //         res.sendStatus(400);
+      //       } //end if err
+      //       else{
+      //         done();
+      //         res.sendStatus(200);
+      //       } // end else
+      //   } // end else
+      }); // end pool connection
+  }); //end put request
+
 
 module.exports = router;
