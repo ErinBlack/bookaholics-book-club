@@ -116,24 +116,33 @@ router.get('/requests', function(req, res){
   router.post('/postBook', function(req,res){
     console.log('base url get hit on /postBook');
     console.log('id', req.body);
+    //variables to send to db
+    var userId = req.body.userId;
+    var title= req.body.title;
+    var author = req.body.author;
+    var publishedDate = req.body.publishedDate;
+    var isbn = req.body.isbn;
+    var coverImage = req.body.coverImage;
+    var dueDate = req.body.dueDate;
+
     pool.connect( function(err, connection, done){
       console.log('in pool.connect');
-      // if( err ){
-      //   done();
-      //   res.send('error');
-      // }// end if
-      // else {
-      //   console.log('in get else');
-      //     // connecting to database to approve user
-      //     var sendBook = connection.query("INSERT INTO books (book_id, user_id, title, author, published_date, isbn, cover_img, due_date, status) VALUES ('" + firstName + "', '" + lastName + "', 'pending', '" + email + "', '"+ password+ "', '3');");
-      //       if(err){
-      //         res.sendStatus(400);
-      //       } //end if err
-      //       else{
-      //         done();
-      //         res.sendStatus(200);
-      //       } // end else
-      //   } // end else
+      if( err ){
+        done();
+        res.send('error');
+      }// end if
+      else {
+        console.log('in get else');
+          // connecting to database to approve user
+          var sendBook = connection.query("INSERT INTO books (user_id, title, author, published_date, isbn, cover_img, due_date, status) VALUES ('" + userId + "', '" + title + "', '"+ author +"', '" + publishedDate + "', '"+ isbn + "', '"+ coverImage +"', '"+ dueDate +"', 'true');");
+            if(err){
+              res.sendStatus(400);
+            } //end if err
+            else{
+              done();
+              res.sendStatus(200);
+            } // end else
+        } // end else
       }); // end pool connection
   }); //end put request
 
