@@ -21,9 +21,6 @@ router.use( bodyParser.json() );
 
 // *****  Get all user information from pending requests   *****//
 router.get('/requests', function(req, res){
-  //creating variables from req.body
-  var email = req.body.email;
-  var password = req.body.password;
   pool.connect( function(err, connection, done){
     if( err ){
       done();
@@ -33,6 +30,7 @@ router.get('/requests', function(req, res){
       //connecting to database to retrieve all users pending approval
       var allPending = connection.query("SELECT user_id, first_name, last_name, profile_img, email  FROM users WHERE status='pending';",
       function(err, result){
+        console.log('result', result.rows);
         if(err) throw err;
         done();
         res.send(result.rows);
@@ -90,8 +88,6 @@ router.get('/requests', function(req, res){
     console.log('base url get hit on /disableAccount');
     userId = req.body.data.id;
     status = req.body.data.status
-    console.log('id', userId);
-    console.log('role', status);
     pool.connect( function(err, connection, done){
       if( err ){
         done();
