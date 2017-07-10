@@ -2,6 +2,7 @@ myApp.service('LibraryService', function($http){
 let sv = this;
 let books = [];
 let selectedBook = {};
+sv.savedBooks = [];
 
 
 // *****  Get list of books from API *****//
@@ -10,7 +11,6 @@ sv.searchBook = (search) => {
   books = [];
     //call to openlibrary API
     let searchURL = 'http://openlibrary.org/search.json?q=' + search;
-
     return $http.get(searchURL).then(function(response){
       sv.parseBooks(response);
       return books;
@@ -50,15 +50,17 @@ sv.parseBooks = (bookArray) => {
       console.log('response from sentBook', status.data);
       return status.data;
     }); //end .then function
-    //
-    // return $http({
-    //   method: 'POST',
-    //   url: '',
-    //   data: sentBook
-    // }).then(function(data){
-    //   console.log('data from sentBook', data);
-    // } //end then
-    // );
   };
+
+  // ***** Send selected Book info to controller *****//
+    sv.prevBooks = () => {
+      sv.savedBooks = [];
+      console.log('in prevBooks');
+      return $http.get('main/getBooks').then(function(response){
+        console.log('response', response);
+        sv.savedBooks = response;
+        return sv.savedBooks;
+      }); //end searchBook
+    };
 
 });// end LibraryService
