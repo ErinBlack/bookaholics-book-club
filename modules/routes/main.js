@@ -64,4 +64,31 @@ router.post('/comment', function(req, res){
     }); // end pool connection
 });
 
+
+// ***** Post Main Comment   *****//
+router.get('/comment', function(req, res){
+  console.log('in get / comment');
+  pool.connect( function(err, connection, done){
+    if( err ){
+      done();
+      res.send('error');
+    }// end if
+    else {
+      console.log('in else');
+      var allMainComments = connection.query("SELECT *  FROM main_feed;",
+      function(err, result){
+        if(err){
+          done();
+          res.send('error');
+        }
+        else{
+          done();
+          res.send(result.rows);
+        }
+      }); //end SELECT statement
+      } // end else
+    }); // end pool connection
+});
+
+
 module.exports = router;

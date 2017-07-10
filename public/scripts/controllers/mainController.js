@@ -1,22 +1,31 @@
-myApp.controller('MainController', function(LoginService, LibraryService, CommentService){
+myApp.controller('MainController', function(LoginService, LibraryService, CommentService, UserService){
   var vm = this;
   vm.savedBooks = [];
   vm.futureReads = [];
+  vm.mainComments = [];
   vm.iso = '';
   //getting logged in user info from LoginService
-  vm.user = LoginService.getUser();
+  // vm.user = LoginService.getUser();
+  // console.log('vm.user', vm.user);
+  // vm.allUsers = UserService.getMembers();
+  // console.log('vm.allUsers', vm.allUsers);
+
+
+// *****   Functions to load on init   *****//
+  vm.init = () => {
+    vm.getMembers();
+    vm.getUser();
+    vm.prevBooks();
+    vm.getMainComments();
+  }; //end vm.init
 
   // *****   Get All Books in DB   *****//
   vm.prevBooks = () => {
-    console.log('in prevBooks');
     vm.savedBooks = [];
     LibraryService.prevBooks().then(function(savedBooks){
       vm.savedBooks = savedBooks.data;
-      console.log('prevBooks', vm.savedBooks);
       vm.futureReads(vm.savedBooks);
     }); //end then
-
-
   }; //end searchForBook
 
 
@@ -24,26 +33,17 @@ myApp.controller('MainController', function(LoginService, LibraryService, Commen
   vm.futureReads = (savedBooks) => {
     vm.iso = '';
     vm.futureReads = [];
-    console.log('in futureReads');
     let today = new Date();
     vm.iso = today.toISOString();
-    console.log('today', today);
-    console.log('vm.savedBooks', savedBooks);
-
     for (const value of savedBooks) {
-      console.log('value due date', value.due_date);
       if (vm.iso < value.due_date){
         vm.futureReads.push(value);
       } //end if
     } //end for loop
-    console.log(vm.futureReads);
   }; //end futureReads
 
   // *****   Submitting a Main Comment to Thread   *****//
-    vm.addComment= (comment) => {
-      console.log('in addComment');
-      console.log('userId', vm.user);
-      console.log('comment', comment);
+    vm.addMainComment = (comment) => {
       //comment object to send
       vm.commentToSend = {
         userId: vm.user.userId,
@@ -51,11 +51,46 @@ myApp.controller('MainController', function(LoginService, LibraryService, Commen
         comment: comment
       };
         //send comment to CommentService to Post to DB
-      CommentService.addComment(vm.commentToSend).then(function(response){
-        console.log('back from addComment', response);
+      CommentService.addMainComment(vm.commentToSend).then(function(response){
         vm.comment = '';
       }); //end then
     }; //end addComments
 
+    // *****   Getting Comments for Main Thread  *****//
+      vm.getMainComments= (comment) => {
+        vm.mainComments = [];
+        console.log('in getMainComments');
+        //get comments fromt main_feed DB
+        CommentService.getMainComments().then(function(comments){
+
+          vm.commentInfo = comments.data;
+          console.log('back from getComments with:', vm.commentInfo);
+          for (const value of vm.commentInfo) {
+            vm.memberId = value.user_id;
+            vm.commentUser = vm.allUsers.find(user => user.user_id === vm.memberId);
+            //object with comment data to snd
+            vm.comment = {
+              name: vm.commentUser.first_name + vm.commentUser.last_name,
+              profileImage: vm.commentUser.profile_img,
+              date: value.date,
+              comment: value.comment
+            };
+
+            vm.mainComments.push(vm.comment);
+          } //end for loop
+        }); //end then
+      }; //end addComments
+
+
+// *****   Getting all members  *****//
+      vm.getMembers = () => {
+        vm.allUsers = UserService.getMembers();
+        console.log('allUsres', vm.allUsers);
+      }; //end getRequests
+
+      vm.getUser = () => {
+        vm.user = LoginService.getUser();
+        console.log('user', vm.user);
+      }; //end getRequests
 
 }); //end MainController

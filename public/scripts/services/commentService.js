@@ -3,7 +3,7 @@ console.log('in CommentService');
 let sv = this;
 
 // ***** Send Comment to Main Comment Thread *****//
-  sv.addComment = (sentComment) => {
+  sv.addMainComment = (sentComment) => {
     console.log('in sendComment', sentComment);
     return $http.post('main/comment',{
       data: sentComment
@@ -12,4 +12,15 @@ let sv = this;
       return status.data;
     }); //end .then function
   };
+
+// ***** Get all comments from main thread *****//
+  sv.getMainComments = () => {
+    console.log('in getMainComments');
+    return $http.get('main/comment').then(function(comments){
+      console.log('response from getMainComments', comments);
+      return comments;
+    }); //end .then function
+  };
+
+
 }); //end commentService

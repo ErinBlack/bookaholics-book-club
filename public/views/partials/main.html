@@ -1,13 +1,16 @@
 
-<div ng-controller="MainController as mc" class="page" ng-init="mc.prevBooks()" >
+<div ng-controller="MainController as mc" class="page" ng-init="mc.init()" >
   <!--  Header -->
   <header>
     <div class="container">
       <div class="col-sm-9">
         <a href="/#!/main"><img src="images/header-logo.png" alt=""></a>
       </div>
-      <div ng-show="mc.user.admin" class="col-sm-2 signOut">
+      <div ng-show="mc.user.admin" class="col-sm-1 signOut">
         <a href="/#!/admin">Admin Page</a>
+      </div>
+      <div class="col-sm-1 signOut">
+        <a href="/#!/main">Home</a>
       </div>
       <div class="col-sm-1 signOut">
         <a href="/" ng-click="logOut()">Sign Out</a>
@@ -65,7 +68,7 @@
         </div>
 
         <!-- Main Comment Thread-->
-        <section class=" mainThread" ng-init="mc.getComments()">
+        <section class=" mainThread" >
           <h2>Talk Amongst Yourselves</h2>
           <div class="blueLine"></div>
           <div class="commentSection">
@@ -73,12 +76,12 @@
               <div class="col-sm-5">
                 <div class="subBoundingBox submitThread">
                   <div class="containerBook" >
-                    <form ng-submit="mc.addComment(comment)">
+                    <form ng-submit="mc.addMainComment(comment)">
                       <h3>Submit to Thread</h3>
                       <div class="containerBox">
                         <h4>Message</h4>
                         <textarea class="mainComment" rows="4" cols="35" ng-model="comment" placeholder="Your Comment"></textarea>
-                        <button type="button" ng-click="mc.addComment(comment)" name="button">Submit</button>
+                        <button type="button" ng-click="mc.addMainComment(comment)" name="button">Submit</button>
                       </form>
                     </div>
                   </div>
@@ -86,8 +89,8 @@
               </div>
               <div class="col-md-7 commentThread">
                 <div class="row">
-                  <div class="col-ms-12 comment">
-
+                  <div class="col-ms-12 comment" ng-repeat="comment in mc.mainComments">
+                    {{comment.profileImage}} {{comment.name}} {{comment.date | date : format : medium }} {{comment.comment}}
                   </div>
                 </div>
               </div>
