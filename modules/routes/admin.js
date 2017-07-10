@@ -30,7 +30,6 @@ router.get('/requests', function(req, res){
       //connecting to database to retrieve all users pending approval
       var allPending = connection.query("SELECT user_id, first_name, last_name, profile_img, email  FROM users WHERE status='pending';",
       function(err, result){
-        console.log('result', result.rows);
         if(err) throw err;
         done();
         res.send(result.rows);
@@ -51,7 +50,6 @@ router.get('/requests', function(req, res){
         var allUsers = connection.query("SELECT user_id, first_name, last_name, profile_img, email, role  FROM users WHERE status='active';",
         function(err, result){
           if(err) throw err;
-          console.log('result.rows', result.rows);
           done();
           res.send(result.rows);
         }); //end SELECT statement
@@ -85,7 +83,6 @@ router.get('/requests', function(req, res){
 
   // ***** Change Member's Status   *****//
   router.put('/changeStatus', function(req,res){
-    console.log('base url get hit on /disableAccount');
     userId = req.body.data.id;
     status = req.body.data.status
     pool.connect( function(err, connection, done){
@@ -94,7 +91,6 @@ router.get('/requests', function(req, res){
         res.send('error');
       }// end if
       else {
-        console.log('in get else');
           // connecting to database to approve user
           var makeAdmin = connection.query("UPDATE users SET status = '"+ status +"' WHERE user_id = '"+ userId +"';");
             if(err){
@@ -110,34 +106,43 @@ router.get('/requests', function(req, res){
 
   // ***** Submit a new book   *****//
   router.post('/postBook', function(req,res){
-    console.log('base url get hit on /postBook');
-    console.log('id', req.body);
+    console.log('req.body', req.body);
+    data = req.body.data;
     //variables to send to db
-    var userId = req.body.userId;
-    var title= req.body.title;
-    var author = req.body.author;
-    var publishedDate = req.body.publishedDate;
-    var isbn = req.body.isbn;
-    var coverImage = req.body.coverImage;
-    var dueDate = req.body.dueDate;
+    let bookToPost ={
+       userId: data.userId,
+       title: data.title,
+       author:data.author,
+       publishedDate: data.publishedDate,
+       isbn: data.isbn,
+       coverImage: data.coverImage,
+       dueDate: data.dueDate,
+    };
+    console.log('bookToPost', bookToPost);
 
     pool.connect( function(err, connection, done){
-      console.log('in pool.connect');
       if( err ){
         done();
         res.send('error');
       }// end if
       else {
-        console.log('in get else');
+        let queryToSend = "INSERT INTO books (user_id, title, author, published_date,";
+        queryToSend += " isbn, cover_img, due_date, status) VALUES ";
+        queryToSend  += "('" + bookToPost.userId + "', '" + bookToPost.title + "',";
+        queryToSend  += "'"+ bookToPost.author +"', '" + bookToPost.publishedDate + "', ";
+        queryToSend  += " '"+ bookToPost.isbn + "', '"+ bookToPost.coverImage +"', '";
+        queryToSend  += ""+ bookToPost.dueDate +"', 'true');";
           // connecting to database to approve user
-          var sendBook = connection.query("INSERT INTO books (user_id, title, author, published_date, isbn, cover_img, due_date, status) VALUES ('" + userId + "', '" + title + "', '"+ author +"', '" + publishedDate + "', '"+ isbn + "', '"+ coverImage +"', '"+ dueDate +"', 'true');");
+          let sendBook = connection.query(queryToSend, function(err, response){
             if(err){
-              res.sendStatus(400);
+              done();
+              res.send('error');
             } //end if err
             else{
               done();
-              res.sendStatus(200);
-            } // end else
+              res.send('book submitted');
+            }// end else
+          }); //end sendBook
         } // end else
       }); // end pool connection
   }); //end put request

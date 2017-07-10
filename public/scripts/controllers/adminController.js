@@ -4,25 +4,37 @@ var vm = this;
 vm.user = LoginService.getUser();
 vm.pendingUsers = [];
 vm.bookImg = 0;
-let bookSelected = {};
+vm.books = [];
+vm.selectedBook= {};
 
   // *****   Get Search Title   *****//
   vm.searchForBook = (search) => {
-    LibraryService.searchBook(search).then(function(bookSearched){
-      vm.books = bookSearched;
-      vm.searchBook = LibraryService;
+    vm.books = [];
+    LibraryService.searchBook(search).then(function(booksSearched){
+      vm.books = booksSearched;
+      console.log('vm.books', vm.books);
     }); //end then
   }; //end searchForBook
 
 
   // *****   Choose a Book *****//
-  vm.chooseBook = (book) => {
-    LibraryService.selectedBook(book);
+  vm.chooseBook = (i) => {
+    vm.selectedBook = {};
+    console.log('in choose book');
+    console.log('book title', vm.books[i]);
+    vm.selectedBook = {
+      title: vm.books[i].title,
+      author: vm.books[i].author_name[0],
+      publishedDate: vm.books[i].publish_date[0],
+      isbn: vm.books[i].isbn[0],
+      coverImage: "http://covers.openlibrary.org/b/isbn/"+vm.books[i].isbn[0]+"-S.jpg",
+    }; // end selectedBook
+    console.log('vm.selectedBook',vm.selectedBook );
   };
 
     // *****  Submit a Book *****//
   vm.submitBook = () => {
-      vm.selectedBook = LibraryService.currentSelectedBook();
+      vm.bookToSend = {}
       //creating book to send to the books database
       vm.bookToSend = {
         userId: vm.user.userId,
@@ -33,9 +45,29 @@ let bookSelected = {};
         coverImage: "http://covers.openlibrary.org/b/isbn/"+vm.selectedBook.isbn+"-S.jpg",
         dueDate: vm.dueDate
       }; //end bookToSend
-
+      console.log('vm.bookToSend', vm.bookToSend);
       //sending bookToSend to Library Service
-      LibraryService.sendBook(vm.bookToSend).then(function() {
+      LibraryService.sendBook(vm.bookToSend).then(function(status) {
+        vm.books = [];
+        vm.selectedBook= {};
+        vm.bookToSend = {};
+        vm.search = ''
+        console.log('response', status);
+        switch(status) {
+          case 'error': {
+            alert("Oh No! There was a problem with your submission.");
+            break;
+          }
+          case 'book submitted': {
+            alert("Your book has been submitted!");
+            break;
+          }
+          default: {
+            alert("Oh No! There was a problem with your submission.");
+            break;
+          }
+        } //end switch statement
+
       }); //end LibraryService
   }; //end submitBook
 
