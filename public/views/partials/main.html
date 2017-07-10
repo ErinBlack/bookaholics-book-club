@@ -1,37 +1,57 @@
 
 <div ng-controller="MainController as mc" class="page" ng-init="mc.prevBooks()" >
   <!--  Header -->
-    <header>
-      <div class="container">
-        <div class="col-sm-9">
-          <a href="/#!/main"><img src="images/header-logo.png" alt=""></a>
-        </div>
-        <div ng-show="mc.user.admin" class="col-sm-2 signOut">
-          <a href="/#!/admin">Admin Page</a>
-        </div>
-        <div class="col-sm-1 signOut">
-          <a href="/" ng-click="logOut()">Sign Out</a>
-        </div>
+  <header>
+    <div class="container">
+      <div class="col-sm-9">
+        <a href="/#!/main"><img src="images/header-logo.png" alt=""></a>
       </div>
-    </header>
+      <div ng-show="mc.user.admin" class="col-sm-2 signOut">
+        <a href="/#!/admin">Admin Page</a>
+      </div>
+      <div class="col-sm-1 signOut">
+        <a href="/" ng-click="logOut()">Sign Out</a>
+      </div>
+    </div>
+  </header>
 
-    <!-- Main Page Content-->
-    <section class="container-fluid welcome"  >
-      <div class="row">
-        <!-- User Info and Current Book Section-->
-        <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
-          <div class="row ">
+  <!-- Main Page Content-->
+  <section class="container-fluid welcome"  >
+    <div class="row">
+      <!-- User Info and Current Book Section-->
+      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
+        <div class="row ">
 
-            <div class="col-sm-4">
+          <div class="col-sm-4">
+          </div>
+          <div class="col-sm-6 col-sm-offset-1">
+            <h4 class="welcome">Welcome </h4>
+            <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
+          </div>
+        </div>
+        <h3>Current Books</h3>
+        <div class="row prevReads" >
+          <div class="col-sm-12" ng-repeat="book in mc.futureReads " >
+            <div class="imgDiv">
+              <img src="{{book.cover_img}}" alt="" class="bookThumb">
             </div>
-            <div class="col-sm-6 col-sm-offset-1">
-              <h4 class="welcome">Welcome </h4>
-              <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
+            <h3>{{book.title}}</h3>
+            <div class="bookInfo">
+              <p>Author: {{book.author }} </p>
+              <h4>Due: {{book.due_date | date : format : medium}} </h4>
             </div>
           </div>
-          <h3>Current Books</h3>
-          <div class="row prevReads" >
-            <div class="col-sm-12" ng-repeat="book in mc.futureReads " >
+        </div>
+
+
+        <!-- All Books Section-->
+      </section>
+      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads " >
+        <h2>All Bookaholics Books</h2>
+        <div class="blueLine"></div>
+        <div class="allBooks">
+          <div class="row" >
+            <div class="col-sm-3 prevBooks" ng-repeat="book in mc.savedBooks |  orderBy:'-due_date'">
               <div class="imgDiv">
                 <img src="{{book.cover_img}}" alt="" class="bookThumb">
               </div>
@@ -42,30 +62,43 @@
               </div>
             </div>
           </div>
+        </div>
 
-
-
-        </section>
-        <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads " >
-          <h2>All Bookaholics Books</h2>
+        <!-- Main Comment Thread-->
+        <section class=" mainThread" ng-init="mc.getComments()">
+          <h2>Talk Amongst Yourselves</h2>
           <div class="blueLine"></div>
-          <div class="allBooks">
+          <div class="commentSection">
             <div class="row" >
-              <div class="col-sm-3 prevBooks" ng-repeat="book in mc.savedBooks |  orderBy:'-due_date'">
-                <div class="imgDiv">
-                  <img src="{{book.cover_img}}" alt="" class="bookThumb">
+              <div class="col-sm-5">
+                <div class="subBoundingBox submitThread">
+                  <div class="containerBook" >
+                    <form ng-submit="mc.addComment(comment)">
+                      <h3>Submit to Thread</h3>
+                      <div class="containerBox">
+                        <h4>Message</h4>
+                        <textarea class="mainComment" rows="4" cols="35" ng-model="comment" placeholder="Your Comment"></textarea>
+                        <button type="button" ng-click="mc.addComment(comment)" name="button">Submit</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
-                <h3>{{book.title}}</h3>
-                <div class="bookInfo">
-                  <p>Author: {{book.author }} </p>
-                  <h4>Due: {{book.due_date | date : format : medium}} </h4>
+              </div>
+              <div class="col-md-7 commentThread">
+                <div class="row">
+                  <div class="col-ms-12 comment">
+
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-      </div>
-    </section>
+      </section>
 
-<footer></footer>
+
+
+
+  </section>
+  <footer></footer>
 </div><!-- end Controller -->
