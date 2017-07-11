@@ -42,7 +42,7 @@ vm.selectedBook= {};
         author: vm.selectedBook.author,
         publishedDate: vm.selectedBook.publishedDate,
         isbn: vm.selectedBook.isbn,
-        coverImage: "http://covers.openlibrary.org/b/isbn/"+vm.selectedBook.isbn+"-S.jpg",
+        coverImage: "http://covers.openlibrary.org/b/isbn/"+vm.selectedBook.isbn+"-M.jpg",
         dueDate: vm.dueDate
       }; //end bookToSend
       console.log('vm.bookToSend', vm.bookToSend);

@@ -50,7 +50,7 @@ router.post('/comment', function(req, res){
     }// end if
     else {
       console.log('in else');
-      var commentToSend = connection.query("INSERT INTO main_feed (user_id, date, comment) VALUES ('"+ sentComment.userId +"', '"+ sentComment.date +"', '"+ sentComment.comment +"' );", function(){
+      var commentToSend = connection.query("INSERT INTO main_feed (user_id, date, comment) VALUES ('"+ sentComment.userId +"', '"+ sentComment.date +"', '"+ sentComment.comment +"' );", function(err, result){
         if(err){
           done();
           res.send('error');

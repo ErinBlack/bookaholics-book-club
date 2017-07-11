@@ -1,9 +1,93 @@
-<header>
-  <a href="/">login</a>
-  <a href="/#!/register">register</a>
-  <a href="/#!/admin">admin</a>
-  <a href="/#!/edit-profile">edit profile</a>
-  <a href="/#!/book">book</a>
-  <a href="/#!/main">main</a>
-</header>
-<h1>Book</h1>
+
+
+<div class="page" >
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="col-sm-9">
+        <a href="/#!/main"><img src="images/header-logo.png" alt=""></a>
+      </div>
+      <div ng-show="bc.user.admin" class="col-sm-2 signOut">
+        <a href="/#!/admin">Admin Page</a>
+      </div>
+      <div class="col-sm-1 signOut">
+        <a href="/" ng-click="logOut()">Sign Out</a>
+      </div>
+    </div>
+  </header>
+
+<!-- Main Page Content-->
+<section class="container-fluid welcome"  >
+  <div class="row">
+    <!-- User Info and Current Book Section-->
+    <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-init="bc.prevBooks()" ng-controller="BookController as bc">
+      <div class="row ">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-6 col-sm-offset-1">
+          <h4 class="welcome">Welcome </h4>
+          <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
+        </div>
+      </div>
+      <h3>Current Books</h3>
+      <div class="row prevReads" >
+        <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
+          <div class="imgDiv">
+            <img src="{{book.cover_img}}" alt="" class="bookThumb">
+          </div>
+          <h3>{{book.title}}</h3>
+          <div class="bookInfo">
+            <p>Author: {{book.author }} </p>
+            <h4>Due: {{book.due_date | date : format : medium}} </h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <!-- All Books Section-->
+      <div class=" ">
+        <!-- Book Information Section -->
+        <section class=" boundingBox prevReads col-sm-7 col-sm-offset-1 " >
+          <section class="col-sm-4">
+            <h2>Book Title</h2>
+            <img src="" alt="">
+          </section>
+
+
+
+          <!-- Main Comment Thread-->
+          <section class=" mainThread col-sm-8" >
+            <h2>Book Title Feed</h2>
+            <div class="blueLine"></div>
+            <div class="commentSection">
+              <div class="row boundingBoxRow" >
+                <div class="col-sm-12">
+                  <div class="subBoundingBox submitThread">
+                    <div class="containerBook" >
+                      <form ng-submit="bc.addMainComment(comment)">
+                        <h3>Submit to Thread</h3>
+                        <div class="containerBox">
+                          <h4>Message</h4>
+                          <textarea class="mainComment" rows="4" cols="35"  ng-model="mc.comment" ng-attr-placeholder="Write a comment.." ></textarea>
+                          <button type="button" ng-click="mc.addMainComment(mc.comment)" name="button">Submit</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-7 commentThread">
+                  <div class="row ">
+                    <div class="col-ms-12 comment" ng-repeat="comment in mc.mainComments">
+                      {{comment.profileImage}} {{comment.name}} {{comment.date | date : format : medium }} {{comment.comment}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+    </section>
+      <footer></footer>
+
+      </div>

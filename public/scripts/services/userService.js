@@ -88,6 +88,7 @@ myApp.service('UserService', function($http){
       data: sv.userInfo
     }).then(function(){
       sv.getUserRequests();
+      sv.getMembers();
       return sv.pendingUsers;
     }); //end .then function
   }; //end changeStatus

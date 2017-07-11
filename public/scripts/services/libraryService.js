@@ -64,3 +64,9 @@ sv.parseBooks = (bookArray) => {
     };
 
 });// end LibraryService
+
+  // ***** Get Book Info for Book Page *****//
+
+  sv.getBook = () => {
+    console.log('in getBook');
+  }; //end getBook

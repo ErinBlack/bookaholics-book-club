@@ -3,15 +3,10 @@ myApp.controller('MainController', function(LoginService, LibraryService, Commen
   vm.savedBooks = [];
   vm.futureReads = [];
   vm.mainComments = [];
+  vm.comment = '';
   vm.iso = '';
-  //getting logged in user info from LoginService
-  // vm.user = LoginService.getUser();
-  // console.log('vm.user', vm.user);
-  // vm.allUsers = UserService.getMembers();
-  // console.log('vm.allUsers', vm.allUsers);
 
-
-// *****   Functions to load on init   *****//
+  // *****   Functions to load on init   *****//
   vm.init = () => {
     vm.getMembers();
     vm.getUser();
@@ -29,7 +24,7 @@ myApp.controller('MainController', function(LoginService, LibraryService, Commen
   }; //end searchForBook
 
 
-// *****   Determining if book is a FutureRead   *****//
+  // *****   Determining if book is a FutureRead   *****//
   vm.futureReads = (savedBooks) => {
     vm.iso = '';
     vm.futureReads = [];
@@ -43,54 +38,67 @@ myApp.controller('MainController', function(LoginService, LibraryService, Commen
   }; //end futureReads
 
   // *****   Submitting a Main Comment to Thread   *****//
-    vm.addMainComment = (comment) => {
-      //comment object to send
-      vm.commentToSend = {
-        userId: vm.user.userId,
-        date: vm.iso,
-        comment: comment
-      };
-        //send comment to CommentService to Post to DB
-      CommentService.addMainComment(vm.commentToSend).then(function(response){
-        vm.comment = '';
-      }); //end then
-    }; //end addComments
+  vm.addMainComment = (comment) => {
+    //comment object to send
+    vm.commentToSend = {
+      userId: vm.user.userId,
+      date: vm.iso,
+      comment: comment
+    };
+    //send comment to CommentService to Post to DB
+    CommentService.addMainComment(vm.commentToSend).then(function(response){
+      vm.getMainComments();
+    }); //end then
+    vm.comment = '';
+  }; //end addComments
 
-    // *****   Getting Comments for Main Thread  *****//
-      vm.getMainComments= (comment) => {
-        vm.mainComments = [];
-        console.log('in getMainComments');
-        //get comments fromt main_feed DB
-        CommentService.getMainComments().then(function(comments){
+  // *****   Getting Comments for Main Thread  *****//
+  vm.getMainComments= (comment) => {
+    vm.mainComments = [];
+    console.log('in getMainComments');
+    //get comments fromt main_feed DB
+    CommentService.getMainComments().then(function(comments){
 
-          vm.commentInfo = comments.data;
-          console.log('back from getComments with:', vm.commentInfo);
-          for (const value of vm.commentInfo) {
-            vm.memberId = value.user_id;
-            vm.commentUser = vm.allUsers.find(user => user.user_id === vm.memberId);
-            //object with comment data to snd
-            vm.comment = {
-              name: vm.commentUser.first_name + vm.commentUser.last_name,
-              profileImage: vm.commentUser.profile_img,
-              date: value.date,
-              comment: value.comment
-            };
+      vm.commentInfo = comments.data;
+      console.log('back from getComments with:', vm.commentInfo);
+      for (const value of vm.commentInfo) {
+        vm.memberId = value.user_id;
+        vm.commentUser = vm.allUsers.find(user => user.user_id === vm.memberId);
+        //object with comment data to snd
+        vm.commentToSend = {
+          name: vm.commentUser.first_name + vm.commentUser.last_name,
+          profileImage: vm.commentUser.profile_img,
+          date: value.date,
+          comment: value.comment
+        };
 
-            vm.mainComments.push(vm.comment);
-          } //end for loop
-        }); //end then
-      }; //end addComments
+        vm.mainComments.push(vm.commentToSend);
+      } //end for loop
+    }); //end then
+  }; //end addComments
 
 
-// *****   Getting all members  *****//
-      vm.getMembers = () => {
-        vm.allUsers = UserService.getMembers();
-        console.log('allUsres', vm.allUsers);
-      }; //end getRequests
+  // *****   Getting all members  *****//
+  vm.getMembers = () => {
+    vm.allUsers = UserService.getMembers();
+    console.log('allUsres', vm.allUsers);
+  }; //end getRequests
 
-      vm.getUser = () => {
-        vm.user = LoginService.getUser();
-        console.log('user', vm.user);
-      }; //end getRequests
+  vm.getUser = () => {
+    vm.user = LoginService.getUser();
+    console.log('user', vm.user);
+  }; //end getRequests
+
+
+  vm.bookPage = (bookId) => {
+    console.log('in getBook');
+    console.log('bookId', bookId);
+    //Send selected book to LibraryService
+    LibraryService.getBook(bookId).then(function(bookInfo){
+      vm.bookInfo = bookInfo.data;
+
+    }); //end then
+  }; //end getBook
+
 
 }); //end MainController

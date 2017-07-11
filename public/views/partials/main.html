@@ -45,25 +45,28 @@
             </div>
           </div>
         </div>
-
+      </section>
 
         <!-- All Books Section-->
-      </section>
+
       <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads " >
         <h2>All Bookaholics Books</h2>
         <div class="blueLine"></div>
         <div class="allBooks">
           <div class="row" >
+
             <div class="col-sm-3 prevBooks" ng-repeat="book in mc.savedBooks |  orderBy:'-due_date'">
+              <a href="#!/book" ng-click="mc.bookPage(book.book_id)">
               <div class="imgDiv">
                 <img src="{{book.cover_img}}" alt="" class="bookThumb">
               </div>
-              <h3>{{book.title}}</h3>
+              <h3>{{book.title}} </h3>
               <div class="bookInfo">
                 <p>Author: {{book.author }} </p>
                 <h4>Due: {{book.due_date | date : format : medium}} </h4>
               </div>
             </div>
+            </a>
           </div>
         </div>
 
@@ -72,23 +75,23 @@
           <h2>Talk Amongst Yourselves</h2>
           <div class="blueLine"></div>
           <div class="commentSection">
-            <div class="row" >
+            <div class="row boundingBoxRow" >
               <div class="col-sm-5">
                 <div class="subBoundingBox submitThread">
                   <div class="containerBook" >
-                    <form ng-submit="mc.addMainComment(comment)">
+                    <form ng-submit="mc.addMainComment(mc.comment)">
                       <h3>Submit to Thread</h3>
                       <div class="containerBox">
                         <h4>Message</h4>
-                        <textarea class="mainComment" rows="4" cols="35" ng-model="comment" placeholder="Your Comment"></textarea>
-                        <button type="button" ng-click="mc.addMainComment(comment)" name="button">Submit</button>
+                        <textarea class="mainComment" rows="4" cols="35"  ng-model="mc.comment" ng-attr-placeholder="Write a comment.." ></textarea>
+                        <button type="button" ng-click="mc.addMainComment(mc.comment)" name="button">Submit</button>
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-md-7 commentThread">
-                <div class="row">
+                <div class="row ">
                   <div class="col-ms-12 comment" ng-repeat="comment in mc.mainComments">
                     {{comment.profileImage}} {{comment.name}} {{comment.date | date : format : medium }} {{comment.comment}}
                   </div>

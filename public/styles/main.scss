@@ -187,7 +187,6 @@ footer{
 // ****** Admin Styles *******
 .subBoundingBox {
   min-height: 500px;
-  margin: 40px 0;
   background-color: $commentBkg;
   border-radius: 3px;
 
@@ -320,5 +319,8 @@ footer{
 form{
  padding: 0 0 40px 0;
 }
+}
 
+.boundingBoxRow {
+  margin: 40px 0;
 }

@@ -19,22 +19,35 @@
   <section class="container-fluid welcome">
     <div class="row">
       <!-- User Info and Current Book Section-->
-      <section class="col-md-offset-1 col-md-2 sideBar boundingBox ">
+      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
         <div class="row ">
+
           <div class="col-sm-4">
           </div>
           <div class="col-sm-6 col-sm-offset-1">
             <h4 class="welcome">Welcome </h4>
-            <p>{{ac.user.firstName}} {{ac.user.lastName}}</p>
+            <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
           </div>
         </div>
         <h3>Current Books</h3>
+        <div class="row prevReads" >
+          <div class="col-sm-12" ng-repeat="book in mc.futureReads " >
+            <div class="imgDiv">
+              <img src="{{book.cover_img}}" alt="" class="bookThumb">
+            </div>
+            <h3>{{book.title}}</h3>
+            <div class="bookInfo">
+              <p>Author: {{book.author }} </p>
+              <h4>Due: {{book.due_date | date : format : medium}} </h4>
+            </div>
+          </div>
+        </div>
       </section>
       <!-- Admin Page Content  -->
       <section class=" col-md-7 col-sm-offset-1  boundingBox">
         <h2>Admin Page</h2>
         <div class="blueLine"></div>
-        <div class="row">
+        <div class="row boundingBoxRow">
         <!-- Search for Book -->
           <div class="col-md-4 ">
             <div class="subBoundingBox">
