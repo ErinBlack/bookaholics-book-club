@@ -3,10 +3,12 @@ var vm = this;
 vm.savedBooks = [];
 vm.futureReads = [];
 vm.iso = '';
+vm.bookPageBook = [];
 vm.user = LoginService.getUser();
 
 // *****   Get All Books in DB   *****//
 vm.getBooks = () => {
+  console.log('in getBooks');
   vm.savedBooks = [];
   LibraryService.prevBooks().then(function(savedBooks){
     vm.savedBooks = savedBooks.data;
@@ -30,8 +32,16 @@ vm.futureReads = (savedBooks) => {
 
 
 vm.getBookInfo = () => {
+  console.log('in getBookInfo');
+  vm.books = LibraryService.allBooks();
+  console.log('books',   vm.books);
   vm.bookPageId = LibraryService.getBookId();
-  console.log('vm.bookPageId', vm.bookPageId);
+  for (const value of vm.books.data) {
+    if (vm.bookPageId == value.book_id){
+      vm.bookPageBook.push(value);
+    } //end if
+  } //end for loop
+  console.log('bookPageBook',vm.bookPageBook );
 }
 
 

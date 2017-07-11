@@ -17,10 +17,10 @@
   </header>
 
 <!-- Main Page Content-->
-<section class="container-fluid welcome"  >
+<section class="container-fluid welcome"  ng-controller="BookController as bc">
   <div class="row">
     <!-- User Info and Current Book Section-->
-    <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-init="bc.getBookInfo()" ng-controller="BookController as bc">
+    <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox " >
       <div class="row ">
         <div class="col-sm-4">
         </div>
@@ -47,10 +47,15 @@
       <!-- All Books Section-->
       <div class=" ">
         <!-- Book Information Section -->
-        <section class=" boundingBox prevReads col-sm-7 col-sm-offset-1 " >
-          <section class="col-sm-4">
-            <h2>Book Title</h2>
-            <img src="" alt="">
+        <section class=" boundingBox prevReads col-sm-7 col-sm-offset-1 " ng-init="bc.getBookInfo()"  >
+          <section class="col-sm-4" ng-repeat="book in bc.bookPageBook" >
+            <h2>{{book.title}}</h2>
+            <img src="{{book.cover_img}}" alt="">
+            <div class="">
+              Due Date: {{book.due_date}} <br>
+              Author: {{book.author}}<br>
+              Published: {{book.published_date}}<br>
+            </div>
           </section>
 
 

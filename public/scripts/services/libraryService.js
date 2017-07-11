@@ -69,4 +69,8 @@ sv.parseBooks = (bookArray) => {
     sv.getBookId = () => {
       return sv.bookPageId;
     }
+
+    sv.allBooks = () => {
+      return sv.savedBooks;
+    }; //end allBooks
 });// end LibraryService
