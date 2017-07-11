@@ -9,6 +9,7 @@ var login = require('./modules/routes/login');
 var register = require('./modules/routes/register');
 var main = require('./modules/routes/main');
 var admin = require('./modules/routes/admin');
+var books = require('./modules/routes/books');
 var bcrypt = require( 'bcrypt' );
 var pg = require('pg');
 //uses
@@ -19,6 +20,8 @@ app.use('/login', login);
 app.use('/register', register);
 app.use('/main', main);
 app.use('/admin', admin);
+app.use('/books', books);
+
 
 
 //port for server

@@ -3,6 +3,7 @@ let sv = this;
 let books = [];
 let selectedBook = {};
 sv.savedBooks = [];
+sv.bookPageId = 0;
 
 
 // *****  Get list of books from API *****//
@@ -29,25 +30,20 @@ sv.parseBooks = (bookArray) => {
       books.push(value);
       } //end else
     } //end for loop
-    console.log('books', books);
 }; //end parseBooks
 
 
 // ***** Send selected Book info to controller *****//
   sv.currentSelectedBook= () => {
-    console.log('in currentSelectedBook');
     sv.selectedBook = selectedBook;
-    console.log('sv.selectedBook', sv.selectedBook);
     return sv.selectedBook;
   }; //end getUser
 
 // ***** Send selected Book info to controller *****//
   sv.sendBook = (sentBook) => {
-    console.log('in sendBook', sentBook);
     return $http.post('admin/postBook',{
       data: sentBook
     }).then(function(status){
-      console.log('response from sentBook', status.data);
       return status.data;
     }); //end .then function
   };
@@ -57,16 +53,20 @@ sv.parseBooks = (bookArray) => {
       sv.savedBooks = [];
       console.log('in prevBooks');
       return $http.get('main/getBooks').then(function(response){
-        console.log('response', response);
         sv.savedBooks = response;
         return sv.savedBooks;
       }); //end searchBook
     };
 
+
+    sv.sendBookId = (bookId) => {
+      console.log('in sendBookId in service with:', bookId);
+      sv.bookPageId = bookId;
+      console.log('sv.bookPageId', sv.bookPageId);
+    }; // endSendBookId
+
+
+    sv.getBookId = () => {
+      return sv.bookPageId;
+    }
 });// end LibraryService
-
-  // ***** Get Book Info for Book Page *****//
-
-  sv.getBook = () => {
-    console.log('in getBook');
-  }; //end getBook

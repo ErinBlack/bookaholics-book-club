@@ -1,4 +1,4 @@
-myApp.controller('MainController', function(LoginService, LibraryService, CommentService, UserService){
+myApp.controller('MainPageController', function(LoginService, LibraryService, CommentService, UserService){
   var vm = this;
   vm.savedBooks = [];
   vm.futureReads = [];
@@ -55,12 +55,10 @@ myApp.controller('MainController', function(LoginService, LibraryService, Commen
   // *****   Getting Comments for Main Thread  *****//
   vm.getMainComments= (comment) => {
     vm.mainComments = [];
-    console.log('in getMainComments');
     //get comments fromt main_feed DB
     CommentService.getMainComments().then(function(comments){
 
       vm.commentInfo = comments.data;
-      console.log('back from getComments with:', vm.commentInfo);
       for (const value of vm.commentInfo) {
         vm.memberId = value.user_id;
         vm.commentUser = vm.allUsers.find(user => user.user_id === vm.memberId);
@@ -81,23 +79,18 @@ myApp.controller('MainController', function(LoginService, LibraryService, Commen
   // *****   Getting all members  *****//
   vm.getMembers = () => {
     vm.allUsers = UserService.getMembers();
-    console.log('allUsres', vm.allUsers);
   }; //end getRequests
 
   vm.getUser = () => {
     vm.user = LoginService.getUser();
-    console.log('user', vm.user);
   }; //end getRequests
 
 
   vm.bookPage = (bookId) => {
-    console.log('in getBook');
+    console.log('in bookpage');
     console.log('bookId', bookId);
     //Send selected book to LibraryService
-    LibraryService.getBook(bookId).then(function(bookInfo){
-      vm.bookInfo = bookInfo.data;
-
-    }); //end then
+    LibraryService.sendBookId(bookId);
   }; //end getBook
 
 
