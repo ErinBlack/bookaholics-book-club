@@ -94,20 +94,27 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
   vm.parseComments = (comments) =>{
     vm.bookComments = [];
     vm.commentInfo = comments.data;
-    //for loop to get the comments belonging to this book page
+
+
+
     for (const value of vm.commentInfo) {
+      //see if comment id matches book page id
       if(value.book_id == bookId){
-        // vm.commentUser = vm.allUsers.find(user => vm.allUsers.user_id === value.user_id);
-        // console.log('vm.commentUser', vm.commentUser);
-        //object with comment and user data to send
-        vm.commentToDisplay = {
-          // name: vm.commentUser.first_name + vm.commentUser.last_name,
-          // profileImage: vm.commentUser.profile_img,
+        vm.memberId = value.user_id;
+        vm.commentUser = vm.allMembers.find(user => user.user_id === vm.memberId);
+        //object with comment data to snd
+        vm.commentToSend = {
+          name: vm.commentUser.first_name + vm.commentUser.last_name,
+          profileImage: vm.commentUser.profile_img,
           date: value.date,
           comment: value.comment
         };
-        vm.bookComments.push(vm.commentToDisplay);
+        vm.bookComments.push(vm.commentToSend);
       }
+      else{
+        console.log('no matching comments');
+      }
+
     } //end for loop
   }; //end parseComments
 
