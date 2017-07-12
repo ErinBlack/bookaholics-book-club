@@ -81,8 +81,13 @@ vm.selectedBook= {};
 
 
   // *****  Get All Members for Role Change  *****//
+  // *****   Getting all members  *****//
   vm.getMembers = () => {
-    vm.allUsers = UserService.getMembers();
+    console.log('in get members');
+    UserService.getMembers().then(function(allMembers){
+      vm.allUsers = allMembers;
+      console.log('vm.allUsers in controller', vm.allUsers);
+    });
   }; //end getRequests
 
 

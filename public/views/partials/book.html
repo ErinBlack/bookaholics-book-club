@@ -86,13 +86,15 @@
                 </div>
                 <div class="col-md-7 commentThread">
                   <div class="row ">
-                    <div class="col-ms-12 comment" ng-repeat="comment in mc.mainComments">
+                    <div class="col-ms-12 comment" ng-repeat="comment in bc.bookComments">
                       {{comment.profileImage}} {{comment.name}} {{comment.date | date : format : medium }} {{comment.comment}}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+
           </section>
         </section>
 

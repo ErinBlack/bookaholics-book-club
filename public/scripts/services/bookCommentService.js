@@ -12,8 +12,10 @@ let sv = this;
   };
 
 // ***** Get all comments from main thread *****//
-  sv.getBookComments = () => {
+  sv.getBookComments = (bookId) => {
+    console.log('in getBookComments with:', bookId);
     return $http.get('books/comment').then(function(comments){
+      console.log('comments from getBookComments', comments);
       return comments;
     }); //end .then function
   };

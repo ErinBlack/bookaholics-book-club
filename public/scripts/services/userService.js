@@ -17,12 +17,12 @@ myApp.service('UserService', function($http){
 
   }; //end getRequests
 
+
   // ***** Get all Approved Members *****//
   sv.getMembers = () => {
     sv.allUsers = [];
-    $http.get('/admin/getMembers').then(function(data){
+    return $http.get('/admin/getMembers').then(function(data){
     sv.userData = data.data;
-
       // for loop to go through userData
       for (const value of sv.userData) {
         //switch statement to determine if admin
@@ -52,8 +52,8 @@ myApp.service('UserService', function($http){
         }; //end user
         sv.allUsers.push(sv.user);
       }// end for loop
+      return sv.allUsers;
     }); //end .then
-    return sv.allUsers;
   }; //end getRequests
 
   // ***** Change User Roll *****//

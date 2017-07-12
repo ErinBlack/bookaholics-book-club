@@ -1,10 +1,11 @@
-myApp.controller('MainPageController', function($location, LoginService, LibraryService, CommentService, UserService){
+myApp.controller('MainPageController', function(LoginService, LibraryService, CommentService, UserService){
   var vm = this;
   vm.savedBooks = [];
   vm.futureReads = [];
-  vm.bookComments = [];
+  vm.mainComments = [];
   vm.comment = '';
   vm.iso = '';
+  vm.user = '';
 
   // *****   Functions to load on init   *****//
   vm.init = () => {
@@ -61,11 +62,11 @@ myApp.controller('MainPageController', function($location, LoginService, Library
       vm.commentInfo = comments.data;
       for (const value of vm.commentInfo) {
         vm.memberId = value.user_id;
-        vm.commentUser = vm.allUsers.find(user => user.user_id === vm.memberId);
+        // vm.commentUser = vm.allUsers.find(user => user.user_id === vm.memberId);
         //object with comment data to snd
         vm.commentToSend = {
-          name: vm.commentUser.first_name + vm.commentUser.last_name,
-          profileImage: vm.commentUser.profile_img,
+          // name: vm.commentUser.first_name + vm.commentUser.last_name,
+          // profileImage: vm.commentUser.profile_img,
           date: value.date,
           comment: value.comment
         };
@@ -76,10 +77,13 @@ myApp.controller('MainPageController', function($location, LoginService, Library
   }; //end addComments
 
 
-  // *****   Getting all members  *****//
+  // *****   Getting All User Info  *****//
   vm.getMembers = () => {
-    vm.allUsers = UserService.getMembers();
-  }; //end getRequests
+    UserService.getMembers().then(function(allmembers){
+      vm.allMembers = allmembers;
+      console.log('vm.allMembers', vm.allMembers);
+    });
+  }; //end getMembers
 
   vm.getUser = () => {
     vm.user = LoginService.getUser();
@@ -87,9 +91,10 @@ myApp.controller('MainPageController', function($location, LoginService, Library
 
 
   vm.bookPage = (bookId) => {
+    console.log('in bookpage');
+    console.log('bookId', bookId);
     //Send selected book to LibraryService
     LibraryService.sendBookId(bookId);
-    $location.path('/book/' + bookId);
   }; //end getBook
 
 

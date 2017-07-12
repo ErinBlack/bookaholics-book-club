@@ -65,7 +65,7 @@ router.post('/comment', function(req, res){
 });
 
 
-// ***** Post Main Comment   *****//
+// ***** Get Main Comments   *****//
 router.get('/comment', function(req, res){
   console.log('in get / comment');
   pool.connect( function(err, connection, done){
