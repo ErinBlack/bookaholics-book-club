@@ -1,4 +1,4 @@
-myApp.controller('MainPageController', function(LoginService, LibraryService, CommentService, UserService){
+myApp.controller('MainPageController', function($location,LoginService, LibraryService, CommentService, UserService){
   var vm = this;
   vm.savedBooks = [];
   vm.futureReads = [];
@@ -6,14 +6,20 @@ myApp.controller('MainPageController', function(LoginService, LibraryService, Co
   vm.comment = '';
   vm.iso = '';
   vm.user = '';
+  vm.allMembers = [];
 
-  // *****   Functions to load on init   *****//
-  vm.init = () => {
+  // // *****   Functions to load on init   *****//
+  // vm.init = () => {
+  //   vm.getMembers();
+  //   vm.getUser();
+  //   vm.prevBooks();
+  //   vm.getMainComments();
+  // }; //end vm.init
+
+  vm.getUser = () => {
+    vm.user = LoginService.getUser();
     vm.getMembers();
-    vm.getUser();
-    vm.prevBooks();
-    vm.getMainComments();
-  }; //end vm.init
+  }; //end getRequests
 
   // *****   Get All Books in DB   *****//
   vm.prevBooks = () => {
@@ -21,6 +27,7 @@ myApp.controller('MainPageController', function(LoginService, LibraryService, Co
     LibraryService.prevBooks().then(function(savedBooks){
       vm.savedBooks = savedBooks.data;
       vm.futureReads(vm.savedBooks);
+      vm.getMainComments();
     }); //end then
   }; //end searchForBook
 
@@ -62,11 +69,11 @@ myApp.controller('MainPageController', function(LoginService, LibraryService, Co
       vm.commentInfo = comments.data;
       for (const value of vm.commentInfo) {
         vm.memberId = value.user_id;
-        // vm.commentUser = vm.allUsers.find(user => user.user_id === vm.memberId);
+        vm.commentUser = vm.allMembers.find(user => user.user_id === vm.memberId);
         //object with comment data to snd
         vm.commentToSend = {
-          // name: vm.commentUser.first_name + vm.commentUser.last_name,
-          // profileImage: vm.commentUser.profile_img,
+          name: vm.commentUser.first_name + vm.commentUser.last_name,
+          profileImage: vm.commentUser.profile_img,
           date: value.date,
           comment: value.comment
         };
@@ -82,19 +89,17 @@ myApp.controller('MainPageController', function(LoginService, LibraryService, Co
     UserService.getMembers().then(function(allmembers){
       vm.allMembers = allmembers;
       console.log('vm.allMembers', vm.allMembers);
+      vm.prevBooks();
     });
   }; //end getMembers
 
-  vm.getUser = () => {
-    vm.user = LoginService.getUser();
-  }; //end getRequests
+
 
 
   vm.bookPage = (bookId) => {
-    console.log('in bookpage');
-    console.log('bookId', bookId);
     //Send selected book to LibraryService
     LibraryService.sendBookId(bookId);
+    $location.path('/book/' + bookId);
   }; //end getBook
 
 

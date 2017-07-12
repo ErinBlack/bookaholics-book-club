@@ -66,6 +66,7 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
 
   // *****   Submitting to Book Comment to Thread   *****//
   vm.addBookComment = (comment) => {
+    console.log('in addBookComment');
     console.log('bookId', bookId);
     //comment object to send
     vm.commentToSend = {
@@ -83,7 +84,6 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
 
   // *****   Get Book Comment Thread   *****//
   vm.getBookComments = () => {
-    console.log('in getBookComments with:', vm.allMembers );
     //get comments fromt main_feed DB
     BookCommentService.getBookComments(bookId).then(function(comments){
       vm.parseComments(comments);
@@ -92,7 +92,6 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
 
   // *****   Parse Comments to get only for this page   *****//
   vm.parseComments = (comments) =>{
-    console.log('in parseComments');
     vm.bookComments = [];
     vm.commentInfo = comments.data;
     //for loop to get the comments belonging to this book page
@@ -100,7 +99,6 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
       if(value.book_id == bookId){
         // vm.commentUser = vm.allUsers.find(user => vm.allUsers.user_id === value.user_id);
         // console.log('vm.commentUser', vm.commentUser);
-        console.log('IN IF STATEMENT');
         //object with comment and user data to send
         vm.commentToDisplay = {
           // name: vm.commentUser.first_name + vm.commentUser.last_name,
@@ -111,7 +109,6 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
         vm.bookComments.push(vm.commentToDisplay);
       }
     } //end for loop
-    console.log('bookComments', vm.bookComments);
   }; //end parseComments
 
 

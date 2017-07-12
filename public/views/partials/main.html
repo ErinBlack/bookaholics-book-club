@@ -1,5 +1,5 @@
 
-<div ng-controller="MainPageController as mc" class="page" ng-init="mc.init()" >
+<div ng-controller="MainPageController as mc" class="page" ng-init="mc.getUser()" >
   <!--  Header -->
   <header>
     <div class="container">
@@ -56,7 +56,7 @@
           <div class="row" >
 
             <div class="col-sm-3 prevBooks" ng-repeat="book in mc.savedBooks |  orderBy:'-due_date'">
-              <a ng-click="mc.bookPage(book.book_id)">
+              <a  ng-click="mc.bookPage(book.book_id)">
               <div class="imgDiv">
                 <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
               </div>
