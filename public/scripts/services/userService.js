@@ -58,6 +58,8 @@ myApp.service('UserService', function($http){
 
   // ***** Change User Roll *****//
   sv.changeRole = (user_id, role) => {
+    console.log('in changeRoll');
+    console.log('user_id, role', user_id, role);
     sv.userInfo = {
       id: user_id,
       role: role
@@ -73,6 +75,7 @@ myApp.service('UserService', function($http){
 
   // ***** Change User Roll *****//
   sv.changeStatus = (user_id, status) => {
+    console.log('in changeStatus');
     sv.userInfo = {
       id: user_id,
       status: status

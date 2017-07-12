@@ -19,5 +19,37 @@ var pool = new pg.Pool(config);
 router.use( bodyParser.urlencoded( { extended: true } ) );
 router.use( bodyParser.json() );
 
+// ***** Post Main Comment   *****//
+router.post('/comment', function(req, res){
+  console.log('in book Comment to Post');
+  console.log('req.body', req.body.data);
+  let sentComment = req.body.data;
+  console.log('sent data', sentComment.userId, sentComment.date, sentComment.comment, sentComment.bookId );
+  pool.connect( function(err, connection, done){
+    if( err ){
+      done();
+      res.send('error');
+    }// end if
+    else {
+      console.log('in else');
+      var commentToSend = connection.query("INSERT INTO book_comments (user_id, book_id, date, comment) VALUES ('"+ sentComment.userId +"','"+ sentComment.bookId  +"', '"+ sentComment.date +"', '"+ sentComment.comment +"' );", function(err, result){
+        if(err){
+          done();
+          res.send('error');
+        }
+        else{
+          done();
+          res.send('success');
+        }
+      }); //end connection Query
+      } // end else
+    }); // end pool connection
+});
+
+
+
+
+
+
 
 module.exports = router;

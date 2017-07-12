@@ -17,6 +17,9 @@
   </header>
 
 <!-- Main Page Content-->
+<div class="bookController">
+
+
 <section class="container-fluid welcome" ng-controller="BookController as bc" ng-init="bc.getUser()" >
   <div class="row">
     <!-- User Info and Current Book Section-->
@@ -53,9 +56,9 @@
             <h2>{{bc.bookPageBook[0].title}}</h2>
             <img ng-src="{{bc.bookPageBook[0].cover_img}}" alt="">
             <div class="">
-              Due Date: {{bc.bookPageBook[0].due_date}} <br>
+              Due Date: {{bc.bookPageBook[0].due_date | date : format : medium}} <br>
               Author: {{bc.bookPageBook[0].author}}<br>
-              Published: {{bc.bookPageBook[0].published_date}}<br>
+              Published: {{bc.bookPageBook[0].published_date | date : format : medium}}<br>
             </div>
           </section>
 
