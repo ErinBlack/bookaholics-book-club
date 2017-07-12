@@ -13,7 +13,7 @@ myApp.config(function($routeProvider){
   }).when('/admin', {
     templateUrl: 'views/partials/admin.html',
     controller:'AdminController as ac'
-  }).when('/book', {
+  }).when('/book/:id', {
     templateUrl: 'views/partials/book.html',
     controller:'BookController as bc'
   }).when('/edit-profile', {

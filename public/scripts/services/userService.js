@@ -6,14 +6,12 @@ myApp.service('UserService', function($http){
 
   // *****  Get Users Pending Approval *****//
   sv.getUserRequests = (search) => {
-    console.log('in getUserRequests');
     sv.pendingUsers = [];
     return $http.get('/admin/requests').then(function(data){
       sv.pendingUserData = data.data;
       for (const value of sv.pendingUserData) {
         sv.pendingUsers.push(value);
       }
-      console.log('leaving getUserRequests');
       return sv.pendingUsers;
     });
 
@@ -21,7 +19,6 @@ myApp.service('UserService', function($http){
 
   // ***** Get all Approved Members *****//
   sv.getMembers = () => {
-    console.log('in getMembers');
     sv.allUsers = [];
     $http.get('/admin/getMembers').then(function(data){
     sv.userData = data.data;
@@ -56,14 +53,11 @@ myApp.service('UserService', function($http){
         sv.allUsers.push(sv.user);
       }// end for loop
     }); //end .then
-    console.log('leaving Members');
     return sv.allUsers;
   }; //end getRequests
 
   // ***** Change User Roll *****//
   sv.changeRole = (user_id, role) => {
-    console.log('in changeRoll');
-    console.log('user_id, role', user_id, role);
     sv.userInfo = {
       id: user_id,
       role: role
@@ -79,7 +73,6 @@ myApp.service('UserService', function($http){
 
   // ***** Change User Roll *****//
   sv.changeStatus = (user_id, status) => {
-    console.log('in changeStatus');
     sv.userInfo = {
       id: user_id,
       status: status

@@ -51,20 +51,15 @@ sv.parseBooks = (bookArray) => {
   // ***** Send selected Book info to controller *****//
     sv.prevBooks = () => {
       sv.savedBooks = [];
-      console.log('in prevBooks');
       return $http.get('main/getBooks').then(function(response){
         sv.savedBooks = response;
         return sv.savedBooks;
       }); //end searchBook
     };
 
-
     sv.sendBookId = (bookId) => {
-      console.log('in sendBookId in service with:', bookId);
       sv.bookPageId = bookId;
-      console.log('sv.bookPageId', sv.bookPageId);
     }; // endSendBookId
-
 
     sv.getBookId = () => {
       return sv.bookPageId;

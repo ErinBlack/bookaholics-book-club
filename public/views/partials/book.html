@@ -1,6 +1,6 @@
 
 
-<div class="page" >
+<div class="page"  >
   <!-- Header -->
   <header>
     <div class="container">
@@ -17,23 +17,23 @@
   </header>
 
 <!-- Main Page Content-->
-<section class="container-fluid welcome"  ng-controller="BookController as bc">
+<section class="container-fluid welcome" ng-controller="BookController as bc" ng-init="bc.getUser()" >
   <div class="row">
     <!-- User Info and Current Book Section-->
-    <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox " >
+    <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox "  >
       <div class="row ">
         <div class="col-sm-4">
         </div>
         <div class="col-sm-6 col-sm-offset-1">
           <h4 class="welcome">Welcome </h4>
-          <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
+          <p>{{bc.user.firstName}} {{bc.user.lastName}}</p>
         </div>
       </div>
       <h3>Current Books</h3>
-      <div class="row prevReads" >
+      <div class="row prevReads"  >
         <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
           <div class="imgDiv">
-            <img src="{{book.cover_img}}" alt="" class="bookThumb">
+            <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
           </div>
           <h3>{{book.title}}</h3>
           <div class="bookInfo">
@@ -45,16 +45,17 @@
     </section>
 
       <!-- All Books Section-->
-      <div class=" ">
         <!-- Book Information Section -->
-        <section class=" boundingBox prevReads col-sm-7 col-sm-offset-1 " ng-init="bc.getBookInfo()"  >
-          <section class="col-sm-4" ng-repeat="book in bc.bookPageBook" >
-            <h2>{{book.title}}</h2>
-            <img src="{{book.cover_img}}" alt="">
+        <section class=" boundingBox prevReads col-sm-7 col-sm-offset-1 "   >
+
+
+          <section class="col-sm-4" >
+            <h2>{{bc.bookPageBook[0].title}}</h2>
+            <img ng-src="{{bc.bookPageBook[0].cover_img}}" alt="">
             <div class="">
-              Due Date: {{book.due_date}} <br>
-              Author: {{book.author}}<br>
-              Published: {{book.published_date}}<br>
+              Due Date: {{bc.bookPageBook[0].due_date}} <br>
+              Author: {{bc.bookPageBook[0].author}}<br>
+              Published: {{bc.bookPageBook[0].published_date}}<br>
             </div>
           </section>
 
@@ -69,12 +70,12 @@
                 <div class="col-sm-12">
                   <div class="subBoundingBox submitThread">
                     <div class="containerBook" >
-                      <form ng-submit="bc.addMainComment(comment)">
+                      <form ng-submit="bc.addBookComment(bc.comment)">
                         <h3>Submit to Thread</h3>
                         <div class="containerBox">
                           <h4>Message</h4>
-                          <textarea class="mainComment" rows="4" cols="35"  ng-model="mc.comment" ng-attr-placeholder="Write a comment.." ></textarea>
-                          <button type="button" ng-click="mc.addMainComment(mc.comment)" name="button">Submit</button>
+                          <textarea class="mainComment" rows="4" cols="35"  ng-model="bc.comment" ng-attr-placeholder="Write a comment.." ></textarea>
+                          <button type="button" ng-click="bc.addBookComment(bc.comment)" name="button">Submit</button>
                         </form>
                       </div>
                     </div>
@@ -94,5 +95,3 @@
 
     </section>
       <footer></footer>
-
-      </div>

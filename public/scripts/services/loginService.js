@@ -3,11 +3,10 @@ myApp.service('LoginService', function($http){
   var sv = this;
   sv.loggedIn = false;
   sv.admin = false;
-  var user = {};
+  sv.user = {};
 
 //send user info to controller
   sv.getUser=function(){
-    sv.user = user;
     return sv.user;
   }; //end getUser
 
@@ -43,7 +42,7 @@ myApp.service('LoginService', function($http){
               sv.admin = true;
             }
             //all user information
-            user = {
+            sv.user = {
               loggedIn: sv.loggedIn,
               registeredUser: sv.registeredUser,
               userId: userData.user_id,
@@ -54,7 +53,7 @@ myApp.service('LoginService', function($http){
               role: userData.role,
               admin: sv.admin
             };
-            return user;
+            return sv.user;
           } //end else statement
       }
     }); // end http

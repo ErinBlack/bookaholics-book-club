@@ -1,8 +1,8 @@
-myApp.controller('MainPageController', function(LoginService, LibraryService, CommentService, UserService){
+myApp.controller('MainPageController', function($location, LoginService, LibraryService, CommentService, UserService){
   var vm = this;
   vm.savedBooks = [];
   vm.futureReads = [];
-  vm.mainComments = [];
+  vm.bookComments = [];
   vm.comment = '';
   vm.iso = '';
 
@@ -87,10 +87,9 @@ myApp.controller('MainPageController', function(LoginService, LibraryService, Co
 
 
   vm.bookPage = (bookId) => {
-    console.log('in bookpage');
-    console.log('bookId', bookId);
     //Send selected book to LibraryService
     LibraryService.sendBookId(bookId);
+    $location.path('/book/' + bookId);
   }; //end getBook
 
 

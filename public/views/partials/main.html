@@ -36,7 +36,7 @@
         <div class="row prevReads" >
           <div class="col-sm-12" ng-repeat="book in mc.futureReads " >
             <div class="imgDiv">
-              <img src="{{book.cover_img}}" alt="" class="bookThumb">
+              <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
             </div>
             <h3>{{book.title}}</h3>
             <div class="bookInfo">
@@ -56,9 +56,9 @@
           <div class="row" >
 
             <div class="col-sm-3 prevBooks" ng-repeat="book in mc.savedBooks |  orderBy:'-due_date'">
-              <a href="#!/book" ng-click="mc.bookPage(book.book_id)">
+              <a ng-click="mc.bookPage(book.book_id)">
               <div class="imgDiv">
-                <img src="{{book.cover_img}}" alt="" class="bookThumb">
+                <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
               </div>
               <h3>{{book.title}} </h3>
               <div class="bookInfo">
