@@ -41,17 +41,7 @@
         <!-- end name row -->
         <div class="row">
           <div class="col-sm-6">
-            <!-- <p>Upload Profile Image</p>
-            <input type="file" ngf-select ng-model="picFile" name="file"
-            accept="image/*" ngf-max-size="2MB"
-            required ngf-model-invalid="errorFile">
-             <i ng-show="myForm.file.$error.required">*required</i><br>
-             <i ng-show="myForm.file.$error.maxSize">File too large
-          {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-          <img ng-show="myForm.file" ngf-thumbnail="picFile" class="thumb">
-          <button ng-click="picFile = null" ng-show="picFile">Remove</button>
-          <br>
-           <span class="progress" ng-show="picFile.progress >= 0"> -->
+            <input type="button" value="Upload" onclick="showPicker()" />
           </div>
         <div class="col-sm-6">
           <p>Email Address *</p>

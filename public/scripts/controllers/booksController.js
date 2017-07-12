@@ -94,9 +94,7 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
   vm.parseComments = (comments) =>{
     vm.bookComments = [];
     vm.commentInfo = comments.data;
-
-
-
+    //for loop to parse out comment data and choose only for bookPage
     for (const value of vm.commentInfo) {
       //see if comment id matches book page id
       if(value.book_id == bookId){

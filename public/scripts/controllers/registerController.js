@@ -2,7 +2,7 @@ myApp.controller('RegisterController', function(RegisterService){
 console.log('in RegisterController');
 
 var vm = this;
-
+var client = filestack.init('ARe83u3xXQw2imhkEvE0Cz');
 //sending registration info to service
 vm.registerNewUser = function(){
 console.log('in vm.register');
@@ -26,4 +26,12 @@ console.log('vm.firstName', vm.firstNameInput);
     }); // end RegisterService
   }; // end registerNewUser
 
+
+
+  function showPicker() {
+    client.pick({
+    }).then(function(result) {
+      console.log(JSON.stringify(result.filesUploaded))
+    });
+  }
 }); //end register controller
