@@ -6,6 +6,7 @@ vm.pendingUsers = [];
 vm.bookImg = 0;
 vm.books = [];
 vm.selectedBook= {};
+vm.allUsers = [];
 
   // *****   Get Search Title   *****//
   vm.searchForBook = (search) => {
@@ -83,6 +84,7 @@ vm.selectedBook= {};
   // *****  Get All Members for Role Change  *****//
   // *****   Getting all members  *****//
   vm.getMembers = () => {
+    vm.allUsers = [];
     console.log('in get members');
     UserService.getMembers().then(function(allMembers){
       vm.allUsers = allMembers;
@@ -102,6 +104,7 @@ vm.selectedBook= {};
     vm.changeStatus = (user_id, status) => {
       UserService.changeStatus(user_id, status).then(function(pendingUsers){
           vm.pendingUsers = pendingUsers;
+          vm.getMembers();
       });
     }; //end makeAdmin
 

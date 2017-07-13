@@ -122,7 +122,8 @@
                           <md-content flex layout="row" layout-align="center">
                           <md-content flex="10">
                           <div class="col-md-4">
-                            {{user.profile_img}}
+                            <img ng-src="{{user.profile_img}}" alt="" class="profileImg img-circle ">
+
                           </div>
                           <div class="col-md-8">
                             {{user.first_name}} {{user.last_name}}
