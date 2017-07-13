@@ -3,9 +3,11 @@ let sv = this;
 
 // ***** Send Comment to Main Comment Thread *****//
   sv.addMainComment = (sentComment) => {
+    console.log('sentComment', sentComment);
     return $http.post('main/comment',{
       data: sentComment
     }).then(function(status){
+      console.log('status.data', status.data);
       return status.data;
     }); //end .then function
   };

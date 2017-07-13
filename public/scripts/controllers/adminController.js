@@ -1,3 +1,17 @@
+myApp.directive('imgLoad', function(LibraryService) {
+  return {
+    restrict: 'A',
+    scope: {
+        loadHandler: '&imgLoad' // 'imgLoad'
+    },
+    link: function (scope, element, attr) {
+      console.log('in on load');
+        element.on('load', scope.loadHandler);
+        console.log('scope.loadHandler', scope.loadHandler);
+        console.log('libraryService', LibraryService.books);
+    }
+};
+});
 //Library Controller to get books from Open Library API
 myApp.controller('AdminController', function(LibraryService, LoginService, UserService, $http){
 var vm = this;
@@ -13,10 +27,24 @@ vm.allUsers = [];
     vm.books = [];
     LibraryService.searchBook(search).then(function(booksSearched){
       vm.books = booksSearched;
-      console.log('vm.books', vm.books);
+      // console.log('vm.books', vm.books);
+
     }); //end then
   }; //end searchForBook
 
+
+
+  // vm.checkImage = (index) =>{
+  //
+  // };
+  //   vm.books[0]isbn.onload = function(){
+  //     console.log('in book load function');
+  //     var height = isbnNum.height;
+  //     var width = isbnNum.width;
+  //     console.log('height and width',height, width  );
+  //     // code here to use the dimensions
+  //   isbnNum.src = "http://covers.openlibrary.org/b/isbn/"+ isbnNum +"-s.jpg";
+  // };
 
   // *****   Choose a Book *****//
   vm.chooseBook = (i) => {
@@ -96,7 +124,7 @@ vm.allUsers = [];
   // ***** Change Role *****//
   vm.changeRole = (user_id, role) => {
     UserService.changeRole(user_id, role).then(function(allUsers){
-      vm.allUsers = allUsers
+      vm.allUsers = allUsers;
     });
   }; //end changeRoll
 

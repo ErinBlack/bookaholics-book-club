@@ -87,7 +87,8 @@
                 <div class="col-md-7 commentThread">
                   <div class="row ">
                     <div class="col-ms-12 comment" ng-repeat="comment in bc.bookComments">
-                      {{comment.profileImage}} {{comment.name}} {{comment.date | date : format : medium }} {{comment.comment}}
+                      <img ng-src="{{comment.profileImage}}" alt="" class="profileImg img-circle ">
+                       {{comment.name}} {{comment.date | date : format : medium }} {{comment.comment}}
                     </div>
                   </div>
                 </div>

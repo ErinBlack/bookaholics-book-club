@@ -1,5 +1,5 @@
 
-<div ng-controller="MainPageController as mc" class="page" ng-init="mc.getUser()" >
+<div >
   <!--  Header -->
   <header>
     <div class="container">
@@ -22,22 +22,18 @@
   <section class="container-fluid welcome"  >
     <div class="row">
       <!-- User Info and Current Book Section-->
-      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
+      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-controller="BookController as bc" ng-init="bc.getUser()" >
         <div class="row ">
-
-          <div class="col-sm-4 profileSidebar" >
-            <img ng-src="{{mc.user.image}}" alt="" class="profileImg img-circle ">
+          <div class="col-sm-4">
           </div>
           <div class="col-sm-6 col-sm-offset-1">
             <h4 class="welcome">Welcome </h4>
-
-
-            <p>{{mc.user.firstName}} {{mc.user.lastName}} {{mc.user.profile_img}}</p>
+            <p>{{bc.user.firstName}} {{bc.user.lastName}}</p>
           </div>
         </div>
         <h3>Current Books</h3>
-        <div class="row prevReads" >
-          <div class="col-sm-12" ng-repeat="book in mc.futureReads " >
+        <div class="row prevReads"  >
+          <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
             <div class="imgDiv">
               <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
             </div>
@@ -52,7 +48,7 @@
 
         <!-- All Books Section-->
 
-      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads " >
+      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads "  ng-controller="MainPageController as mc" class="page" ng-init="mc.getUser()" >
         <h2>All Bookaholics Books</h2>
         <div class="blueLine"></div>
         <div class="allBooks">
@@ -96,7 +92,8 @@
               <div class="col-md-7 commentThread">
                 <div class="row ">
                   <div class="col-ms-12 comment" ng-repeat="comment in mc.mainComments">
-                    {{comment.profileImage}} {{comment.name}} {{comment.date | date : format : medium }} {{comment.comment}}
+                    <img ng-src="{{comment.profileImage}}" alt="" class="profileImg img-circle ">
+                     {{comment.name}} {{comment.date | date : format : medium }} {{comment.comment}}
                   </div>
                 </div>
               </div>

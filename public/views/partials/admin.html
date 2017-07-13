@@ -1,5 +1,5 @@
 
-<div  ng-controller="AdminController as ac" class="page">
+<div  >
   <!-- Header -->
   <header>
     <div class="container">
@@ -19,19 +19,18 @@
   <section class="container-fluid welcome">
     <div class="row">
       <!-- User Info and Current Book Section-->
-      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
+      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-controller="BookController as bc" ng-init="bc.getUser()" >
         <div class="row ">
-
           <div class="col-sm-4">
           </div>
           <div class="col-sm-6 col-sm-offset-1">
             <h4 class="welcome">Welcome </h4>
-            <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
+            <p>{{bc.user.firstName}} {{bc.user.lastName}}</p>
           </div>
         </div>
         <h3>Current Books</h3>
-        <div class="row prevReads" >
-          <div class="col-sm-12" ng-repeat="book in mc.futureReads " >
+        <div class="row prevReads"  >
+          <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
             <div class="imgDiv">
               <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
             </div>
@@ -44,7 +43,7 @@
         </div>
       </section>
       <!-- Admin Page Content  -->
-      <section class=" col-md-7 col-sm-offset-1  boundingBox">
+      <section class=" col-md-7 col-sm-offset-1  boundingBox" ng-controller="AdminController as ac" class="page">
         <h2>Admin Page</h2>
         <div class="blueLine"></div>
         <div class="row boundingBoxRow">
@@ -65,7 +64,7 @@
                 <div ng-repeat="book in ac.books | limitTo:15 " class="bookListing" >
                   <div class="row" ng-click="ac.chooseBook($index)">
                     <div class="col-sm-2 ">
-                      <img ng-src="http://covers.openlibrary.org/b/isbn/{{book.isbn[0]}}-S.jpg" />
+                      <img img-load="onLoad()" ng-src="http://covers.openlibrary.org/b/isbn/{{book.isbn[0]}}-S.jpg" />
                     </div>
                     <div class="col-sm-9">
                       <div class="listingInfo" id="title">{{book.title}}</div>
@@ -90,11 +89,11 @@
                   <h3>Membership Requests</h3>
                   <div>
                     <h4>{{ac.pendingUsers.length}} New Requests</h4>
-                    <div class="pendingUsers" ng-repeat = 'user in ac.pendingUsers '>
+                    <div class="pendingUsers" ng-repeat = 'user in ac.pendingUsers | orderBy : "first_name"  '>
                       <!-- | orderBy:["first_name","last_name", "email"] -->
                       <div class="row">
                         <div class="col-md-4">
-                          <img ng-src="{{user.profile_img}}" alt="" class="profileImg img-circle ">
+                          <img ng-src="{{user.profile_img}}" alt="" class="profileImg imgFit img-circle ">
 
                         </div>
                         <div class="col-md-8">
@@ -117,7 +116,7 @@
                 <div class="subBoundingBox">
                     <h3>All Members</h3>
                     <div>
-                      <div class="allUsers" ng-repeat = 'user in ac.allUsers '>
+                      <div class="allUsers" ng-repeat = 'user in ac.allUsers | orderBy : "first_name" '>
                         <div class="row">
                           <md-content flex layout="row" layout-align="center">
                           <md-content flex="10">

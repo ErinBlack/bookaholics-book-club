@@ -16,7 +16,6 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
   vm.getMembers = () => {
     UserService.getMembers().then(function(allmembers){
       vm.allMembers = allmembers;
-      console.log('vm.allMembers', vm.allMembers);
       vm.getBookComments();
     });
   }; //end getMembers
@@ -56,7 +55,6 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
     vm.savedBooks = LibraryService.allBooks();
     for (const value of vm.savedBooks.data) {
       if (bookId == value.book_id){
-        console.log(value);
         vm.bookPageBook.push(value);
       } //end if
     } //end for loop
@@ -66,8 +64,6 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
 
   // *****   Submitting to Book Comment to Thread   *****//
   vm.addBookComment = (comment) => {
-    console.log('in addBookComment');
-    console.log('bookId', bookId);
     //comment object to send
     vm.commentToSend = {
       userId: vm.user.userId,

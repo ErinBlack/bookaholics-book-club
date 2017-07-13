@@ -14,6 +14,7 @@ sv.searchBook = (search) => {
     let searchURL = 'http://openlibrary.org/search.json?q=' + search;
     return $http.get(searchURL).then(function(response){
       sv.parseBooks(response);
+      sv.books = books;
       return books;
     }); //end searchBook
 }; //end searchBook
@@ -22,13 +23,26 @@ sv.searchBook = (search) => {
 // *****  Parse through the books array to remove items without authors *****//
 sv.parseBooks = (bookArray) => {
   let bookData = bookArray.data.docs;
+
   //checking to see if the book array returned is < 25 items
+  console.log('bookData', bookData);
     for (const value of bookData) {
-      if(value.author_name === undefined || value.isbn === undefined || value.publish_date === undefined   ){
+
+      if(value.author_name === undefined || value.isbn === undefined){
       }
       else{
-      books.push(value);
-      } //end else
+        for(const isnbNumber of value.isbn){
+          isnbNumber.onload = function(){
+
+            var height = isnbNumber.height;
+            var width = isnbNumber.width;
+            console.log('height and width',height, width  );
+            // code here to use the dimensions
+          }
+          isnbNumber.src = "http://covers.openlibrary.org/b/isbn/"+ isnbNumber +"-s.jpg";
+        }
+        books.push(value);
+      }
     } //end for loop
 }; //end parseBooks
 
