@@ -52,6 +52,7 @@ myApp.service('UserService', function($http){
         }; //end user
         sv.allUsers.push(sv.user);
       }// end for loop
+      console.log('sv.allUsers', sv.allUsers);
       return sv.allUsers;
     }); //end .then
   }; //end getRequests

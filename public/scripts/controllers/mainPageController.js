@@ -8,16 +8,11 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
   vm.user = '';
   vm.allMembers = [];
 
-  // // *****   Functions to load on init   *****//
-  // vm.init = () => {
-  //   vm.getMembers();
-  //   vm.getUser();
-  //   vm.prevBooks();
-  //   vm.getMainComments();
-  // }; //end vm.init
+
 
   vm.getUser = () => {
     vm.user = LoginService.getUser();
+    console.log(vm.user);
     vm.getMembers();
   }; //end getRequests
 

@@ -12,6 +12,7 @@ var admin = require('./modules/routes/admin');
 var books = require('./modules/routes/books');
 var bcrypt = require( 'bcrypt' );
 var pg = require('pg');
+var morgan = require('morgan');
 //uses
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -21,7 +22,7 @@ app.use('/register', register);
 app.use('/main', main);
 app.use('/admin', admin);
 app.use('/books', books);
-
+app.use(morgan('dev'));
 
 
 //port for server

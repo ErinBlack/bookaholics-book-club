@@ -25,11 +25,14 @@
       <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
         <div class="row ">
 
-          <div class="col-sm-4">
+          <div class="col-sm-4 profileSidebar" >
+            <img ng-src="{{mc.user.image}}" alt="" class="profileImg img-circle ">
           </div>
           <div class="col-sm-6 col-sm-offset-1">
             <h4 class="welcome">Welcome </h4>
-            <p>{{mc.user.firstName}} {{mc.user.lastName}}</p>
+
+
+            <p>{{mc.user.firstName}} {{mc.user.lastName}} {{mc.user.profile_img}}</p>
           </div>
         </div>
         <h3>Current Books</h3>

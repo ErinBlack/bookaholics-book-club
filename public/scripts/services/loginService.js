@@ -36,6 +36,7 @@ myApp.service('LoginService', function($http){
           // user is in system and confirmed
           else{
             var userData = response.data[0];
+            console.log('userData', userData);
             sv.loggedIn = true;
             sv.registeredUser = !sv.registeredUser;
             if(userData.role < 3){
@@ -53,6 +54,7 @@ myApp.service('LoginService', function($http){
               role: userData.role,
               admin: sv.admin
             };
+            console.log('sv.user', sv.user);
             return sv.user;
           } //end else statement
       }
