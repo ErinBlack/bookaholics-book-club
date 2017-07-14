@@ -18,7 +18,7 @@ myApp.config(function($routeProvider){
     controller:'BookController as bc'
   }).when('/edit-profile/:id', {
     templateUrl: 'views/partials/editProfile.html',
-    controller:'UserController as uc'
+    controller:'UpdateController as uc'
   }).when('/main', {
     templateUrl: 'views/partials/main.html',
     controller:'LoginController as lc'
