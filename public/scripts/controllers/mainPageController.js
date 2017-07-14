@@ -91,12 +91,14 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
 
 
 
-
+  // *****  Send Users to bookPage *****//
   vm.bookPage = (bookId) => {
     //Send selected book to LibraryService
     LibraryService.sendBookId(bookId);
     $location.path('/book/' + bookId);
   }; //end getBook
+
+
 
 
 }); //end MainController

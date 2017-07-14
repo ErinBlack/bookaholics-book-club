@@ -1,9 +1,59 @@
-<header>
-  <a href="/">login</a>
-  <a href="/#!/register">register</a>
-  <a href="/#!/admin">admin</a>
-  <a href="/#!/edit-profile">edit profile</a>
-  <a href="/#!/book">book</a>
-  <a href="/#!/main">main</a>
-</header>
-<h1>Edit Profile</h1>
+<div >
+  <!-- Header -->
+  <header ng-controller="HeaderController as hc">
+    <div class="headerWrapper">
+      <div class="col-sm-7 col-md-9">
+        <a href="/#!/main"><img src="images/header-logo.png" alt=""></a>
+      </div>
+      <div class="col-sm-5 col-md-3 ">
+        <div class="col-md-4 col-sm-4  signOut">
+          <a href="/" ng-click="hc.logOut()">Sign Out</a>
+        </div>
+        <div ng-show="hc.user.admin" class="col-md-4 col-sm-4  signOut">
+          <a href="/#!/admin">Admin </a>
+        </div>
+        <div class="col-md-4 col-sm-4 signOut">
+          <a href="/#!/main">Home</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Page Content-->
+  <section class="container-fluid welcome"  >
+    <div class="row">
+      <!-- User Info and Current Book Section-->
+      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
+        <div class="row " ng-controller="UserController as uc" ng-init="uc.getUser()">
+          <div class="col-sm-4">
+          </div>
+          <div class="col-sm-6 col-sm-offset-1">
+            <h4 class="welcome">Welcome </h4>
+            <img ng-src="{{uc.user.image}}" alt="" class="profileImg imgFit img-circle">
+            <p>{{uc.user.firstName}} {{uc.user.lastName}}</p>
+
+          </div>
+        </div>
+        <h3>Current Books</h3>
+        <div class="row prevReads"  class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-controller="BookController as bc" ng-init="bc.getUser()" >
+          <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
+            <div class="imgDiv">
+              <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
+            </div>
+            <h3>{{book.title}}</h3>
+            <div class="bookInfo">
+              <p>Author: {{book.author }} </p>
+              <h4>Due: {{book.due_date | date : format : medium}} </h4>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads "  ng-controller="UserController as uc" class="page" ng-init="uc.getUser()" >
+        <h2>Edit Your Profile</h2>
+        <div class="blueLine"></div>
+
+        
+      </section>
+</div>
