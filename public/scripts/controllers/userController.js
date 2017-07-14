@@ -17,4 +17,24 @@ vm.editProfile = (userId) => {
   $location.path('/edit-profile/' + userId);
 }; //editProfile
 
+// *****  Check input fields on update user info *****//
+vm.checkInput = (data) => {
+  if (data == '' ) {
+    return "Please fill all fields";
+  }
+};
+
+
+// *****  Get Updated User Info *****//
+vm.getUpdatedInfo = () => {
+
+  console.log('updateUser', vm.user.email);
+};
+
+
+
+}); //end UserController
+
+myApp.run(function(editableOptions) {
+  editableOptions.theme = 'bs3';
 });
