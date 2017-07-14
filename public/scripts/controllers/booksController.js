@@ -23,6 +23,7 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
   // *****   Getting User from LoginService  *****//
   vm.getUser = () => {
     vm.user = LoginService.user;
+    console.log('vm.user', vm.user);
     vm.getBooks();
     vm.getMembers();
   }; //end getRequests

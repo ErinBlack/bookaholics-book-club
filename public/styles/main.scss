@@ -31,14 +31,14 @@ h1{
 }
 
 h2 {
-font-family: $font-primary;
+  font-family: $font-primary;
   font-weight: 300;
   font-size: 2em;
   color: $textGray;
   margin-top: 0px;
 }
 h3 {
-font-family: $font-primary;
+  font-family: $font-primary;
   font-weight: 300;
   font-size: 1.5em;
   color: $textGray;
@@ -53,12 +53,13 @@ a{
   font-weight: 300;
 }
 
+
 button {
   background-color: $salmon;
   color: $white;
   border: none;
-  padding: 5px 20px;
-  font-size: 1.2em;
+  padding: 5px 10px;
+  font-size: 1em;
   font-weight: 300;
   border-radius: 6px;
 
@@ -79,6 +80,7 @@ button {
 .profileImg{
   width: 50px;
   height: 50px;
+
 
 }
 
@@ -133,6 +135,10 @@ header {
   }
   .signOut{
     padding: 20px 0;
+    float: right;
+  }
+  .headerWrapper{
+    padding: 0 3% 0 7%;
   }
 }
 
@@ -198,6 +204,49 @@ footer{
 }
 
 // ****** Admin Styles *******
+
+// ****** Admin Member Styles *******
+.allMembers {
+  margin: 40px 0 0 0;
+}
+.coverImgThumb {
+  float: left;
+  padding: 5px;
+}
+.adminMemberSections {
+
+  .subBoundingBox {
+    min-height:300px;
+    h4{
+      padding: 0 0 20px 0;
+      text-decoration: underline;
+      font-size: 1.4em;
+    }
+  }
+  .disable{
+    background-color: transparent;
+    color: $blue;
+    text-decoration: underline;
+  }
+  .make{
+    background-color: $blue;
+  }
+  .decline{
+    width: 71px;
+    margin: 10px 0 0 0 ;
+  }
+  .adminRequestRow{
+    margin: 0 auto;
+    width: 90%;
+    padding: 15px ;
+  }
+  .pendingUsers {
+    padding: 15px 0;
+  }
+
+
+}
+
 .subBoundingBox {
   min-height: 500px;
   background-color: $commentBkg;
@@ -224,17 +273,7 @@ footer{
     font-weight: 300
   }
   .adminRights{
-    button{
-      color: $blue;
-      background-color: transparent;
-      font-size: .7em;
-      float: left;
-      font-family: $font-secondary;
-      font-weight: 400;
-      border: none;
-      text-decoration: underline;
-      padding: 2px;
-    } // end Button
+
   } //end adminRights
   .userEmail {
     font-size: .7em;
@@ -328,10 +367,10 @@ footer{
     width: calc(100% - 10px);
     height: auto;
     margin-bottom: 20px;
-}
-form{
- padding: 0 0 40px 0;
-}
+  }
+  form{
+    padding: 0 0 40px 0;
+  }
 }
 
 .boundingBoxRow {

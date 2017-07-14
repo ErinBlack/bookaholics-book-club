@@ -42,7 +42,7 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
 
   // *****   Submitting a Main Comment to Thread   *****//
   vm.addMainComment = (comment) => {
-    console.log('in addMainComment');
+
     //comment object to send
     vm.commentToSend = {
       userId: vm.user.userId,
@@ -50,7 +50,6 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
       comment: comment
     };
 
-    console.log('vm.commentToSend', vm.commentToSend);
     //send comment to CommentService to Post to DB
     CommentService.addMainComment(vm.commentToSend).then(function(response){
       vm.getMainComments();
@@ -86,7 +85,6 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
   vm.getMembers = () => {
     UserService.getMembers().then(function(allmembers){
       vm.allMembers = allmembers;
-      console.log('vm.allMembers', vm.allMembers);
       vm.prevBooks();
     });
   }; //end getMembers

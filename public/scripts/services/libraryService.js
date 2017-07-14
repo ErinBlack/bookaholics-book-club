@@ -55,6 +55,7 @@ sv.parseBooks = (bookArray) => {
 
 // ***** Send selected Book info to controller *****//
   sv.sendBook = (sentBook) => {
+    console.log('in LibraryService sendBook with:',sentBook);
     return $http.post('admin/postBook',{
       data: sentBook
     }).then(function(status){

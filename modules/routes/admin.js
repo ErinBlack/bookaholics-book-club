@@ -122,10 +122,12 @@ router.get('/requests', function(req, res){
 
     pool.connect( function(err, connection, done){
       if( err ){
+        console.log('in connection pool if');
         done();
         res.send('error');
       }// end if
       else {
+        console.log('in pool.connect else');
         let queryToSend = "INSERT INTO books (user_id, title, author, published_date,";
         queryToSend += " isbn, cover_img, due_date, status) VALUES ";
         queryToSend  += "('" + bookToPost.userId + "', '" + bookToPost.title + "',";
@@ -135,10 +137,12 @@ router.get('/requests', function(req, res){
           // connecting to database to approve user
           let sendBook = connection.query(queryToSend, function(err, response){
             if(err){
+              console.log('in sendBOok if');
               done();
               res.send('error');
             } //end if err
             else{
+              console.log('in sendBOok else');
               done();
               res.send('book submitted');
             }// end else
