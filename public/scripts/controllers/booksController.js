@@ -16,42 +16,57 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
   vm.getMembers = () => {
     UserService.getMembers().then(function(allmembers){
       vm.allMembers = allmembers;
-      vm.getBookComments();
+      // vm.getBookComments();
     });
   }; //end getMembers
 
   // *****   Getting User from LoginService  *****//
   vm.getUser = () => {
+    console.log('in getUser');
     vm.user = LoginService.user;
-    console.log('vm.user', vm.user);
     vm.getBooks();
     vm.getMembers();
+      console.log('leaving getUser');
   }; //end getRequests
 
+vm.getBooksMain = () =>{
+  console.log('in getBooks');
+  vm.savedBooks = [];
+  LibraryService.prevBooks().then(function(savedBooks){
+    vm.savedBooks = savedBooks.data;
+    vm.futureReads(vm.savedBooks);
+  });
+}
+
+// *****   Determining if book is a FutureRead   *****//
+vm.futureReads = (savedBooks) => {
+  console.log('in futureReads');
+  vm.futureReads = [];
+  for (const value of savedBooks) {
+    if (vm.iso < value.due_date){
+      vm.futureReads.push(value);
+    } //end if
+  } //end for loop
+  console.log('leaving futureReads');
+}; //end futureReads
 
   // *****   Get All Books in DB   *****//
   vm.getBooks = () => {
+    console.log('in getBooks');
     vm.savedBooks = [];
     LibraryService.prevBooks().then(function(savedBooks){
       vm.savedBooks = savedBooks.data;
+      console.log('vm.savedBooks',vm.savedBooks);
       vm.futureReads(vm.savedBooks);
-      vm.getBookInfo();
+      // vm.getBookInfo();
     }); //end then
+    console.log('leaving getBooks');
   }; //end searchForBook
 
 
-  // *****   Determining if book is a FutureRead   *****//
-  vm.futureReads = (savedBooks) => {
-    vm.futureReads = [];
-    for (const value of savedBooks) {
-      if (vm.iso < value.due_date){
-        vm.futureReads.push(value);
-      } //end if
-    } //end for loop
-  }; //end futureReads
-
   // *****   Getting Info for Book page Book  *****//
   vm.getBookInfo = () => {
+    console.log('in getBookInfo');
     vm.bookPageBook = [];
     vm.savedBooks = LibraryService.allBooks();
     for (const value of vm.savedBooks.data) {
@@ -60,6 +75,7 @@ myApp.controller('BookController', function($routeParams, LibraryService, LoginS
       } //end if
     } //end for loop
     vm.getBookComments();
+    console.log('leaving getBookInfo');
   }; // end getBookInfo
 
 

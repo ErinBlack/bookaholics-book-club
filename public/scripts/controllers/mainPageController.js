@@ -16,29 +16,29 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
     vm.getMembers();
   }; //end getRequests
 
-  // *****   Get All Books in DB   *****//
-  vm.prevBooks = () => {
-    vm.savedBooks = [];
-    LibraryService.prevBooks().then(function(savedBooks){
-      vm.savedBooks = savedBooks.data;
-      vm.futureReads(vm.savedBooks);
-      vm.getMainComments();
-    }); //end then
-  }; //end searchForBook
-
-
-  // *****   Determining if book is a FutureRead   *****//
-  vm.futureReads = (savedBooks) => {
-    vm.iso = '';
-    vm.futureReads = [];
-    let today = new Date();
-    vm.iso = today.toISOString();
-    for (const value of savedBooks) {
-      if (vm.iso < value.due_date){
-        vm.futureReads.push(value);
-      } //end if
-    } //end for loop
-  }; //end futureReads
+  // // *****   Get All Books in DB   *****//
+  // vm.prevBooks = () => {
+  //   vm.savedBooks = [];
+  //   LibraryService.prevBooks().then(function(savedBooks){
+  //     vm.savedBooks = savedBooks.data;
+  //     vm.futureReads(vm.savedBooks);
+  //     vm.getMainComments();
+  //   }); //end then
+  // }; //end searchForBook
+  //
+  //
+  // // *****   Determining if book is a FutureRead   *****//
+  // vm.futureReads = (savedBooks) => {
+  //   vm.iso = '';
+  //   vm.futureReads = [];
+  //   let today = new Date();
+  //   vm.iso = today.toISOString();
+  //   for (const value of savedBooks) {
+  //     if (vm.iso < value.due_date){
+  //       vm.futureReads.push(value);
+  //     } //end if
+  //   } //end for loop
+  // }; //end futureReads
 
   // *****   Submitting a Main Comment to Thread   *****//
   vm.addMainComment = (comment) => {
@@ -59,25 +59,33 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
 
   // *****   Getting Comments for Main Thread  *****//
   vm.getMainComments= (comment) => {
+    console.log('in getMainComments');
     vm.mainComments = [];
     //get comments fromt main_feed DB
     CommentService.getMainComments().then(function(comments){
 
       vm.commentInfo = comments.data;
+      console.log('vm.commentINfo', vm.commentInfo);
       for (const value of vm.commentInfo) {
+        console.log('value', value);
         vm.memberId = value.user_id;
-        vm.commentUser = vm.allMembers.find(user => user.user_id === vm.memberId);
+        console.log('vm.memberID',vm.memberId );
+        console.log('vm.allMembers',vm.allMembers );
+        vm.commentUser = vm.allMembers.find(user => user.user_id == vm.memberId);
         //object with comment data to snd
-        vm.commentToSend = {
+        console.log('vm.commentUser', vm.commentUser);
+        vm.mainComment = {
           name: vm.commentUser.first_name + vm.commentUser.last_name,
           profileImage: vm.commentUser.profile_img,
           date: value.date,
           comment: value.comment
         };
 
-        vm.mainComments.push(vm.commentToSend);
+        vm.mainComments.push(vm.mainComment);
+        console.log('vm.mainComments', vm.mainComments);
       } //end for loop
     }); //end then
+    console.log('leave getMainComments');
   }; //end addComments
 
 
@@ -85,7 +93,8 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
   vm.getMembers = () => {
     UserService.getMembers().then(function(allmembers){
       vm.allMembers = allmembers;
-      vm.prevBooks();
+      vm.getMainComments();
+      // vm.prevBooks();
     });
   }; //end getMembers
 

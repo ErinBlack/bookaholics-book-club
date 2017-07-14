@@ -1,7 +1,7 @@
 myApp.controller('UserController', function($location, LoginService){
   console.log('in UserController');
   var vm = this;
-
+  vm.user = LoginService.user;
   // *****   Getting User from LoginService  *****//
   vm.getUser = () => {
     vm.user = LoginService.user;

@@ -7,6 +7,7 @@ myApp.controller('LoginController', function(LoginService){
 
   //function to login users
   vm.login = function(){
+    console.log('in Login');
       // create userInfo object
     var userInfo = {
       email: vm.emailInput,
@@ -29,6 +30,7 @@ myApp.controller('LoginController', function(LoginService){
         }
       }); // end LoginService call
     } //end else
+    console.log('leaving Login');
   }; //end login
 
 }); //end LoginController

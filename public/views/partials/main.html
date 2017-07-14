@@ -52,14 +52,14 @@
 
         <!-- All Books Section-->
 
-      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads "  ng-controller="MainPageController as mc" class="page" ng-init="mc.getUser()" >
+      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads "  ng-controller="BookController as bc" class="page" ng-init="bc.getBooksMain()" >
         <h2>All Bookaholics Books</h2>
         <div class="blueLine"></div>
         <div class="allBooks">
           <div class="row" >
 
-            <div class="col-sm-3 prevBooks" ng-repeat="book in mc.savedBooks |  orderBy:'-due_date'">
-              <a  ng-click="mc.bookPage(book.book_id)">
+            <div class="col-sm-3 prevBooks" ng-repeat="book in bc.savedBooks | orderBy : 'due_date'">
+              <a  ng-click="bc.bookPage(book.book_id)">
               <div class="imgDiv">
                 <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
               </div>
@@ -74,7 +74,7 @@
         </div>
 
         <!-- Main Comment Thread-->
-        <section class=" mainThread" >
+        <section class=" mainThread" ng-controller="MainPageController as mc" class="page" ng-init="mc.getUser()" >
           <h2>Talk Amongst Yourselves</h2>
           <div class="blueLine"></div>
           <div class="commentSection">
