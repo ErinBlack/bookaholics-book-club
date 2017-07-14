@@ -13,4 +13,5 @@ myApp.controller('UserController', function($location, LoginService){
     //getUser Id from
     $location.path('/edit-profile/' + userId);
   }; //editProfile
-});
+
+}); //end UserController

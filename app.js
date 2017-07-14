@@ -10,6 +10,7 @@ var register = require('./modules/routes/register');
 var main = require('./modules/routes/main');
 var admin = require('./modules/routes/admin');
 var books = require('./modules/routes/books');
+var update = require('./modules/routes/update');
 var bcrypt = require( 'bcrypt' );
 var pg = require('pg');
 var morgan = require('morgan');
@@ -22,6 +23,7 @@ app.use('/register', register);
 app.use('/main', main);
 app.use('/admin', admin);
 app.use('/books', books);
+app.use('/update', update);
 app.use(morgan('dev'));
 
 
