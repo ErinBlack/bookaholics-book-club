@@ -29,10 +29,10 @@ myApp.controller('UpdateController', function($location, UpdateService, LoginSer
         firstName: vm.user.firstName,
         lastName: vm.user.lastName,
         email: vm.user.email,
-        img: vm.imgUpload,
+        img: vm.user.image,
         userId: vm.user.userId
       }; //end updateToSend
-      vm.user.image = vm.imgUpload;
+      // vm.user.image = vm.imgUpload;
       UpdateService.sendUpdatedUser(vm.updateToSend).then(function(status){
         console.log('status', status);
         vm.refreshUser();
@@ -78,7 +78,7 @@ myApp.controller('UpdateController', function($location, UpdateService, LoginSer
       // console.log(JSON.stringify(result.filesUploaded[0].url));
       vm.imgUpload = JSON.stringify(result.filesUploaded[0].url);
 
-      vm.imgUpload = vm.imgUpload.slice(1, -1);
+      vm.user.image = vm.imgUpload.slice(1, -1);
       // console.log('vm.imgUpload', vm.imgUpload );
      });
   }
