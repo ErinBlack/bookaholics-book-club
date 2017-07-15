@@ -65,9 +65,11 @@ sv.parseBooks = (bookArray) => {
 
   // ***** Send selected Book info to controller *****//
     sv.prevBooks = () => {
+      console.log('in LC prevBooks');
       sv.savedBooks = [];
       return $http.get('main/getBooks').then(function(response){
         sv.savedBooks = response;
+        console.log('sv.savedBooks', sv.savedBooks);
         return sv.savedBooks;
       }); //end searchBook
     };

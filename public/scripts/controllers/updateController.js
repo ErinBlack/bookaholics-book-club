@@ -81,7 +81,7 @@ myApp.controller('UpdateController', function($location, UpdateService, LoginSer
       vm.user.image = vm.imgUpload.slice(1, -1);
       // console.log('vm.imgUpload', vm.imgUpload );
      });
-  }
+  };
 
 }); //end UserController
 

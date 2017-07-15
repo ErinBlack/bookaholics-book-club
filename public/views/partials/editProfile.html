@@ -94,7 +94,77 @@
             </span>
           </div>
         </form>
-
         <button type="button" class="btn" name="button">Disable Account</button>
+      </section>
+      <!-- All Books Section-->
+
+      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads "  ng-controller="UpdateBookController as ub" class="page" ng-init="ub.getBooks()" >
+        <h2>Edit All Books</h2>
+        <div class="blueLine"></div>
+        <div class="allBooks">
+          <div class="row" >
+
+            <div class="col-sm-4 prevBooks" ng-repeat="book in ub.savedBooks | orderBy : '-due_date'">
+              <div class="imgDiv">
+                <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
+              </div>
+              <!-- Edit Book Information -->
+              <form editable-form name="editableForm" onaftersave="ub.getUpdatedBook($data, book.book_id )" >
+                <div>
+                  <!-- editable username (text with validation) -->
+                  <span  e-name="bookId" ng-hide="true">{{ book.book_id|| 'empty' }}</span>
+                  <span class="title">Title: </span>
+                  <span editable-text="book.title" class="input" e-name="title"  e-required >{{ book.title|| 'empty' }}</span>
+                </div>
+
+                <div>
+                  <!-- editable status (select-local) -->
+                  <span class="title">Author: </span>
+                  <span editable-text="book.author" class="input" e-name="author"  e-required >{{book.author|| 'empty' }}</span>
+                </div>
+
+                <div>
+                  <!-- editable group (select-remote) -->
+                  <span class="title">ISBN: </span>
+                  <span editable-text="book.isbn" class="input" e-name="isbn"  e-required >{{book.isbn|| 'empty' }}</span>
+                </div>
+                <div>
+                  <!-- editable group (select-remote) -->
+                  <span class="title">Published: </span>
+                  <span editable-text="book.published_date" class="input" e-name="datePublished"  e-required >{{book.published_date|| 'empty' }}</span>
+                </div>
+                <div>
+                  <!-- editable group (select-remote) -->
+                  <span class="title">Due Date: </span>
+                  <span editable-text="book.due_date" class="input" e-name="dueDate"  e-required >{{book.due_date | date : format : medium|| 'empty' }}</span>
+                </div>
+
+                <div>
+                </div>
+
+                <div>
+                  <!-- button to show form -->
+                  <button type="button" class="btn" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                    Edit
+                  </button>
+                  <span ng-show="editableForm.$visible">
+                    <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting" >
+                      Save
+                    </button>
+                    <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                      Cancel
+                    </button>
+                  </span>
+                </div>
+
+                  <div class="">
+                    <input type="button" value="Upload" ng-click="ub.showPicker()" />
+                  </div>
+                  <!-- buttons to submit / cancel form -->
+
+              </form>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
