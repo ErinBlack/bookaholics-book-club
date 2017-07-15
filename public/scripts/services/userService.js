@@ -3,9 +3,9 @@ myApp.service('UserService', function($http){
   sv.pendingUsers = [];
   sv.allUsers = [];
 
-
   // *****  Get Users Pending Approval *****//
   sv.getUserRequests = () => {
+    console.log('in getUserRequests');
     sv.pendingUsers = [];
     return $http.get('/admin/requests').then(function(data){
       sv.pendingUserData = data.data;
@@ -14,15 +14,18 @@ myApp.service('UserService', function($http){
       }
       return sv.pendingUsers;
     });
+      console.log('leaving getUserRequests');
   }; //end getRequests
 
 
   // ***** Get all Approved Members *****//
   sv.getMembers = () => {
+      console.log('in getMembers');
     sv.allUsers = [];
     return $http.get('/admin/getMembers').then(function(data){
-      sv.allUsers = [];
+    sv.allUsers = [];
     sv.userData = data.data;
+    console.log('sv.usreData',sv.userData );
       // for loop to go through userData
       for (const value of sv.userData) {
         //switch statement to determine if admin
@@ -51,9 +54,12 @@ myApp.service('UserService', function($http){
           admin: sv.admin
         }; //end user
         sv.allUsers.push(sv.user);
+        console.log('sv.allUsers in userService',sv.allUsers );
       }// end for loop
       return sv.allUsers;
+      console.log('sv.allUsers in userService',sv.allUsers );
     }); //end .then
+    console.log('leaving getMembers');
   }; //end getRequests
 
   // ***** Change User Roll *****//

@@ -34,16 +34,34 @@ router.put('/user', function(req,res){
       let email = req.body.data.email;
       let userId = req.body.data.userId;
       let image = req.body.data.img;
-      console.log('req.body shortcuts', firstName, lastName, email, userId);
-        // connecting to database to approve user
-        let updateUser = connection.query("UPDATE users SET first_name = '"+firstName+"', last_name = '"+ lastName+"', email = '"+ email +"', profile_img = '"+ image +"' WHERE user_id = '"+ userId +"';");
+      console.log('let image' ,image );
+      if(image == ''){
+        let updateUser = connection.query("UPDATE users SET first_name = '"+firstName+"', last_name = '"+ lastName+"', email = '"+ email +"' WHERE user_id = '"+ userId +"';", function(){
           if(err){
+            done();
             res.sendStatus(400);
           } //end if err
           else{
             done();
             res.sendStatus(200);
           } // end else
+        });
+      }
+      else {
+        console.log('req.body shortcuts', firstName, lastName, email, userId);
+          // connecting to database to approve user
+          let updateUser = connection.query("UPDATE users SET first_name = '"+firstName+"', last_name = '"+ lastName+"', email = '"+ email +"', profile_img = '"+ image +"' WHERE user_id = '"+ userId +"';", function(){
+            if(err){
+              done();
+              res.sendStatus(400);
+            } //end if err
+            else{
+              done();
+              res.sendStatus(200);
+            } // end else
+          });
+      }
+
       } // end else
     }); // end pool connection
 }); //end put request

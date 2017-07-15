@@ -21,10 +21,10 @@
 
   <!-- Main Page Content-->
   <section class="container-fluid welcome"  >
-    <div class="row">
+    <div class="row" ng-controller="UpdateController as uc" ng-init="uc.getUser()">
       <!-- User Info and Current Book Section-->
       <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox " >
-        <div class="row " ng-controller="UpdateController as uc" ng-init="uc.getUser()">
+        <div class="row " >
           <div class="col-sm-4">
           </div>
           <div class="col-sm-6 col-sm-offset-1">
@@ -35,8 +35,8 @@
           </div>
         </div>
         <h3>Current Books</h3>
-        <div class="row prevReads"  class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-controller="BookController as bc" ng-init="bc.getUser()" >
-          <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
+        <div class="row prevReads"  class="col-sm-offset-1 col-sm-2 sideBar boundingBox "  >
+          <div class="col-sm-12" ng-repeat="book in uc.futureReads " >
             <div class="imgDiv">
               <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
             </div>
@@ -50,7 +50,7 @@
       </section>
 
 
-      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads "  ng-controller="UpdateController as uc" class="page" ng-init="uc.getUser()" >
+      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads "   >
         <h2>Edit Your Profile</h2>
         <div class="blueLine"></div>
         <!-- Edit User Info Form -->

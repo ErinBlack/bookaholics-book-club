@@ -11,9 +11,19 @@ vm.allUsers = [];
 
 
 
+// *****   Getting all members  *****//
+vm.getMembers = () => {
+  // console.log('in get members');
+  UserService.getMembers().then(function(allMembers){
+    vm.allUsers = allMembers;
+    // console.log('vm.allUsers', vm.allUsers);
+  });
+  // console.log('leaving get members');
+}; //end getRequests
+
   // *****   Get Search Title   *****//
   vm.searchForBook = (search) => {
-    console.log('in searchForBook');
+    // console.log('in searchForBook');
     vm.books = [];
     LibraryService.searchBook(search).then(function(booksSearched){
       vm.books = booksSearched;
@@ -22,13 +32,13 @@ vm.allUsers = [];
       }
       // console.log('vm.books', vm.books);
     }); //end then
-    console.log('leaving searchForBook');
+    // console.log('leaving searchForBook');
   }; //end searchForBook
 
   // *****   Choose a Book *****//
   vm.chooseBook = (i) => {
     vm.selectedBook = {};
-    console.log('in choose book');
+    // console.log('in choose book');
     vm.selectedBook = {
       title: vm.books[i].title,
       author: vm.books[i].author_name[0],
@@ -88,24 +98,17 @@ vm.allUsers = [];
 
 
   // *****  Get All Members for Role Change  *****//
-  // *****   Getting all members  *****//
-  vm.getMembers = () => {
-    vm.allUsers = [];
-    console.log('in get members');
-    UserService.getMembers().then(function(allMembers){
-      vm.allUsers = allMembers;
-    });
-    console.log('leaving get members');
-  }; //end getRequests
+
 
 
   // ***** Change Role *****//
   vm.changeRole = (user_id, role) => {
     console.log('in changeRole');
     UserService.changeRole(user_id, role).then(function(allUsers){
-      vm.allUsers = allUsers;
+      vm.getMembers();
     });
     console.log('leaving changeRole');
+
   }; //end changeRoll
 
     // ***** Change User Status *****//

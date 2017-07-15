@@ -49,9 +49,15 @@ router.get('/requests', function(req, res){
         //connecting to database to retrieve all users pending approval
         var allUsers = connection.query("SELECT user_id, first_name, last_name, profile_img, email, role  FROM users WHERE status='active';",
         function(err, result){
-          if(err) throw err;
-          done();
-          res.send(result.rows);
+          if(err){
+            done();
+            res.send('error');
+          }
+          else {
+            done();
+            console.log('result.rows',result.rows );
+            res.send(result.rows);
+          }
         }); //end SELECT statement
       } //end else
     });// end pool connect
