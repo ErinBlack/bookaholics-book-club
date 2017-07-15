@@ -104,7 +104,7 @@
         <div class="allBooks">
           <div class="row" >
 
-            <div class="col-sm-4 prevBooks" ng-repeat="book in ub.savedBooks | orderBy : '-due_date'">
+            <div class="col-sm-4 prevBooks" ng-repeat="book in ub.savedBooks | orderBy : '-due_date' ">
               <div class="imgDiv">
                 <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
               </div>
@@ -159,7 +159,7 @@
                 </div>
 
                   <div class="">
-                    <input type="button" value="Upload" ng-click="ub.showPicker()" />
+                    <input type="button" value="Upload" ng-click="ub.showPicker(book.book_id, $index)" />
                   </div>
                   <!-- buttons to submit / cancel form -->
 

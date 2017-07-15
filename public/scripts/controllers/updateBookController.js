@@ -2,6 +2,8 @@ myApp.controller('UpdateBookController', function(UpdateService, LibraryService)
   console.log('in UpdateBookController');
   var vm = this;
   vm.savedBooks =[];
+  var client = filestack.init('ARe83u3xXQw2imhkEvE0Cz');
+  vm.coverToEdit='';
   // *****   Get All Books in DB   *****//
   vm.getBooks = () => {
     console.log('in getBooks');
@@ -34,19 +36,35 @@ vm.getUpdatedBook = (data, id) => {
     });
   }; // end getUpdatedBook
 
-// ***** Show Image Picker *****//
-  vm.showPicker = () => {
-    vm.imgUpload = '';
+// // ***** Show Image Picker *****//
+  vm.showPicker = (bookId, index) => {
+    console.log('in showPIcker with:', bookId, index);
     client.pick({
      }).then(function(result) {
-      // console.log(JSON.stringify(result.filesUploaded[0].url));
+       console.log('in then function with', index);
+       console.log(JSON.stringify(result.filesUploaded[0].url));
       vm.imgUpload = JSON.stringify(result.filesUploaded[0].url);
+      console.log('vm.savedBooks.data', vm.savedBooks);
+      vm.savedBooks[index].cover_img = vm.imgUpload.slice(1, -1);
 
-      vm.user.image = vm.imgUpload.slice(1, -1);
-      // console.log('vm.imgUpload', vm.imgUpload );
+      vm.coverToSend = {
+        image: vm.savedBooks[index].cover_img,
+        bookId: bookId
+      }; //end coverToSend
+      console.log('coverToSend',  vm.coverToSend );
+      vm.updateCoverImage(vm.coverToSend);
+
      });
+//
   };// end showPIcker
-
+//
+// ***** Send Cover Image to be Updated *****//
+vm.updateCoverImage = (coverToSend) => {
+  console.log('in updateCoverImage with:', coverToSend);
+  UpdateService.updateCoverImage(coverToSend).then(function(status){
+    vm.getBooks();
+  });
+}; //end updateCoverImage
 
 }); // end updateBooksController
 

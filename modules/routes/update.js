@@ -104,4 +104,36 @@ router.put('/book', function(req,res){
     }); // end pool connection
 }); //end put request
 
+
+// *****  Update User Info   *****//
+router.put('/bookCover', function(req,res){
+  console.log('in book router with:', req.body);
+
+  pool.connect( function(err, connection, done){
+    if( err ){
+      done();
+      res.send('error');
+    }// end if
+    else {
+      let coverImg = req.body.data.image;
+      let bookId = req.body.data.bookId;
+      console.log('in else with:', coverImg, bookId);
+      let queryToSend = "UPDATE books SET cover_img = '"+ coverImg +"'";
+          queryToSend += "WHERE book_id = '"+ bookId +"';";
+
+        let updateUser = connection.query(queryToSend, function(err, isUploaded){
+          if(isUploaded){
+            done();
+            res.sendStatus(200);
+          } //end if err
+          else{
+            done();
+            res.sendStatus(200);
+          } // end else
+        });
+
+      } // end else
+    }); // end pool connection
+}); //end put request
+
 module.exports = router;

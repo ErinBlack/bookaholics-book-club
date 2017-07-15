@@ -14,7 +14,7 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
     console.log(vm.user);
     vm.getMembers();
   }; //end getRequests
-  
+
 
   // *****   Submitting a Main Comment to Thread   *****//
   vm.addMainComment = (comment) => {
@@ -79,29 +79,6 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
 
 
 
-  // // *****   Get All Books in DB   *****//
-  // vm.prevBooks = () => {
-  //   vm.savedBooks = [];
-  //   LibraryService.prevBooks().then(function(savedBooks){
-  //     vm.savedBooks = savedBooks.data;
-  //     vm.futureReads(vm.savedBooks);
-  //     vm.getMainComments();
-  //   }); //end then
-  // }; //end searchForBook
-  //
-  //
-  // // *****   Determining if book is a FutureRead   *****//
-  // vm.futureReads = (savedBooks) => {
-  //   vm.iso = '';
-  //   vm.futureReads = [];
-  //   let today = new Date();
-  //   vm.iso = today.toISOString();
-  //   for (const value of savedBooks) {
-  //     if (vm.iso < value.due_date){
-  //       vm.futureReads.push(value);
-  //     } //end if
-  //   } //end for loop
-  // }; //end futureReads
 
 
 }); //end MainController

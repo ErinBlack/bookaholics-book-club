@@ -21,4 +21,20 @@ sv = this;
         }); //end .then function
       }; //end sendUpdatedUser
 
+  // ***** Put Request to Update Cover Image *****//
+      sv.updateCoverImage = (coverToSend) => {
+        console.log('in updateCoverImage with:', coverToSend);
+        return $http.put('/update/bookCover',{
+          data: coverToSend
+        }).then(function(status){
+          console.log('status in service', status);
+          if(status.data === 'OK'){
+             sv.error = alert('You upload was complete');
+          }
+          else{
+             sv.error = alert('There was a problem with your upload');
+          }
+          return sv.error;
+        }); //end .then function
+      } // updateCoverImage
 }); //end UpdateService
