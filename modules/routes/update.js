@@ -67,4 +67,41 @@ router.put('/user', function(req,res){
 }); //end put request
 
 
+// *****  Update User Info   *****//
+router.put('/book', function(req,res){
+  console.log('in book router with:', req.body);
+
+  pool.connect( function(err, connection, done){
+    if( err ){
+      done();
+      res.send('error');
+    }// end if
+    else {
+      let title = req.body.data.title;
+      let author = req.body.data.author;
+      let publishedDate = req.body.data.publishedDate;
+      let dueDate = req.body.data.dueDate;
+      let isbn = req.body.data.isbn;
+      let bookId = req.body.data.bookId;
+      let queryToSend = "UPDATE books SET title = '"+ title +"', ";
+          queryToSend +="author = '"+ author +"', isbn = '"+ isbn +"',";
+          queryToSend +=  " due_date = '"+ dueDate +"', published_date ='"+ publishedDate +"' ";
+          queryToSend += "WHERE book_id = '"+ bookId +"';";
+
+
+        let updateUser = connection.query(queryToSend, function(){
+          if(err){
+            done();
+            res.sendStatus(400);
+          } //end if err
+          else{
+            done();
+            res.sendStatus(200);
+          } // end else
+        });
+
+      } // end else
+    }); // end pool connection
+}); //end put request
+
 module.exports = router;

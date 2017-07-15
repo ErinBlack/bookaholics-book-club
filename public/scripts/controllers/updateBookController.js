@@ -28,10 +28,10 @@ vm.getUpdatedBook = (data, id) => {
     }; //end updateToSend
     console.log('vm.updateToSend',vm.updateToSend  );
     // vm.user.image = vm.imgUpload;
-    // UpdateService.sendUpdatedUser(vm.updateToSend).then(function(status){
-    //   console.log('status', status);
-    //   vm.refreshUser();
-    // });
+    UpdateService.sendUpdatedBook(vm.updateToSend).then(function(status){
+      console.log('status', status);
+        vm.getBooks();
+    });
   }; // end getUpdatedBook
 
 // ***** Show Image Picker *****//

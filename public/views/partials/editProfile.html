@@ -136,7 +136,8 @@
                 <div>
                   <!-- editable group (select-remote) -->
                   <span class="title">Due Date: </span>
-                  <span editable-text="book.due_date" class="input" e-name="dueDate"  e-required >{{book.due_date | date : format : medium|| 'empty' }}</span>
+
+                  <span editable-text="book.due_date" e-datepicker-popup="dd-MMMM-yyyy" e-name="dueDate"  e-required >{{book.due_date | date : format : medium|| 'empty' }}</span>
                 </div>
 
                 <div>
