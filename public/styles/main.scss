@@ -467,3 +467,23 @@ footer{
 .boundingBoxRow {
   margin: 40px 0;
 }
+
+
+
+// ****** Book Page Styles *******
+.bookPageCover {
+    max-height: 250px !important ;
+    box-shadow: -2px 2px 5px $textGray;
+}
+
+
+.bookInfoBox {
+  margin: 40px 0 100px 0;
+  h3 {
+    text-align: left;
+  }
+}
+
+.bookThread {
+  margin: 40px 0;
+}

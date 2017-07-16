@@ -20,101 +20,126 @@
       </div>
     </div>
   </header>
-<!-- Main Page Content-->
-<div class="bookController">
-
-
   <!-- Main Page Content-->
-  <section class="container-fluid welcome"  >
-    <div class="row">
-      <!-- User Info and Current Book Section-->
-      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
-        <div  ng-controller="UserController as uc" ng-init="uc.getUser()">
-          <div class="row">
-            <div class=" col-sm-12 headerStyle">
-              <h2>Welcome </h2>
+  <div class="bookController">
+
+
+    <!-- Main Page Content-->
+    <section class="container-fluid welcome"  >
+      <div class="row">
+        <!-- User Info and Current Book Section-->
+        <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
+          <div  ng-controller="UserController as uc" ng-init="uc.getUser()">
+            <div class="row">
+              <div class=" col-sm-12 headerStyle">
+                <h2>Welcome </h2>
+              </div>
             </div>
-          </div>
-          <!-- User Signed in Info-->
-          <div class="row signedInUser">
-            <div class="col-md-3">
-              <img ng-src="{{uc.user.image}}" alt="" class="profileImg imgFit img-circle">
-            </div>
-            <div class="col-md-5 col-md-offset-1">
-              <p id="name">{{uc.user.firstName}} {{uc.user.lastName}}</p>
+            <!-- User Signed in Info-->
+            <div class="row signedInUser">
+              <div class="col-md-3">
+                <img ng-src="{{uc.user.image}}" alt="" class="profileImg imgFit img-circle">
+              </div>
+              <div class="col-md-5 col-md-offset-1">
+                <p id="name">{{uc.user.firstName}} {{uc.user.lastName}}</p>
                 <a  ng-click="uc.editProfile(uc.user.userId)" class="btn">Edit Profile </a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <h3 class="col-sm-12">Current Books</h3>
-        </div>
-
-        <div class="row prevReads"  class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-controller="BookController as bc" ng-init="bc.getUser()" >
-          <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
-            <div class="imgDiv">
-              <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
-            </div>
-            <h4>{{book.title}}</h4>
-            <div class="bookInfo">
-              <p><strong>Author:</strong> {{book.author }} <br>
-              <span><strong>Due:</strong> {{book.due_date | date : format : medium}} </span></p>
-            </div>
+          <div class="row">
+            <h3 class="col-sm-12">Current Books</h3>
           </div>
-        </div>
-      </section>
 
-      <!-- All Books Section-->
-        <!-- Book Information Section -->
-        <section class=" boundingBox prevReads col-sm-7 col-sm-offset-1 " ng-controller="BookPageController as bp" ng-init="bp.getUser()"  >
+          <div class="row prevReads"  class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-controller="BookController as bc" ng-init="bc.getUser()" >
 
-
-          <section class="col-sm-4" >
-            <h2>{{bp.bookPageBook[0].title}}</h2>
-            <img ng-src="{{bp.bookPageBook[0].cover_img}}" alt="">
-            <div class="">
-              Due Date: {{bp.bookPageBook[0].due_date | date : format : medium}} <br>
-              Author: {{bp.bookPageBook[0].author}}<br>
-              Published: {{bp.bookPageBook[0].published_date | date : format : medium}}<br>
+            <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
+              <div class="imgDiv">
+                <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
+              </div>
+              <h4>{{book.title}}</h4>
+              <div class="bookInfo">
+                <p><strong>Author:</strong> {{book.author }} <br>
+                  <span><strong>Due:</strong> {{book.due_date | date : format : medium}} </span></p>
+                </div>
+              </div>
             </div>
           </section>
 
+          <!-- All Books Section-->
+          <!-- Book Information Section -->
+          <section class=" boundingBox prevReads col-sm-7 col-sm-offset-1 " ng-controller="BookPageController as bp" ng-init="bp.getUser()"  >
+            <div class="row">
+              <div class="col-sm-12 headerStyle ">
+                <h2>{{bp.bookPageBook[0].title}}</h2>
+                <div class="blueLine"></div>
+              </div>
+            </div>
+
+            <section class=" col-sm-offset-3 col-sm-8 "  >
+              <div class="row bookInfoBox">
+                <div class="col-sm-5">
+                  <img ng-src="{{bp.bookPageBook[0].cover_img}}" alt="{{bp.bookPageBook[0].title}} book cover image" class="bookPageCover">
+                </div>
+                <div class="col-sm-7">
+                  <div class="">
+                    <h3>{{bp.bookPageBook[0].title}}</h3>
+                    Due Date: {{bp.bookPageBook[0].due_date | date : format : medium}} <br>
+                    Author: {{bp.bookPageBook[0].author}}<br>
+                    Published: {{bp.bookPageBook[0].published_date | date : format : medium}}<br>
+                  </div>
+                </div>
+              </div>
+            </section>
 
 
-          <!-- Main Comment Thread-->
-          <section class=" mainThread col-sm-8" >
-            <h2>Book Title Feed</h2>
-            <div class="blueLine"></div>
-            <div class="commentSection">
-              <div class="row boundingBoxRow" >
-                <div class="col-sm-12">
-                  <div class="subBoundingBox submitThread">
-                    <div class="containerBook" >
-                      <form ng-submit="bp.addBookComment(bp.comment)">
-                        <h3>Submit to Thread</h3>
-                        <div class="containerBox">
-                          <h4>Message</h4>
-                          <textarea class="mainComment" rows="4" cols="35"  ng-model="bp.comment" ng-attr-placeholder="Write a comment.." ></textarea>
-                          <button type="button" ng-click="bp.addBookComment(bp.comment)" name="button">Submit</button>
-                        </form>
+
+            <!-- Main Comment Thread-->
+            <div class="row">
+              <div class="col-sm-12 headerStyle ">
+                <h2>Comment Thread</h2>
+                <div class="blueLine"></div>
+              </div>
+            </div>
+            <section class="mainThread col-sm-12" >
+
+              <div class="commentSection">
+                <div class="row boundingBoxRow" >
+                  <div class="col-sm-12">
+                    <div class="subBoundingBox submitThread">
+                      <div class="containerBook" >
+                        <form ng-submit="bp.addBookComment(bp.comment)">
+                          <h3>Submit to Thread</h3>
+                          <div class="containerBox">
+                            <h4>Message</h4>
+                            <textarea class="mainComment" rows="4" cols="35"  ng-model="bp.comment" ng-attr-placeholder="Write a comment.." ></textarea>
+                            <button type="button" ng-click="bp.addBookComment(bp.comment)" name="button">Submit</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 bookThread ">
+                    <div class="row ">
+                      <div class="col-sm-12 " ng-repeat="comment in bp.bookComments | orderBy : '-date'">
+                        <div class="row mainThread comment">
+                          <div class="col-sm-2">
+                            <img ng-src="{{comment.profileImage}}" alt="" class="profileImg img-circle ">
+                          </div>
+                          <div class="col-sm-2">
+                            <p><strong>{{comment.name}}</strong><br>
+                              <span>{{comment.date | date : format : medium }}</p>
+                              </div>
+                              <div class="col-sm-offset-1 col-sm-6 commentText">
+                                <p>{{comment.comment}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-7 commentThread">
-                  <div class="row ">
-                    <div class="col-ms-12 comment" ng-repeat="comment in bp.bookComments">
-                      <img ng-src="{{comment.profileImage}}" alt="" class="profileImg img-circle ">
-                       {{comment.name}} {{comment.date | date : format : medium }} {{comment.comment}}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
+              </section>
+            </section>
           </section>
-        </section>
-
-    </section>
-      <footer></footer>
+          <footer></footer>
