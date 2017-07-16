@@ -77,19 +77,21 @@
 
                 </form>
                 <!-- Display Book Results -->
-                <div class="bookContainer">
+                <div class="bookContainer" >
                 <div ng-repeat="book in ac.books | limitTo:15 " class="bookListing" >
 
-                  <div  ng-click="ac.chooseBook($index)">
-                    <div class="row">
-                        <img class="coverImgThumb"   ng-src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-S.jpg"  err-src="http://google.com/favicon.ico"/>
+                  <div  ng-click="ac.chooseBook($index)" ng-class="{selected : $index === ac.idSelectedVote}" >
+                    <div class="row"  >
+
                       <!-- <img class="coverImgThumb"   ng-src="http://covers.openlibrary.org/b/isbn/{{cover}}-S.jpg?default=false"  err-src="http://google.com/favicon.ico"/> -->
+                    <div class="col-sm-3" >
+                      <img class="coverImgThumb" ng-src="http://covers.openlibrary.org/b/id/{{book.cover_i}}-S.jpg"  err-src="http://google.com/favicon.ico"/>
                     </div>
-                    <div class="row">
-                    <div class="col-sm-12">
-                      <div class="listingInfo" id="title">{{book.title}}</div>
-                      <div class="listingInfo" id="author">By {{book.author_name[0]}}</div>
-                      <div class="listingInfo" id="isbn">ISBN# {{book.isbn[0]}} </div>
+
+                    <div class="col-sm-8">
+                        <div class="listingInfo" id="title">{{book.title}}</div>
+                        <div class="listingInfo" id="author">By {{book.author_name[0]}}</div>
+                        <div class="listingInfo" id="isbn">ISBN# {{book.isbn[0]}} </div>
                     </div>
                   </div>
                   </div>
@@ -99,7 +101,7 @@
             </div>
             <!-- Submit Book-->
             <div class="">
-              <input type="date" placeholder="Date / Month / Year" ng-model="ac.dueDate">
+              <input type="date"  placeholder="Date / Month / Year" ng-model="ac.dueDate">
               <button type="button" name="button" ng-click="ac.submitBook()">Submit Book</button>
             </div>
           </div>

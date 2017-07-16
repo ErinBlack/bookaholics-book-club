@@ -8,7 +8,7 @@ vm.bookImg = 0;
 vm.books = books;
 vm.selectedBook= {};
 vm.allUsers = [];
-
+vm.idSelectedVote = null;
 
 
 // *****   Getting all members  *****//
@@ -37,6 +37,7 @@ vm.getMembers = () => {
 
   // *****   Choose a Book *****//
   vm.chooseBook = (i) => {
+    vm.idSelectedVote = i;
     vm.selectedBook = {};
     // console.log('in choose book');
     vm.selectedBook = {
@@ -48,6 +49,7 @@ vm.getMembers = () => {
     }; // end selectedBook
       console.log('leaving choose book');
   };
+
 
     // *****  Submit a Book *****//
   vm.submitBook = () => {

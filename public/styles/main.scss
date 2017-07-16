@@ -258,6 +258,10 @@ footer{
   float: left;
   padding: 5px;
 }
+.selected {
+  background-color: $backgroundGray;
+}
+
 .adminMemberSections {
 
   .subBoundingBox {
