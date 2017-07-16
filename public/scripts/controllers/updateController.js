@@ -77,11 +77,23 @@ myApp.controller('UpdateController', function($location, UpdateService, LoginSer
      }).then(function(result) {
       // console.log(JSON.stringify(result.filesUploaded[0].url));
       vm.imgUpload = JSON.stringify(result.filesUploaded[0].url);
-
       vm.user.image = vm.imgUpload.slice(1, -1);
+      vm.imageToSend = {
+        img: vm.user.image,
+        userId: vm.user.userId
+      }
+      vm.updateProfileImage(vm.imageToSend);
       // console.log('vm.imgUpload', vm.imgUpload );
      });
   };
+
+  // ***** Send Cover Image to be Updated *****//
+  vm.updateProfileImage = (imageToSend) => {
+    console.log('in updateProfileImage with:', imageToSend);
+    UpdateService.updateProfileImage(imageToSend).then(function(status){
+        vm.refreshUser();
+    });
+  }; //end updateCoverImage
 
 }); //end UserController
 

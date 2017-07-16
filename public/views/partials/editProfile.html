@@ -57,62 +57,82 @@
 
 
       <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads "   >
-        <h2>Edit Your Profile</h2>
-        <div class="blueLine"></div>
+        <div class="row">
+          <div class="col-sm-12 headerStyle ">
+            <h2>Edit Your Profile</h2>
+            <div class="blueLine"></div>
+          </div>
+        </div>
+        <!-- Upload New Image -->
+        <div class="row editProfile">
+          <div class="col-sm-6">
+            <img src="{{ uc.user.image}}" alt="">
+            <input type="button" class="btn btn-primary" value="Change Profile Image" ng-click="uc.showPicker()" />
+          </div>
+          <div class="col-sm-6">
+            <form editable-form name="editableForm" onaftersave="uc.getUpdatedInfo()" >
+              <div>
+                <!-- editable username (text with validation) -->
+                <span class="title">First Name: </span>
+                <span editable-text="uc.user.firstName" class="input" e-name="firstName"  e-required >{{ uc.user.firstName || 'empty' }}</span>
+              </div>
+
+              <div>
+                <!-- editable status (select-local) -->
+                <span class="title">Last Name: </span>
+                <span editable-text="uc.user.lastName" class="input" e-name="lastName"  e-required >{{ uc.user.lastName|| 'empty' }}</span>
+              </div>
+
+              <div>
+                <!-- editable group (select-remote) -->
+                <span class="title">Email: </span>
+                <span editable-text="uc.user.email" class="input" e-name="email"  e-required >{{ uc.user.email|| 'empty' }}</span>
+              </div>
+
+              <div>
+              </div>
+
+              <div>
+                <!-- button to show form -->
+                <button type="button" class="btn btn-primary" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                  Edit
+                </button>
+                <!-- buttons to submit / cancel form -->
+                <span ng-show="editableForm.$visible">
+                  <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting" >
+                    Save
+                  </button>
+                  <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                    Cancel
+                  </button>
+                </span>
+              </div>
+            </form>
+            <button type="button" class="btn" name="button">Disable Account</button>
+          </div>
+
+        </div>
         <!-- Edit User Info Form -->
-        <form editable-form name="editableForm" onaftersave="uc.getUpdatedInfo()" >
-          <div>
-            <!-- editable username (text with validation) -->
-            <span class="title">First Name: </span>
-            <span editable-text="uc.user.firstName" class="input" e-name="firstName"  e-required >{{ uc.user.firstName || 'empty' }}</span>
-          </div>
 
-          <div>
-            <!-- editable status (select-local) -->
-            <span class="title">Last Name: </span>
-            <span editable-text="uc.user.lastName" class="input" e-name="lastName"  e-required >{{ uc.user.lastName|| 'empty' }}</span>
-          </div>
-
-          <div>
-            <!-- editable group (select-remote) -->
-            <span class="title">Email: </span>
-            <span editable-text="uc.user.email" class="input" e-name="email"  e-required >{{ uc.user.email|| 'empty' }}</span>
-          </div>
-          <div class="">
-            <input type="button" value="Upload" ng-click="uc.showPicker()" />
-          </div>
-          <div>
-          </div>
-
-          <div>
-            <!-- button to show form -->
-            <button type="button" class="btn" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
-              Edit
-            </button>
-            <!-- buttons to submit / cancel form -->
-            <span ng-show="editableForm.$visible">
-              <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting" >
-                Save
-              </button>
-              <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-                Cancel
-              </button>
-            </span>
-          </div>
-        </form>
-        <button type="button" class="btn" name="button">Disable Account</button>
       </section>
       <!-- All Books Section-->
 
-      <section class=" col-sm-7 col-sm-offset-1  boundingBox prevReads "  ng-controller="UpdateBookController as ub" class="page" ng-init="ub.getBooks()" >
-        <h2>Edit All Books</h2>
-        <div class="blueLine"></div>
+      <section class=" col-sm-7 col-sm-offset-1  boundingBox editBooks prevReads  "  ng-controller="UpdateBookController as ub" class="page" ng-init="ub.getBooks()" >
+        <div class="row">
+          <div class="col-sm-12 headerStyle ">
+            <h2>Edit All Books</h2>
+            <div class="blueLine"></div>
+          </div>
+        </div>
         <div class="allBooks">
           <div class="row" >
 
             <div class="col-sm-4 prevBooks" ng-repeat="book in ub.savedBooks | orderBy : '-due_date' ">
               <div class="imgDiv">
                 <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
+                <div class="">
+                  <input type="button" class ="btn btn-primary" value="Change Cover" ng-click="ub.showPicker(book.book_id, $index)" />
+                </div>
               </div>
               <!-- Edit Book Information -->
               <form editable-form name="editableForm" onaftersave="ub.getUpdatedBook($data, book.book_id )" >
@@ -151,7 +171,7 @@
 
                 <div>
                   <!-- button to show form -->
-                  <button type="button" class="btn" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                  <button type="button" class="btn " ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
                     Edit
                   </button>
                   <span ng-show="editableForm.$visible">
@@ -164,9 +184,7 @@
                   </span>
                 </div>
 
-                  <div class="">
-                    <input type="button" value="Upload" ng-click="ub.showPicker(book.book_id, $index)" />
-                  </div>
+
                   <!-- buttons to submit / cancel form -->
 
               </form>
