@@ -37,4 +37,21 @@ sv = this;
           return sv.error;
         }); //end .then function
       } // updateCoverImage
+
+
+      sv.updateProfileImage = (updateToSend) => {
+        console.log('in updateProfileImage wiht:', updateToSend);
+        return $http.put('/update/profileImage',{
+          data: updateToSend
+        }).then(function(status){
+          console.log('status in service', status);
+          if(status.data === 'OK'){
+             sv.error = alert('You upload was complete');
+          }
+          else{
+             sv.error = alert('There was a problem with your upload');
+          }
+          return sv.error;
+        }); //end .then function
+      }; //end updateProfileImage
 }); //end UpdateService

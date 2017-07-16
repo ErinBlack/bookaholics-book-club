@@ -136,4 +136,36 @@ router.put('/bookCover', function(req,res){
     }); // end pool connection
 }); //end put request
 
+
+// *****  Update User Info   *****//
+router.put('/profileImage', function(req,res){
+  console.log('in profileImage router with:', req.body);
+
+  pool.connect( function(err, connection, done){
+    if( err ){
+      done();
+      res.send('error');
+    }// end if
+    else {
+      let image = req.body.data.image;
+      let userId = req.body.data.userId;
+      console.log('in else with:', image, userId);
+      let queryToSend = "UPDATE users SET profile_img = '"+ image +"'";
+          queryToSend += "WHERE user_id = '"+ userId +"';";
+
+        let updateUser = connection.query(queryToSend, function(err, isUploaded){
+          if(isUploaded){
+            done();
+            res.sendStatus(200);
+          } //end if err
+          else{
+            done();
+            res.sendStatus(200);
+          } // end else
+        });
+
+      } // end else
+    }); // end pool connection
+}); //end put request
+
 module.exports = router;

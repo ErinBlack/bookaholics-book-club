@@ -79,7 +79,7 @@ myApp.controller('UpdateController', function($location, UpdateService, LoginSer
       vm.imgUpload = JSON.stringify(result.filesUploaded[0].url);
       vm.user.image = vm.imgUpload.slice(1, -1);
       vm.imageToSend = {
-        img: vm.user.image,
+        image: vm.user.image,
         userId: vm.user.userId
       }
       vm.updateProfileImage(vm.imageToSend);
