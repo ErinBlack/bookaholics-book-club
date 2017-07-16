@@ -21,29 +21,40 @@
   </header>
 
   <!-- Main Page Content-->
-  <section class="container-fluid welcome">
+  <section class="container-fluid welcome"  >
     <div class="row">
       <!-- User Info and Current Book Section-->
-      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-controller="BookController as bc" ng-init="bc.getUser()" >
-        <div class="row ">
-          <div class="col-sm-4">
+      <section class="col-sm-offset-1 col-sm-2 sideBar boundingBox ">
+        <div  ng-controller="UserController as uc" ng-init="uc.getUser()">
+          <div class="row">
+            <div class=" col-sm-12 headerStyle">
+              <h2>Welcome </h2>
+            </div>
           </div>
-          <div class="col-sm-6 col-sm-offset-1">
-            <h4 class="welcome">Welcome </h4>
-            <img ng-src="{{bc.user.image}}" alt="" class="profileImg imgFit img-circle">
-            <p>{{bc.user.firstName}} {{bc.user.lastName}}</p>
+          <!-- User Signed in Info-->
+          <div class="row signedInUser">
+            <div class="col-md-3">
+              <img ng-src="{{uc.user.image}}" alt="" class="profileImg imgFit img-circle">
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+              <p id="name">{{uc.user.firstName}} {{uc.user.lastName}}</p>
+                <a  ng-click="uc.editProfile(uc.user.userId)" class="btn">Edit Profile </a>
+            </div>
           </div>
         </div>
-        <h3>Current Books</h3>
-        <div class="row prevReads"  >
+        <div class="row">
+          <h3 class="col-sm-12">Current Books</h3>
+        </div>
+
+        <div class="row prevReads"  class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-controller="BookController as bc" ng-init="bc.getUser()" >
           <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
             <div class="imgDiv">
               <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
             </div>
-            <h3>{{book.title}}</h3>
+            <h4>{{book.title}}</h4>
             <div class="bookInfo">
-              <p>Author: {{book.author }} </p>
-              <h4>Due: {{book.due_date | date : format : medium}} </h4>
+              <p><strong>Author:</strong> {{book.author }} <br>
+              <span><strong>Due:</strong> {{book.due_date | date : format : medium}} </span></p>
             </div>
           </div>
         </div>

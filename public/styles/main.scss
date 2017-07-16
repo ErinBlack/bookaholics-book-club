@@ -9,6 +9,7 @@ $commentBkg: #e4e5e6;
 $inputHeader: #747678;
 $backgroundGray: #E9EBEE;
 $borderGray:#e5e6e9 ;
+$headerBackground: #f6f7f9;
 
 // ****** Main Styles *******
 body, html {
@@ -32,10 +33,11 @@ h1{
 
 h2 {
   font-family: $font-primary;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 2em;
-  color: $textGray;
-  margin-top: 0px;
+  color: $blue;
+  text-align: center;
+  padding: 20px 0 10px 0;
 }
 h3 {
   font-family: $font-primary;
@@ -44,9 +46,17 @@ h3 {
   color: $textGray;
   margin-top: 0px;
 }
+h4{
+  color: $textGray;
+  text-decoration: underline;
+  text-align: center;
+  font-size: 1.4em;
+}
 p{
   font-family: $font-primary;
   font-weight: 300;
+  color: $textGray;
+  font-size: .9em;
 }
 a{
   font-family: $font-primary;
@@ -80,48 +90,81 @@ button {
 .profileImg{
   width: 50px;
   height: 50px;
-
-
 }
 
 .imgFit{
   object-fit: cover;
 }
 
+.imgDiv{
+    padding: 20px 0;
+    text-align: center;
+    img{
+      box-shadow: -2px 2px 5px $textGray;
+    }
+
+  }
+  img {
+    max-height: 120px;
+
+  }
+  .bookInfo {
+    padding: 0 5px 10px 5px;;
+  }
+
 .profileSidebar {
   padding-top: 40px;
 }
 
+.headerStyle {
+  background-color: $headerBackground;
+  border: 1px $borderGray solid;
+}
 
 
-.welcome {
-  padding: 10px 0 0 0;
+// ****** SideBar Styles *******
+.sideBar {
   h2{
     font-family: $font-primary;
-    font-weight: 600;
-    font-size: 2.3em;
-    color: $textGray;
+    font-weight: 400;
+    font-size: 2em;
+    color: $blue;
     text-align: center;
-    margin-top: 20px;
+    padding: 20px 0 10px 0;
   }
   h3 {
-    color: $textGray;
+    color: $white;
+    background-color: $blue;
     font-size: 1.6em;
+    margin: 15px 0;
     padding: 20px 0;
     text-align: center;
     font-weight: 500;
   }
-  h4 {
-    color: $blue;
-    text-decoration: underline;
-  }
+
   p{
-    color: $blue;
+    color: $textGray;
     font-size: 1em;
+    font-weight: 300;
+    padding: 6px 12px 0 12px;
+  }
+  #name {
     font-weight: 600;
   }
 
+  .signedInUser {
+    margin: 15px 0;
+  }
+  a {
+    font-size: .9em;
+    text-decoration: underline;
+  }
+
 }
+
+
+
+
 // ****** Header Styles *******
 header {
   background-color: $teal;
@@ -148,6 +191,8 @@ footer{
   background-color: $commentBkg;
   margin-top: 150px;
 }
+
+
 // ****** Login Styles *******
 
 .loginBackground {
@@ -313,33 +358,38 @@ footer{
 // ****** Main Page Styles *******
 
 .prevReads {
-
-
-  h4{
-    color: $salmon;
-    font-size: 1em;
-    font-weight: 600;
+  .headerStyle {
+    padding: 0 0 20px 0;
   }
-
-  p{
+  .blueLine {
+    width: 90%;
+    margin: 0 5%;
+  }
+  a {
     color: $textGray;
-    font-size: .8em;
-    font-weight: 400;
   }
-  .imgDiv{
-    padding: 20px 0;
+  h3{
     text-align: center;
-  }
-  img {
-    max-height: 120px;
-    box-shadow: -2px 2px 5px $textGray;
+    font-weight: 600px;
+    text-decoration: underline;
   }
   .bookInfo {
-    padding: 0 5px 10px 5px;;
+    padding: 0 0 10px 15%;;
   }
+
+  .allBooks {
+    height: 500px;
+    overflow-x: scroll;
+  }
+
 }
 
 .mainThread {
+  margin: 40px 0 20px 0;
+  .commentThread {
+    overflow-y: scroll;
+    height: 500px;
+  }
   h3 {
     color: $white;
     text-align: center;
@@ -367,9 +417,24 @@ footer{
     width: calc(100% - 10px);
     height: auto;
     margin-bottom: 20px;
+
   }
   form{
     padding: 0 0 40px 0;
+  }
+  .comment {
+    background-color: $backgroundGray;
+    margin: 0 0 20px 0;
+    padding: 20px 0 20px 20px;
+    border-radius: 4px;
+    p {
+      font-size: 1em;
+      color: $textGray
+    }
+    span {
+      font-size: .7em;
+      font-weight: 500;
+    }
   }
 }
 

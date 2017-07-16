@@ -1,10 +1,11 @@
-myApp.controller('BookController', function($routeParams, $location, LibraryService, LoginService, UserService, BookCommentService){
-  // console.log('OMERGD!', $routeParams.id);
-  // console.log('libraryService', LibraryService.bookPageId);
+myApp.controller('BookPageController', function($routeParams, $location, LibraryService, LoginService, UserService, BookCommentService){
   let vm = this;
-  vm.savedBooks = [];
+
+  vm.savedBooks = LibraryService.savedBooks.data;
   vm.futureReads = [];
+  vm.savedBooks = [];
   vm.bookComments = [];
+  vm.bookPageBook = [];
   vm.comment = '';
   const today = new Date();
   vm.iso = today.toISOString();
@@ -12,7 +13,6 @@ myApp.controller('BookController', function($routeParams, $location, LibraryServ
   vm.bookPageId = $location.$$url.slice(6);
   let bookId = $routeParams.id;
   vm.allMembers = [];
-
   // *****   Getting All User Info  *****//
   vm.getMembers = () => {
     UserService.getMembers().then(function(allmembers){
@@ -23,60 +23,40 @@ myApp.controller('BookController', function($routeParams, $location, LibraryServ
 
   // *****   Getting User from LoginService  *****//
   vm.getUser = () => {
-    // console.log('in getUser');
+    console.log('in getUser');
     vm.user = LoginService.user;
     vm.getBooks();
     vm.getMembers();
-      // console.log('leaving getUser');
+      console.log('leaving getUser');
   }; //end getRequests
 
-vm.getBooksMain = () =>{
-  // console.log('in getBooks');
-  vm.savedBooks = [];
-  LibraryService.prevBooks().then(function(savedBooks){
-    vm.savedBooks = savedBooks.data;
-    vm.futureReads(vm.savedBooks);
-  });
-}
-
-// *****   Determining if book is a FutureRead   *****//
-vm.futureReads = (savedBooks) => {
-  // console.log('in futureReads');
-  vm.futureReads = [];
-  for (const value of savedBooks) {
-    if (vm.iso < value.due_date){
-      vm.futureReads.push(value);
-    } //end if
-  } //end for loop
-  // console.log('leaving futureReads');
-}; //end futureReads
 
   // *****   Get All Books in DB   *****//
   vm.getBooks = () => {
-    // console.log('in getBooks');
+    console.log('in getBooks');
     vm.savedBooks = [];
     LibraryService.prevBooks().then(function(savedBooks){
       vm.savedBooks = savedBooks.data;
-      // console.log('vm.savedBooks',vm.savedBooks);
-      vm.futureReads(vm.savedBooks);
+      console.log('vm.savedBooks',vm.savedBooks);
+      vm.getBookInfo();
       // vm.getBookInfo();
     }); //end then
-    // console.log('leaving getBooks');
+    console.log('leaving getBooks');
+
   }; //end searchForBook
 
 
   // *****   Getting Info for Book page Book  *****//
   vm.getBookInfo = () => {
-    // console.log('in getBookInfo');
+    console.log('in getBookInfo');
     vm.bookPageBook = [];
-    vm.savedBooks = LibraryService.allBooks();
-    for (const value of vm.savedBooks.data) {
-      if (bookId == value.book_id){
+    for (const value of vm.savedBooks) {
+      if (vm.bookPageId == value.book_id){
         vm.bookPageBook.push(value);
       } //end if
     } //end for loop
     vm.getBookComments();
-    // console.log('leaving getBookInfo');
+    console.log('leaving getBookInfo');
   }; // end getBookInfo
 
 
@@ -100,6 +80,7 @@ vm.futureReads = (savedBooks) => {
   vm.getBookComments = () => {
     //get comments fromt main_feed DB
     BookCommentService.getBookComments(bookId).then(function(comments){
+      console.log('commnets', comments);
       vm.parseComments(comments);
     }); //end then
   }; //end getComments
@@ -110,8 +91,10 @@ vm.futureReads = (savedBooks) => {
     vm.commentInfo = comments.data;
     //for loop to parse out comment data and choose only for bookPage
     for (const value of vm.commentInfo) {
+
       //see if comment id matches book page id
       if(value.book_id == bookId){
+        console.log('in if');
         vm.memberId = value.user_id;
         vm.commentUser = vm.allMembers.find(user => user.user_id === vm.memberId);
         //object with comment data to snd
@@ -121,12 +104,14 @@ vm.futureReads = (savedBooks) => {
           date: value.date,
           comment: value.comment
         };
+        console.log('vm.commentToSend',vm.commentToSend );
         vm.bookComments.push(vm.commentToSend);
       }
       else{
-        // console.log('no matching comments');
+        console.log('no matching comments');
       }
     } //end for loop
+    console.log('vm.bookComments', vm.bookComments);
   }; //end parseComments
 
   // *****  Send Users to bookPage *****//
@@ -136,4 +121,5 @@ vm.futureReads = (savedBooks) => {
     $location.path('/book/' + bookId);
   }; //end getBook
 
-}); // end BookController
+
+});//end bookpageController

@@ -46,7 +46,7 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
         vm.commentUser = vm.allMembers.find(user => user.user_id == vm.memberId);
         //object with comment data to snd
         vm.mainComment = {
-          name: vm.commentUser.first_name + vm.commentUser.last_name,
+          name: vm.commentUser.first_name + ' ' + vm.commentUser.last_name,
           profileImage: vm.commentUser.profile_img,
           date: value.date,
           comment: value.comment
@@ -69,12 +69,7 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
     console.log('leaving getMembers');
   }; //end getMembers
 
-  // *****  Send Users to bookPage *****//
-  vm.bookPage = (bookId) => {
-    //Send selected book to LibraryService
-    LibraryService.sendBookId(bookId);
-    $location.path('/book/' + bookId);
-  }; //end getBook
+
 
 
 
