@@ -52,6 +52,11 @@ h4{
   text-align: center;
   font-size: 1.4em;
 }
+h5{
+  color: $textGray;
+  font-size: 1em;
+  font-weight: 400;
+}
 p{
   font-family: $font-primary;
   font-weight: 300;
@@ -119,6 +124,7 @@ button {
 .headerStyle {
   background-color: $headerBackground;
   border: 1px $borderGray solid;
+    padding: 0 0 20px 0;
 }
 
 
@@ -245,14 +251,24 @@ footer{
       top: 7px;
     }
   }
-
 }
-
 // ****** Admin Styles *******
-
+.adminMain {
+  .blueLine {
+    width: 90%;
+    margin: 0 5%;
+  }
+}
+.bookSearch {
+  button {
+    margin: 20px 0;
+  }
+}
 // ****** Admin Member Styles *******
 .allMembers {
   margin: 40px 0 0 0;
+  height:400px;
+  overflow-x: scroll;
 }
 .coverImgThumb {
   float: left;
@@ -291,6 +307,7 @@ footer{
   }
   .pendingUsers {
     padding: 15px 0;
+
   }
 
 
@@ -334,7 +351,7 @@ footer{
     padding: 5px;
   }
   .bookContainer{
-    overflow-y: scroll;
+    overflow-x: scroll;
     height: 200px;
     background-color: $white;
     margin: 10px 0 0 0;
@@ -386,12 +403,17 @@ footer{
     overflow-x: scroll;
   }
 
+  .allRequests {
+    height: 400px;
+    overflow-x: scroll;
+  }
+
 }
 
 .mainThread {
   margin: 40px 0 20px 0;
   .commentThread {
-    overflow-y: scroll;
+    overflow-x: scroll;
     height: 500px;
   }
   h3 {

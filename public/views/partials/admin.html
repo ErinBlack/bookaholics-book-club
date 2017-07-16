@@ -60,23 +60,29 @@
         </div>
       </section>
       <!-- Admin Page Content  -->
-      <section class=" col-md-7 col-sm-offset-1  boundingBox" ng-controller="AdminController as ac" class="page">
-        <h2>Admin Page</h2>
-        <div class="blueLine"></div>
+      <section class=" col-md-7 col-sm-offset-1  boundingBox adminMain" ng-controller="AdminController as ac" class="page">
+        <div class="row">
+          <div class="col-sm-12 headerStyle ">
+            <h2>Administration Page</h2>
+            <div class="blueLine"></div>
+          </div>
+        </div>
         <div class="row boundingBoxRow">
         <!-- Search for Book -->
-          <div class="col-md-5 ">
+          <div class="col-md-5  bookSearch">
             <div class="subBoundingBox">
               <div class="containerBook" >
                 <form ng-submit="ac.searchForBook(ac.search)">
                   <h3>Add New Book</h3>
                   <div class="containerBox">
                     <h4>Search Books</h4>
+                    <h5>Enter Book Title / Author / ISNB</h5>
                     <input type="text" ng-model="ac.search" placeholder="title/ author / isbn" ng-submit="ac.searchForBook(ac.search)">
                     <button type="button" ng-click="ac.searchForBook(ac.search)" name="button">Search</button>
 
                 </form>
                 <!-- Display Book Results -->
+                <h5>Book Search Results</h5>
                 <div class="bookContainer" >
                 <div ng-repeat="book in ac.books | limitTo:15 " class="bookListing" >
 
@@ -100,9 +106,15 @@
               </div>
             </div>
             <!-- Submit Book-->
-            <div class="">
-              <input type="date"  placeholder="Date / Month / Year" ng-model="ac.dueDate">
-              <button type="button" name="button" ng-click="ac.submitBook()">Submit Book</button>
+            <div class="row">
+              <div class="col-sm-12">
+                <h5>Enter Date Due</h5>
+                <input type="date"  placeholder="Date / Month / Year" ng-model="ac.dueDate">
+              </div>
+              <div class="col-sm-12">
+                <button type="button" name="button" ng-click="ac.submitBook()">Submit Book</button>
+              </div>
+
             </div>
           </div>
           </div>
@@ -110,7 +122,7 @@
           <div class="col-md-7 adminMemberBoxes">
 
 
-            <div class="col-md-12 adminMemberSections" ng-init="ac.getRequests()">
+            <div class="col-md-12 adminMemberSections allRequests" ng-init="ac.getRequests()">
               <div class="subBoundingBox">
                   <h3>Membership Requests</h3>
                   <div class="adminRequestRow">
@@ -141,9 +153,9 @@
             </div>
             <!-- All Users-->
               <div class="col-md-12 adminMemberSections allMembers" ng-init="ac.getMembers()">
-                <div class="subBoundingBox">
+                <div class="subBoundingBox ">
                     <h3>All Members</h3>
-                    <div>
+                    <div class="memberWrapper">
                       <div class="pendingUsers" ng-repeat = 'user in ac.allUsers | orderBy : "first_name" '>
                         <div class="row">
                           <md-content flex layout="row" layout-align="center">
