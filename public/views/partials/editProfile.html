@@ -42,14 +42,16 @@
           <h3 class="col-sm-12">Current Books</h3>
         </div>
         <div class="row prevReads"  class="col-sm-offset-1 col-sm-2 sideBar boundingBox "  >
-          <div class="col-sm-12" ng-repeat="book in uc.futureReads " >
+          <div class="col-sm-12" ng-repeat="book in uc.futureReads | orderBy : 'due_date'" >
             <div class="imgDiv">
               <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
             </div>
             <h4>{{book.title}}</h4>
             <div class="bookInfo">
-              <p><strong>Author:</strong> {{book.author }} <br>
-              <span><strong>Due:</strong> {{book.due_date | date : format : medium}} </span></p>
+              <p><strong>Author:</strong>  <br>
+                {{book.author }}<br/>
+              <span><strong>Due:</strong> </br>
+                {{book.due_date | date : format : medium}} </span></p>
             </div>
           </div>
         </div>
@@ -65,11 +67,19 @@
         </div>
         <!-- Upload New Image -->
         <div class="row editProfile">
-          <div class="col-sm-6">
-            <img src="{{ uc.user.image}}" alt="">
-            <input type="button" class="btn btn-primary" value="Change Profile Image" ng-click="uc.showPicker()" />
+          <div class="col-sm-5">
+            <div class="row">
+              <div class="col-sm-12">
+                <img src="{{ uc.user.image}}" alt="">
+              </div>
+              <div class="col-sm-12">
+                <input type="button" class="btn btn-primary" value="Change Profile Image" ng-click="uc.showPicker()" />
+              </div>
+            </div>
+
+
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-7">
             <form editable-form name="editableForm" onaftersave="uc.getUpdatedInfo()" >
               <div>
                 <!-- editable username (text with validation) -->

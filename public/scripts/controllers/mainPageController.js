@@ -1,4 +1,4 @@
-myApp.controller('MainPageController', function($location,LoginService, LibraryService, CommentService, UserService){
+myApp.controller('MainPageController', function($location, LoginService, LibraryService, CommentService, UserService){
   var vm = this;
   vm.savedBooks = [];
   vm.futureReads = [];
@@ -6,12 +6,13 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
   vm.iso = '';
   vm.user = '';
   vm.allMembers = [];
-
-
+  const today = new Date();
+  vm.iso = today.toISOString();
 
   vm.getUser = () => {
+    console.log('in get user');
     vm.user = LoginService.getUser();
-    console.log(vm.user);
+    console.log('vm.user',vm.user);
     vm.getMembers();
   }; //end getRequests
 
@@ -19,6 +20,8 @@ myApp.controller('MainPageController', function($location,LoginService, LibraryS
   // *****   Submitting a Main Comment to Thread   *****//
   vm.addMainComment = (comment) => {
     console.log('in addMainComment');
+    console.log('vm.user.userId', vm.user.userId);
+    console.log('vm.user.userId', vm.iso);
     //comment object to send
     vm.commentToSend = {
       userId: vm.user.userId,

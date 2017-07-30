@@ -54,14 +54,14 @@ h4{
 }
 h5{
   color: $textGray;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 400;
 }
 p{
   font-family: $font-primary;
   font-weight: 300;
   color: $textGray;
-  font-size: .9em;
+  font-size: 1.1em;
 }
 a{
   font-family: $font-primary;
@@ -127,6 +127,11 @@ button {
     padding: 0 0 20px 0;
 }
 
+.registrationForm {
+  .btn-primary{
+    max-width: 200px;
+  }
+}
 
 // ****** SideBar Styles *******
 .sideBar {
@@ -147,10 +152,13 @@ button {
     text-align: center;
     font-weight: 500;
   }
+  h4{
+    font-size: 1.5em;
+  }
 
   p{
     color: $textGray;
-    font-size: 1em;
+    font-size: 1.3em;
     font-weight: 300;
     padding: 6px 12px 0 12px;
   }
@@ -162,7 +170,7 @@ button {
     margin: 15px 0;
   }
   a {
-    font-size: .9em;
+    font-size: 1em;
     text-decoration: underline;
   }
 
@@ -267,8 +275,7 @@ footer{
 // ****** Admin Member Styles *******
 .allMembers {
   margin: 40px 0 0 0;
-  height:400px;
-  overflow-x: scroll;
+
 }
 .coverImgThumb {
   float: left;
@@ -276,6 +283,11 @@ footer{
 }
 .selected {
   background-color: $backgroundGray;
+}
+.memberWrapper {
+  height:400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .adminMemberSections {
@@ -342,7 +354,7 @@ footer{
 
   } //end adminRights
   .userEmail {
-    font-size: .7em;
+    font-size: 1em;
   }
   .allUsers{
     padding: 5px;
@@ -351,20 +363,21 @@ footer{
     padding: 5px;
   }
   .bookContainer{
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     height: 200px;
     background-color: $white;
     margin: 10px 0 0 0;
   }
 
   #title {
-    font-size: .9em;
+    font-size: 1.1em;
   }
   #author {
-    font-size: .8em;
+    font-size: 1em;
   }
   #isbn {
-    font-size: .7em;
+    font-size: 1em;
   }
 }
 .containerBox{
@@ -381,6 +394,12 @@ footer{
 .prevReads {
   .headerStyle {
     padding: 0 0 20px 0;
+  }
+  .editBooks {
+    float: right;
+    text-decoration: underline;
+    color: $blue;
+    margin-right: 30px;
   }
   .blueLine {
     width: 90%;
@@ -400,12 +419,14 @@ footer{
 
   .allBooks {
     height: 500px;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .allRequests {
     height: 400px;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
 }
@@ -413,7 +434,8 @@ footer{
 .mainThread {
   margin: 40px 0 20px 0;
   .commentThread {
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     height: 500px;
   }
   h3 {
@@ -458,7 +480,7 @@ footer{
       color: $textGray
     }
     span {
-      font-size: .7em;
+      font-size: 1em;
       font-weight: 500;
     }
   }

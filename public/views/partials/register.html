@@ -20,7 +20,7 @@
       <!-- End Login Header  -->
 
       <!-- Start Login Form -->
-      <form name="registerForm" ng-submit="rc.registerNewUser()" ng-disabled="registerForm.$invalid">
+      <form name="registerForm" class="registrationForm" ng-submit="rc.registerNewUser()" ng-disabled="registerForm.$invalid">
         <h2>Register</h2>
         <!-- row for first name and last name  -->
         <div class="row">
@@ -41,7 +41,8 @@
         <!-- end name row -->
         <div class="row">
           <div class="col-sm-6">
-            <input type="button" value="Upload" ng-click="rc.showPicker()" />
+              <p>Upload a Profile Photo</p>
+            <input type="button" value="Upload Profile Image" class="btn btn-primary" ng-click="rc.showPicker()" />
           </div>
         <div class="col-sm-6">
           <p>Email Address *</p>

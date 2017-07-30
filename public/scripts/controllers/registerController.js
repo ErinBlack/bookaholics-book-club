@@ -1,4 +1,4 @@
-myApp.controller('RegisterController', function(RegisterService){
+myApp.controller('RegisterController', function($location, RegisterService){
 console.log('in RegisterController');
 
 var vm = this;
@@ -25,6 +25,8 @@ console.log('vm.firstName', vm.firstNameInput);
       vm.passwordInput = '';
       vm.passwordConfirm = '';
       vm.imgUpload = '';
+      alert('Your Account Has Been Created! Please wait for an administrator to approve your request.');
+      window.location = "/#!/";
     }); // end RegisterService
   }; // end registerNewUser
 
@@ -39,6 +41,7 @@ console.log('vm.firstName', vm.firstNameInput);
 
       vm.imgUpload = vm.imgUpload.slice(1, -1);
       console.log('vm.imgUpload', vm.imgUpload );
+
      });
   }
 

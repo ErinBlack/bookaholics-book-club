@@ -87,6 +87,10 @@ vm.getMembers = () => {
 
       }); //end LibraryService
       console.log('leaving submitBook');
+      vm.search = '';
+      vm.dueDate = '';
+      vm.selectedBook = {};
+      vm.books = [];
   }; //end submitBook
 
   // *****   Get Member Request   *****//

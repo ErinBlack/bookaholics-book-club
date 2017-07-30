@@ -32,10 +32,12 @@ var port = process.env.PORT || 3000;
 
 //config to database
 var config = {
-database: 'bookaholics',
-host: 'localhost',
+database: 'elephantsql',
+host: 'pellefant.db.elephantsql.com',
 port: 5432,
-max: 50
+max: 50,
+username:  'wlvexrui',
+password: 'vjoYEiz6iqflCxFnLORb90YYHb-dFC6g'
 };
 
 var pool = new pg.Pool(config);

@@ -82,6 +82,7 @@ vm.futureReads = (savedBooks) => {
 
   // *****   Submitting to Book Comment to Thread   *****//
   vm.addBookComment = (comment) => {
+    console.log('in addBookComment with ', comment );
     //comment object to send
     vm.commentToSend = {
       userId: vm.user.userId,
@@ -135,5 +136,12 @@ vm.futureReads = (savedBooks) => {
     LibraryService.sendBookId(bookId);
     $location.path('/book/' + bookId);
   }; //end getBook
+
+
+  // *****  Send Users to Profile Edit Page *****//
+  vm.editProfile = (userId) => {
+    //getUser Id from
+    $location.path('/edit-profile/' + userId);
+  }; //editProfile
 
 }); // end BookController

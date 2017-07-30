@@ -47,14 +47,16 @@
         </div>
 
         <div class="row prevReads"  class="col-sm-offset-1 col-sm-2 sideBar boundingBox " ng-controller="BookController as bc" ng-init="bc.getUser()" >
-          <div class="col-sm-12" ng-repeat="book in bc.futureReads " >
+          <div class="col-sm-12" ng-repeat="book in bc.futureReads | orderBy : 'due_date' " >
             <div class="imgDiv">
               <img ng-src="{{book.cover_img}}" alt="" class="bookThumb">
             </div>
             <h4>{{book.title}}</h4>
             <div class="bookInfo">
-              <p><strong>Author:</strong> {{book.author }} <br>
-              <span><strong>Due:</strong> {{book.due_date | date : format : medium}} </span></p>
+              <p><strong>Author:</strong>  <br>
+                {{book.author }}<br/>
+              <span><strong>Due:</strong> </br>
+                {{book.due_date | date : format : medium}} </span></p>
             </div>
           </div>
         </div>
@@ -136,13 +138,13 @@
                           </div>
 
                         </div>
-                        <div class="col-md-4 userInfo">
+                        <div class="col-md-5 userInfo">
                           {{user.first_name}} {{user.last_name}} <br>
                           <div class="userEmail">
                             {{user.email}}
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <button type="button" name="button" class="make"  ng-click="ac.changeStatus(user.user_id, 'active')">Approve</button>
                           <button type="button" name="button" class="decline" ng-click="ac.changeStatus(user.user_id, 'declined')">Decline</button>
                         </div>
@@ -165,14 +167,14 @@
                             <img ng-src="{{user.profile_img}}" alt="" class="profileImg imgFit img-circle">
                           </div>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-6">
                             {{user.first_name}} {{user.last_name}}
                             <div class="userEmail">
                               {{user.email}}
                             </div>
                           </div>
                             <!-- Change Member Priviliges-->
-                            <div class="col-md-6 adminRights">
+                            <div class="col-md-4 adminRights">
                               <div ng-show="user.role  == '3'" >
                                 <button type="button" name="button"  ng-click="ac.changeRole(user.user_id, 2)" class="make">Make Admin</button>
                               </div>
