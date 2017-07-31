@@ -2,18 +2,8 @@ let express  = require('express');
 let router = express.Router();
 let path = require('path');
 let bodyParser = require('body-parser');
-let pg = require('pg');
 
-
-//config to database
-let config = {
-database: 'bookaholics',
-host: 'localhost',
-port: 5432,
-max: 50
-};
-
-let pool = new pg.Pool(config);
+var pool = require('../pool.js');
 
 router.use( bodyParser.urlencoded( { extended: true } ) );
 router.use( bodyParser.json() );

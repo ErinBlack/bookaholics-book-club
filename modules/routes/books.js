@@ -14,7 +14,7 @@ port: 5432,
 max: 50
 };
 
-var pool = new pg.Pool(config);
+var pool = require('../pool.js');
 
 router.use( bodyParser.urlencoded( { extended: true } ) );
 router.use( bodyParser.json() );
